@@ -8,8 +8,12 @@
 }
 .Checkbox{
     -webkit-transform: scale(2.5);
-    padding: 5px;
-    
+    padding: 5px 0; 
+    width: 20px;
+}
+.test{
+    display: flex;
+    justify-content: center;
 }
 
 /* .Cont-Card-Body{
