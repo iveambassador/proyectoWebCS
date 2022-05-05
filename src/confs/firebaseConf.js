@@ -8,13 +8,13 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAAeXLJOj4oTSFOsYTs123DVvDmz_MVSc4",
-  authDomain: "elecciones-tss.firebaseapp.com",
-  projectId: "elecciones-tss",
-  storageBucket: "elecciones-tss.appspot.com",
-  messagingSenderId: "344787203266",
-  appId: "1:344787203266:web:c98972e3b915807714775b",
-  measurementId: "G-8T2VLWTKNJ"
+  apiKey: "AIzaSyCEnAfoWOUOWb3AcsCvME-NcaKl6Z9x6hQ",
+  authDomain: "elecciones-electorales-tss.firebaseapp.com",
+  projectId: "elecciones-electorales-tss",
+  storageBucket: "elecciones-electorales-tss.appspot.com",
+  messagingSenderId: "1066944497467",
+  appId: "1:1066944497467:web:770945188614d294f2991e",
+  measurementId: "G-QMWSSEMPLL"
 };
 
 // Initialize Firebase

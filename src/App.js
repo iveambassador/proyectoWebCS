@@ -8,7 +8,7 @@ const App= () =>{
   useEffect(() => {
 
     const obtenerDatos = async() =>{
-      const datos = await getDocs(collection(firestore, 'urnaElectoral'));
+      const datos = await getDocs(collection(firestore, 'UrnaVoto'));
       console.log(datos.docs[0].data());
       console.log(datos.docs[1].data());
     }   
