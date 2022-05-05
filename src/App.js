@@ -9,7 +9,8 @@ const App= () =>{
 
     const obtenerDatos = async() =>{
       const datos = await getDocs(collection(firestore, 'urnaElectoral'));
-      console.log(datos.docs);
+      console.log(datos.docs[0].data());
+      console.log(datos.docs[1].data());
     }   
 
     obtenerDatos();
