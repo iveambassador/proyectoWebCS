@@ -5,12 +5,13 @@ export default function EmitirVoto() {
   return (
     <div className='Container'>
       <h1>Votar</h1>
+      
+      <div className='Cont-Candidatos'>
       <div className='Cont-Titulo'>
         <p>Marca al candidato de tu preferencia</p>
         <p>Puedes votar en blaco si esa es tu elecion</p>
         <p>Si marcas mas de una casilla se contara como voto nulo</p>
       </div>
-      <div className='Cont-Candidatos'>
         <Candidato 
         Partido='Juntos por el 100'
         NombreAp='Juan Perez Sanchez'
