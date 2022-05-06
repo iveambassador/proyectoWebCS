@@ -1,23 +1,30 @@
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import './App.css';
+import HomePage from "./Pages/HomePage";
+import EmitirVoto from "./Pages/EmitirVoto";
+import Navigation from "./Componets/Navigation";
+import NotFoundPage from "./Pages/NotFoundPage";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, {useEffect} from 'react';
-import { collection, getDocs } from "firebase/firestore";
-import firestore from './confs/firebaseConf';
-import { async } from '@firebase/util';
-
-const App= () =>{
-  useEffect(() => {
-
-    const obtenerDatos = async() =>{
-      const datos = await getDocs(collection(firestore, 'UrnaVoto'));
-      console.log(datos.docs[0].data());
-      console.log(datos.docs[1].data());
-    }   
-
-    obtenerDatos();
-  },[]);
-
-  return(
-    <h1>Urna de Votos</h1>
+function App() {
+  return (
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/EmitirVoto" element={<EmitirVoto />} />
+        {/* <Route path="/users" element={<UserPage />} />
+        <Route path="/test" element={<Navigate to="/"/>} />
+        <Route path="/users/:id" element={<Parametros/>} /> */}
+        <Route path="*" element={<NotFoundPage />} />
+        
+      </Routes>
+    </Router>
   );
 }
 
