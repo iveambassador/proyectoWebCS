@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import firestore from './confs/firebaseConf';
-import { async } from '@firebase/util';
+//import { async } from '@firebase/util';
 
 const App= () =>{
   useEffect(() => {
