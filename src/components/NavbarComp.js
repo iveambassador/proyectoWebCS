@@ -19,7 +19,7 @@ export default class NavbarComp extends Component {
         <div>
             <Navbar bg="dark" variant={"dark"} expand="lg">
               <Container fluid>
-                  <Navbar.Brand as={Link} to={"/home"}>Ivote</Navbar.Brand>
+                  <Navbar.Brand as={Link} to={"/"}>Ivote</Navbar.Brand>
                   <Navbar.Toggle aria-controls="navbarScroll" />
                   <Navbar.Collapse id="navbarScroll">
                   <Nav
@@ -27,7 +27,7 @@ export default class NavbarComp extends Component {
                       style={{ maxHeight: '100px' }}
                       navbarScroll
                   >
-                      <Nav.Link as={Link} to={"/home"}>Inicio</Nav.Link>
+                      <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                   </Nav>
                   <Nav>
@@ -39,7 +39,7 @@ export default class NavbarComp extends Component {
               </Navbar>
               <div>
                 <Routes>
-                  <Route path="/home" element={<Home/>}/>
+                  <Route path="/" element={<Home/>}/>
                   <Route path="/urna" element={<Urna/>}/>
                   <Route path="/login" element={<Login/>}/>                    
                   <Route path="/register" element={<Register/>}/>
