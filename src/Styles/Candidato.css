@@ -1,0 +1,21 @@
+.Cont-Card{
+    width: 20rem;
+    margin: 0.7rem 1rem;
+    text-align: center;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+}
+.Checkbox{
+    -webkit-transform: scale(2.5);
+    padding: 5px 0; 
+    width: 20px;
+}
+.test{
+    display: flex;
+    justify-content: center;
+}
+
+/* .Cont-Card-Body{
+    text-align: center;
+} */
