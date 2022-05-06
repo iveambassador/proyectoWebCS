@@ -7,10 +7,8 @@ import {
 import './App.css';
 import HomePage from "./Pages/HomePage";
 import EmitirVoto from "./Pages/EmitirVoto";
-import UserPage from "./Pages/UserPage";
 import Navigation from "./Componets/Navigation";
 import NotFoundPage from "./Pages/NotFoundPage";
-import Parametros from "./Pages/Parametros";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
