@@ -1,17 +1,23 @@
 import React from 'react'
 import Candidato from '../Componets/Candidato'
 import '../Styles/EmitirVoto.css'
+import { Button } from 'react-bootstrap'
+
 export default function EmitirVoto() {
   return (
     <div className='Container'>
-      <h1>Votar</h1>
       
-      <div className='Cont-Candidatos'>
+      <h1>Votar</h1>
       <div className='Cont-Titulo'>
-        <p>Marca al candidato de tu preferencia</p>
-        <p>Puedes votar en blaco si esa es tu elecion</p>
-        <p>Si marcas mas de una casilla se contara como voto nulo</p>
+        <div className='tester'>
+        <h5>Marca al candidato de tu preferencia.</h5>
+        <h5>Puedes votar en blaco si esa es tu elecion.</h5>
+        <h5>Si marcas mas de una casilla se contara como voto "nulo".</h5>
+        </div>
+        <div className='testers'></div>
+        <div className='testers'></div>
       </div>
+      <div className='Cont-Candidatos'>
         <Candidato 
         Partido='Juntos por el 100'
         NombreAp='Juan Perez Sanchez'
@@ -39,8 +45,17 @@ export default function EmitirVoto() {
         Partido='Se me acabaron los names'
         NombreAp='Erika Jhaelis Soto Diaz'
         Cargo='Testing Qa de Notas'/>
+        <Candidato 
+        Partido='Se me acabaron los names'
+        NombreAp='Erika Jhaelis Soto Diaz'
+        Cargo='Testing Qa de Notas'/>
+        <Candidato 
+        Partido='No mas Salteñas'
+        NombreAp='Pepe Pancho Suarez'
+        Cargo='Presidente de Asociasion'/>
         
       </div>
+      <Button variant="primary" size='lg' className='mb-4'>Guardar Voto!</Button>
     </div>
   )
 }
