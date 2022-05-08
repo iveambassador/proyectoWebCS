@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Form, FormCheck } from 'react-bootstrap'
+import { Card, Form, FormCheck } from 'react-bootstrap'
 import logo192 from '../Images/logo512.png'
 import logo from '../logo.svg'
 import '../Styles/Candidato.css'

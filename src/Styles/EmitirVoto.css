@@ -19,13 +19,47 @@
   flex-wrap: wrap;
   justify-content: center;
   flex-grow: 1;
-  padding: 2rem 0 2rem 0  ;
+  padding: 0 0 2rem 0  ;
 }
 .Cont-Titulo{
-  width: 80%;
+  max-width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+.tester{
+  width: 60rem;
+}
+.testers{
+  width: 10rem;
+  margin: 0.7rem 1rem;
+}
+
 @media (max-width: 1300px) {
   .Cont-Candidatos {
     max-width:100%;
+  }
+  .Cont-Titulo{
+    max-width: 100%;
+  }
+}
+@media (max-width: 1760px) {
+  .tester{
+    width: 40rem;
+  }
+}
+@media (max-width: 1056px) {
+  .testers{
+    width: 30rem;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+@media (max-width: 703px) {
+  .tester{
+    width: 20rem;
+  }
+  .testers{
+    width: 22rem;
   }
 }
