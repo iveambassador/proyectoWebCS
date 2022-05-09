@@ -1,5 +1,5 @@
 import React from 'react'
-import Candidato from '../Componets/Candidato'
+import Candidato from './Candidato'
 import '../Styles/EmitirVoto.css'
 import { Button } from 'react-bootstrap'
 
