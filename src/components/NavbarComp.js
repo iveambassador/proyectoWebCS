@@ -11,7 +11,6 @@ import Home from './home'
 import Urna from './urna'
 import Register from './register'
 import Login from './login'
-
 //import image from '/src/Images/blockchain-logo-png-transparent.png'
 import EmitirVoto from './EmitirVoto'
 
