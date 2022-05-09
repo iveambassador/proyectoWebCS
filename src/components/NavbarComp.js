@@ -11,7 +11,7 @@ import Home from './home'
 import Urna from './urna'
 import Register from './register'
 import Login from './login'
-//import image from '/src/Images/blockchain-logo-png-transparent.png'
+import logo from '../blockchain-logo-svg-vector.svg'
 import EmitirVoto from './EmitirVoto'
 
 export default class NavbarComp extends Component {
@@ -21,14 +21,19 @@ export default class NavbarComp extends Component {
         <div>
             <Navbar bg="dark" variant={"dark"} expand="lg">
               <Container fluid>
-                  <Navbar.Brand as={Link} to={"/"}><img src='https://cdn.freebiesupply.com/logos/large/2x/blockchain-logo-png-transparent.png'/> I Vote!</Navbar.Brand>
+                  <Navbar.Brand> </Navbar.Brand>
+                  <Navbar.Brand as={Link} to={"/"}> <img src={logo}></img> I Vote!</Navbar.Brand>
                   <Navbar.Toggle aria-controls="navbarScroll" />
                   <Navbar.Collapse id="navbarScroll">
                   <Nav
                       className="me-auto my-2 my-lg-0"
                       style={{ maxHeight: '100px' }}
                       navbarScroll
-                  >
+                  >   
+                      <Nav.Link as={Link} to={"/"}></Nav.Link>
+                      <Nav.Link as={Link} to={"/"}></Nav.Link>
+                      <Nav.Link as={Link} to={"/"}></Nav.Link>
+                      
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                       <Nav.Link as={Link} to={"/EmitirVoto"}>Emitir Voto</Nav.Link>

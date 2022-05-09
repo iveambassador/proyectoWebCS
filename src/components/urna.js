@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { async } from '@firebase/util';
-import { doc } from 'firebase/firestore';
+//import { async } from '@firebase/util';
+//import { doc } from 'firebase/firestore';
 import {getUrna} from '../confs/firebaseConf';
 
 window.addEventListener('DOMContentLoaded', async() => {
