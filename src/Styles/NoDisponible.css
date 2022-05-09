@@ -1,0 +1,28 @@
+*,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+.Cont-NoDisponible{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f6f7;
+  }
+  .Opss{
+      width: 20rem;
+      text-align: center;
+      margin: 10px;
+  }
+  .Imagen-NoDisponible{
+      width: 12rem;
+  }
+  /* @media (max-width: 700px) {
+    .Imagen-NoDisponible{
+      width: 15rem;
+    }
+  } */
