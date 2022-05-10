@@ -8,6 +8,7 @@ const SHA256 = require("crypto-js/sha256");
 export default function EmitirVoto() {
   function hash() {
     let hashGenerado = SHA256(JSON.stringify()).toString();
+    // console.log(hashGenerado);
     console.log(hashGenerado);
   }
   return (
