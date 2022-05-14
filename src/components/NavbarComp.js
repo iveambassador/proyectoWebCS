@@ -55,6 +55,7 @@ export default class NavbarComp extends Component {
                   <Route path="/EmitirVoto" element={<EmitirVoto/>}/>
                   <Route path="/login" element={<Login/>}/>                    
                   <Route path="/register" element={<Register/>}/>
+                 
                 </Routes>
               </div>
         </div>
