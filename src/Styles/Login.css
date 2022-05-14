@@ -1,0 +1,22 @@
+
+.formulario{
+    background: rgba(212, 212, 212, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,-0,-0,0.568);
+    /* color: white; */
+    /* background-color: beige; */
+}
+.contLogin{
+    width: 90%;
+    max-width: 1600px;
+    height: 80vh;
+    margin: 0 auto;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contLoginTittle{
+    /* background-color: #11183f; */
+}

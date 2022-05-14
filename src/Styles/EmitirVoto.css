@@ -28,6 +28,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  text-align: start;
+  margin: 2rem 0 1rem 0;
 }
 .tester{
   width: 60rem;

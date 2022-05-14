@@ -3,14 +3,21 @@ import Candidato from './Candidato'
 import '../Styles/EmitirVoto.css'
 import { Button } from 'react-bootstrap'
 import NoDisponible from './NoDisponible'
+import Modal from './Modal'
+import ModalConfiramcion from './ModalConfirmacion'
+import { useState } from 'react'
+export default function EmitirVoto(props) {
+  const [modalShow, setModalShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const [mensaje, setMensaje] = useState("hola papu como estas !! ?")
 
-export default function EmitirVoto() {
-  let condicion = false;
-  if (condicion){
+  // let condicion = true;
+  // if(condicion){
+  if (props.posi){
     return (
       <div className='Container'>
         
-        <h1>Votar</h1>
+        <h1>Comienza con !Vote</h1>
         <div className='Cont-Titulo'>
           <div className='tester'>
           <h5>Marca al candidato de tu preferencia.</h5>
@@ -58,7 +65,19 @@ export default function EmitirVoto() {
           Cargo='Presidente de Asociasion'/>
           
         </div>
-        <Button variant="primary" size='lg' className='mb-4'>Guardar Voto!</Button>
+        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>Guardar Voto!</Button>
+        
+
+        <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        test = {() => setShow(true)}
+        setMensaje = {setMensaje}/>
+
+        <ModalConfiramcion 
+        show={show}
+        onHide={() => setShow(false)}
+        mensaje = {mensaje}/>
       </div>
     )
   }else{
