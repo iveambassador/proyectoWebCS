@@ -1,24 +1,15 @@
+import { render } from '@testing-library/react';
 import React, { Component } from 'react'
 //import { async } from '@firebase/util';
 //import { doc } from 'firebase/firestore';
 import {getUrna} from '../confs/firebaseConf';
 import '../Styles/urna.css';
 
-var es_months = new Map();
-es_months.set(0, "Enero");
-es_months.set(1, "Febrero");
-es_months.set(2, "Marzo");
-es_months.set(3, "Abril");
-es_months.set(4, "Mayo");
-es_months.set(5, "Junio");
-es_months.set(6, "Julio");
-es_months.set(7, "Agosto");
-es_months.set(8, "Septiembre");
-es_months.set(9, "Octubre");
-es_months.set(10, "Noviembre");
-es_months.set(11, "Diciembre");
-
 export default class urna extends Component {
+  componentDidMount() {
+    insertData()
+  }
+
   render() {
     return (
       <div id="urnaa">
@@ -37,7 +28,6 @@ export default class urna extends Component {
                 <tbody id="dataTablee">
                 </tbody>
             </table>
-            <script>console.log('Me lloro')</script>
         </div>
         </div>
       </div>
@@ -45,29 +35,32 @@ export default class urna extends Component {
   }
 }
 
-var urnabutton = document.getElementById('navurna')
-urnabutton.addEventListener("click", async () => {
-    
-  console.log('Vamo a rezar')
-  const querySnapshot = await getUrna()
+  /*
+  var urnabutton = document.getElementById('navurna')
+  urnabutton.addEventListener("click", async () => {
+  })*/
 
-  let shtml = ''
-  const dataTable = document.getElementById('dataTablee')
+  async function insertData() {
+    console.log('Se ejecuta insertData()')
+    const querySnapshot = await getUrna()
 
-  querySnapshot.forEach(doc => {
-      var firedate = doc.data().Fecha
-      var reactdate = firedate.toDate()
-      var thedate = reactdate.toLocaleString();
+    let shtml = ''
+    const dataTable = document.getElementById('dataTablee')
 
-      shtml += `
-          <tr>
-          <td>${doc.data().HashVoto}</td>
-          <td>${doc.data().Elector}</td>
-          <td>${doc.data().Voto}</td>
-          <td>${thedate}</td>
-          </tr>
-      `
-  })
+    querySnapshot.forEach(doc => {
+        var firedate = doc.data().Fecha
+        var reactdate = firedate.toDate()
+        var thedate = reactdate.toLocaleString();
 
-  dataTable.innerHTML = shtml
-})
+        shtml += `
+            <tr>
+            <td>${doc.data().HashVoto}</td>
+            <td>${doc.data().Elector}</td>
+            <td>${doc.data().Voto}</td>
+            <td>${thedate}</td>
+            </tr>
+        `
+    })
+
+    dataTable.innerHTML = shtml
+  }
