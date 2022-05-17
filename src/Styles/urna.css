@@ -1,0 +1,43 @@
+.title-urna{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 30px;
+}
+.table-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-header{
+    background-color: #13CAE6;
+}
+
+.table-urna{
+    table-layout: fixed;
+    width: 1200px;
+}
+
+table.table-urna td{
+    width: 50px;
+    border: 2px solid #757a96;
+    padding: 2px 5px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    height: 50px;
+}
+
+table.table-urna th{
+    width: 60px;
+    border: 2px solid #757a96;
+    padding: 2px 5px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    height: 60px;
+    font-size: 20px;
+}
+
