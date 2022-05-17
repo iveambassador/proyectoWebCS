@@ -1,0 +1,33 @@
+
+.formulario{
+    /* background: rgba(212, 212, 212, 0.1);
+    padding: 20px; */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,-0,-0,0.568);
+    color: white;
+    /* background-color: beige; */
+}
+.contLogin{
+    width: 90%;
+    max-width: 1600px;
+    height: 80vh;
+    margin: 0 auto;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contLoginTittle{
+    background-color: #11183f;
+    border-radius: 10px;
+}
+.contLoginBody{
+    border-radius: 10px;
+    background-color: #5668d1;
+    color: black;
+}
+.App {
+    
+    /* background-color: #757596; */
+  }
+  
