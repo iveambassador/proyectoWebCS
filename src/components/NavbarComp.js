@@ -35,7 +35,7 @@ export default class NavbarComp extends Component {
                       <Nav.Link as={Link} to={"/"}></Nav.Link>
                       
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
-                      <Nav.Link id = "navurna" as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
+                      <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                       <Nav.Link as={Link} to={"/EmitirVoto"}>Emitir Voto</Nav.Link>
                   </Nav>
                   <Nav>
