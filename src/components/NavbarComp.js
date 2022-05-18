@@ -13,7 +13,9 @@ import Register from './register'
 import Login from './login'
 import logo from '../blockchain-logo-svg-vector.svg'
 import EmitirVoto from './EmitirVoto'
-
+import PagePostulante from './PagePostulante';
+import Convocatoria from './Convovatoria';
+import CrearPostulacion from '../CrearPostulacion';
 export default class NavbarComp extends Component {
   render() {
     return (
@@ -37,6 +39,9 @@ export default class NavbarComp extends Component {
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                       <Nav.Link as={Link} to={"/EmitirVoto"}>Emitir Voto</Nav.Link>
+                      <Nav.Link as={Link} to={"/PagePostulante"}>Postulantes</Nav.Link>
+                      <Nav.Link as={Link} to={"/Convocatoria"}>Nueva Convovatoria</Nav.Link>
+                      <Nav.Link as={Link} to={"/CrearPostulacion"}>Habilitar Postulantes</Nav.Link>
                   </Nav>
                   <Nav>
                     <NavDropdown title="b474d48cdfc4974d86ef4d24904cdd91..." id='basic-nav-dropdown'>
@@ -55,7 +60,9 @@ export default class NavbarComp extends Component {
                   <Route path="/EmitirVoto" element={<EmitirVoto posi={true}/>}/>
                   <Route path="/login" element={<Login/>}/>                    
                   <Route path="/register" element={<Register/>}/>
-                 
+                  <Route path="/PagePostulante" element={<PagePostulante/>}/>
+                  <Route path="/Convocatoria" element={<Convocatoria/>}/>
+                  <Route path="//CrearPostulacion" element={<CrearPostulacion/>}/>
                 </Routes>
               </div>
         </div>

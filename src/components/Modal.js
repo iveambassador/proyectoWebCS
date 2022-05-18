@@ -1,14 +1,18 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
-
+const SHA256 = require('crypto-js/sha256')
 
 export default function Modales(props) {
-    function generar (){return "añfjgasgbqoiijggqe2435234512nasd"}
+  function generar (){
+    let hashGenerado = SHA256(JSON.stringify()).toString()
+    console.log(hashGenerado)
+    return hashGenerado
+  }
 
     function CambiarModal(){
       props.onHide()
       props.test()
-      props.setMensaje(`holas espero estes bien!!! ${generar()}`)
+      props.setMensaje(`${generar()}`)
     }
 
     return (

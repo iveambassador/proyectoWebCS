@@ -1,0 +1,38 @@
+.contenedor-informacion {
+    width: 1000px;
+    min-width: 17rem;
+    height: 300px;
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    background-color: #ffffff; 
+    box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+  }
+  .contMain{
+      width: 100%;
+
+  }
+  .contPostulante{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  .Postulante-Botones{
+    display: flex;
+    justify-content: end;
+  }
+  .Postulante-Botones button{
+    margin: 0 5px;
+    width: 100px;
+  }
+  @media (max-width: 700px) {
+    .Postulante-Botones{
+      justify-content: center;
+    }
+    /* .contenedor-informacion{
+      height: 350px;
+    } */
+  }
+  
