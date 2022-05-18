@@ -5,7 +5,7 @@ export default function ModalConfiramcion({ show, onHide, mensaje }) {
    
     return (
 
-        <Modal show={show} onHide={onHide}>
+        <Modal show={show} onHide={onHide} size="lg">
           <Modal.Header closeButton>
             <Modal.Title>Voto! realizado correctamente</Modal.Title>
           </Modal.Header>
