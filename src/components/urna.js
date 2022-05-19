@@ -41,6 +41,7 @@ export default class urna extends Component {
   })*/
 
   async function insertData() {
+    console.log('xd')
     console.log('Se ejecuta insertData()')
     const querySnapshot = await getUrna()
 
