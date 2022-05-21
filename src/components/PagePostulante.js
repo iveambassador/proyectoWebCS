@@ -8,11 +8,11 @@ export default function PagePostulantes() {
       <div className='contPostulante'>
         <h4 className='contenedor-testimonio w-100'>Postulantes: </h4>
         <Postulante 
-          nombre='juanito peres test'
+          nombre='Juanito Pérez Test'
           ci='154236780'
           telefono='7156480'
-          partido='Justo por el 100'
-          cargo='secretario de deposrtes'
+          partido='Juntos por el 100'
+          cargo='Secretario de deposrtes'
         />
         <Postulante />
         <Postulante />

@@ -14,7 +14,7 @@ export default class login extends Component {
               </div>
               <div className='contLoginBody pt-1'>
                 <div className="form-group mx-sm-4 mt-4">
-                  <h5 className='text-start'>Numero de CI:</h5>
+                  <h5 className='text-start'>Número de CI:</h5>
                   <input type="text" name="usuario" id="usuario" className="form-control" placeholder="Usuario" />
                 </div>
                 <div className="form-group mx-sm-4 mt-3">

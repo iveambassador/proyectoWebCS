@@ -1,5 +1,5 @@
 import React from 'react'
-import Campos from './components/Campos'
+import Campos from './Campos'
 export default function CrearPostulacion() {
   return (
     <div className="contLogin" style={{fontFamily: 'Arial, Helvetica, sans-serif'}}>
@@ -10,19 +10,19 @@ export default function CrearPostulacion() {
           <h2>Convocatoria a elecciones</h2>
         </div>
         <div className='contLoginBody pt-1'>
-          <Campos NombreCampo="Nombre del partido politico: " Holder='ingrese su nombre'/>
-          <Campos NombreCampo="Sigla del partido politico" Holder='ingrese su apellido'/>
+          <Campos NombreCampo="Nombre del partido político: " Holder='ingrese su nombre'/>
+          <Campos NombreCampo="Sigla del partido político" Holder='ingrese su apellido'/>
          
           <div className="form-group mx-sm-4 mt-4 mx-4" >
                 <h5 className='text-start'>Certificado de antecedentes penales</h5>
                 <input class="form-control" type="file" id="formFileMultiple" multiple/>
              </div>
              <div className="form-group mx-sm-4 mt-4 mx-4" >
-                <h5 className='text-start'>Sigla del paretido politico</h5>
+                <h5 className='text-start'>Sigla del partido político</h5>
                 <input class="form-control" type="file" id="formFileMultiple" multiple/>
              </div>
              <div className="form-group mx-sm-4 mt-4 mx-4" >
-                <h5 className='text-start'>Fotografia</h5>
+                <h5 className='text-start'>Fotografía</h5>
                 <input class="form-control" type="file" id="formFileMultiple" multiple/>
              </div>
           <div className="form-group mx-sm-4">

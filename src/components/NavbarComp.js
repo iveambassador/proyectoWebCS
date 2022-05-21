@@ -15,7 +15,7 @@ import logo from '../blockchain-logo-svg-vector.svg'
 import EmitirVoto from './EmitirVoto'
 import PagePostulante from './PagePostulante';
 import Convocatoria from './Convovatoria';
-import CrearPostulacion from '../CrearPostulacion';
+import CrearPostulacion from './CrearPostulacion';
 export default class NavbarComp extends Component {
   render() {
     return (

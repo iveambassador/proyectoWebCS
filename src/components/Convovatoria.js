@@ -12,14 +12,14 @@ export default function Convovatoria() {
               <h2>Convocatoria a elecciones</h2>
             </div>
             <div className='contLoginBody pt-1'>
-              <Campos NombreCampo="Nombre de la eleccion: " Holder='ingrese su nombre'/>
-              <Campos NombreCampo="Descripcion" Holder='ingrese su apellido'/>
-              <Campos NombreCampo="Nombre de la organizcion" Holder='ingrese su CI'/>
+              <Campos NombreCampo="Nombre de la elección: " Holder='ingrese su nombre'/>
+              <Campos NombreCampo="Descripción" Holder='ingrese su apellido'/>
+              <Campos NombreCampo="Nombre de la organización" Holder='ingrese su CI'/>
               <Fecha NombreCampo="Fecha: "/>
               <Hora NombreCampo="Hora inicio: "/>
               <Hora NombreCampo="Hora fin: "/>
-              <Fecha NombreCampo="Fecha de inicio de postulacion: "/>
-              <Fecha NombreCampo="Fecha final de postulacion: "/>
+              <Fecha NombreCampo="Fecha inicio de postulación: "/>
+              <Fecha NombreCampo="Fecha final de postulación: "/>
               
               <div className="form-group mx-sm-4">
                 <input type="submit" className="btn btn-dark w-50 mt-5 mb-3" style={{backgroundColor: '#EEF2F6', color:'black',border:'none'}} value="Crear" /> 

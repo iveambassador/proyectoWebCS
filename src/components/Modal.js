@@ -6,6 +6,7 @@ export default function Modales(props) {
   function generar (){
     let hashGenerado = SHA256(JSON.stringify()).toString()
     console.log(hashGenerado)
+    // hashGenerado = Math.random()
     return hashGenerado
   }
 
