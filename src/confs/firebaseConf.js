@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+//import { createContext } from "react";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,3 +23,8 @@ const firestore = getFirestore(app);
 
 export default firestore;
 export const getUrna = () => getDocs(collection(firestore,'UrnaVoto'))
+
+//export const AuthContext = createContext(null);
+//export const AuthProvider = {{children}} => {
+//  return <AuthContext.Provider>{children}</AuthContext.Provider>
+//};
