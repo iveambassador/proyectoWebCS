@@ -1,30 +1,18 @@
-import React, { Component } from 'react'
-import { Navbar, Nav, Container, NavLink, NavDropdown } from 'react-bootstrap'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import React from 'react'
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 
-import Home from './home'
-import Urna from './urna'
-import Register from './register'
-import Login from './login'
 import logo from '../blockchain-logo-svg-vector.svg'
-import EmitirVoto from './EmitirVoto'
-import PagePostulante from './PagePostulante';
-import Convocatoria from './Convovatoria';
-import CrearPostulacion from './CrearPostulacion';
-export default class NavbarComp extends Component {
-  render() {
+
+const NavbarComp=()=> {
+
     return (
-      <Router>
+      
         <div>
             <Navbar bg="dark" variant={"dark"} expand="lg">
               <Container fluid>
                   <Navbar.Brand> </Navbar.Brand>
-                  <Navbar.Brand as={Link} to={"/"}> <img src={logo}></img> I Vote!</Navbar.Brand>
+                  <Navbar.Brand as={Link} to={"/"}> <img src={logo}></img> iVote</Navbar.Brand>
                   <Navbar.Toggle aria-controls="navbarScroll" />
                   <Navbar.Collapse id="navbarScroll">
                   <Nav
@@ -53,20 +41,9 @@ export default class NavbarComp extends Component {
                   </Navbar.Collapse>
               </Container>
               </Navbar>
-              <div>
-                <Routes>
-                  <Route path="/" element={<Home/>}/>
-                  <Route path="/urna" element={<Urna/>}/>
-                  <Route path="/EmitirVoto" element={<EmitirVoto posi={true}/>}/>
-                  <Route path="/login" element={<Login/>}/>                    
-                  <Route path="/register" element={<Register/>}/>
-                  <Route path="/PagePostulante" element={<PagePostulante/>}/>
-                  <Route path="/Convocatoria" element={<Convocatoria/>}/>
-                  <Route path="//CrearPostulacion" element={<CrearPostulacion/>}/>
-                </Routes>
-              </div>
+              
         </div>
-      </Router>
+      
     )
   }
-}
+export default NavbarComp

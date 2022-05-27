@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getAuth} from 'firebase/auth'
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,5 +21,7 @@ const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const firestore = getFirestore(app);
 
-export default firestore;
-export const getUrna = () => getDocs(collection(firestore,'UrnaVoto'))
+
+const getUrna = () => getDocs(collection(firestore,'UrnaVoto'))
+const auth =getAuth(app);
+export {getUrna, auth};
