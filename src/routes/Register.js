@@ -33,7 +33,7 @@ const Register = () => {
       navegate("/user");
     } catch (error) {
       console.log(error.code);
-      //alert("Esta email ya esta registrado")
+      alert("Esta cuenta ya esta registrado")
     }
 
     try {
@@ -70,6 +70,8 @@ const Register = () => {
               <Form.Control
                 type="text"
                 required
+                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$"
+                title="Solo letras"
                 onChange={(e) => setNombre(e.target.value)}
               />
             </Form.Group>
@@ -78,6 +80,8 @@ const Register = () => {
               <Form.Control
                 type="text"
                 required
+                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$"
+                title="Solo letras"
                 onChange={(e) => setApellido(e.target.value)}
               />
             </Form.Group>
@@ -86,6 +90,9 @@ const Register = () => {
               <Form.Control
                 type="text"
                 required
+                pattern="[0-9]+$"
+                minLength={7}
+                title="Solo números como mínimo 7 caracteres"
                 onChange={(e) => setCi(e.target.value)}
               />
             </Form.Group>
@@ -110,14 +117,18 @@ const Register = () => {
               <Form.Control
                 type="text"
                 required
+                pattern="[0-9]+$"
+                minLength={8}
+                title="Solo números como mínimo 8 caracteres"
                 onChange={(e) => setCelular(e.target.value)}
               />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
-                type="password"
+                type="password"                
                 required
+                minLength={6}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
