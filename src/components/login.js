@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import '../Styles/Login.css'
+
+const bcryptjs = require('bcryptjs');
 export default class login extends Component {
   render() {
     return (
