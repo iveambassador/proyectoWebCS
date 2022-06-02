@@ -33,7 +33,8 @@ export default function PagePostulantes() {
         let celular = doc.data().Celular
         let partido = doc.data().PostularNombrePartido
         let sigla = doc.data().PostularSigla
-        let dato = { id, nombre, apellido, carnet, celular, partido, sigla }
+        let nombreCompleto = nombre +' '+ apellido
+        let dato = { id, nombreCompleto, carnet, celular, partido, sigla }
         listaTemp.push(dato);
       })
       setList(listaTemp);
@@ -61,7 +62,7 @@ export default function PagePostulantes() {
       console.log(bandera)
    }
 
-   const acepteUser = async (id,nombre,sigla)=>{
+   const acepteUser = async (id,nombre,sigla,nombreCandi)=>{
     console.log(id)
      const user = doc(firestore, "UsuarioComun", id);
      await updateDoc(user, {
@@ -72,6 +73,7 @@ export default function PagePostulantes() {
      await setDoc(doc(firestore, "PartidosAceptados", id), {
       NombrePartido: nombre,
       Sigla : sigla,
+      NombreCandidato : nombreCandi,
       Cant : 10,
     });
      //window.location.reload();
@@ -87,13 +89,13 @@ export default function PagePostulantes() {
         { list.map(tupla => (
           <div>
           <Postulante 
-            nombre= {tupla.nombre}
+            nombre = {tupla.nombreCompleto}
             ci= {tupla.carnet}
             telefono= {tupla.celular}
             partido= {tupla.partido}
             cargo= {tupla.sigla}/>
             <div className='Postulante-Botones'>
-              <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla)}>Aceptado</Button>
+              <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto)}>Aceptado</Button>
               <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
             </div>
           </div>
