@@ -38,6 +38,7 @@ const NavbarComp=()=> {
                       <Nav.Link as={Link} to={"/PagePostulante"}>Postulantes</Nav.Link>
                       <Nav.Link as={Link} to={"/Convocatoria"}>Nueva Convovatoria</Nav.Link>
                       <Nav.Link as={Link} to={"/CrearPostulacion"}>Habilitar Postulantes</Nav.Link>
+                      <Nav.Link as={Link} to={"/Postularme"}>Postularme</Nav.Link>
                   </Nav>
                   <Nav>
                     <NavDropdown title="b474d48cdfc4974d86ef4d24904cdd91..." id='basic-nav-dropdown'>
