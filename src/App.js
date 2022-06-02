@@ -13,6 +13,7 @@ import Register from './routes/Register';
 
 import Home from './components/home'
 import Urna from './components/urna'
+import Postularme from './components/postularme'
 //import Register from './components/register'
 //import Login from './components/login'
 //import logo from '../blockchain-logo-svg-vector.svg'
@@ -36,6 +37,7 @@ function App() {
           <Route path="/PagePostulante" element={<RequireAuth><PagePostulante/></RequireAuth>}/>
           <Route path="/Convocatoria" element={<RequireAuth><Convocatoria/></RequireAuth>}/>
           <Route path="/CrearPostulacion" element={<RequireAuth><CrearPostulacion/></RequireAuth>}/>
+          <Route path="/Postularme" element={<RequireAuth><Postularme/></RequireAuth>}/>
                 </Routes>
         </UserProvider>
     </BrowserRouter>
