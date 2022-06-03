@@ -6,10 +6,14 @@ import NoDisponible from './NoDisponible'
 import Modal from './Modal'
 import ModalConfiramcion from './ModalConfirmacion'
 import { useState } from 'react'
+
+//import Blockchain from './blockchain/blockchain';
+
 export default function EmitirVoto(props) {
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   const [mensaje, setMensaje] = useState("hola papu como estas !! ?")
+
 
   // let condicion = true;
   // if(condicion){
