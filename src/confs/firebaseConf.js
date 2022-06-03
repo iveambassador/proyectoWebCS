@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { getAuth} from 'firebase/auth'
+import { getAuth } from "firebase/auth";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,15 +13,14 @@ const firebaseConfig = {
   storageBucket: "elecciones-electorales-tss.appspot.com",
   messagingSenderId: "1066944497467",
   appId: "1:1066944497467:web:770945188614d294f2991e",
-  measurementId: "G-QMWSSEMPLL"
+  measurementId: "G-QMWSSEMPLL",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
-const firestore = getFirestore(app);
+export const firestore = getFirestore(app);
 
-
-const getUrna = () => getDocs(collection(firestore,'UrnaVoto'));
+const getUrna = () => getDocs(collection(firestore, "UrnaVoto"));
 const auth = getAuth(app);
-export {getUrna, auth};
+export { getUrna, auth };

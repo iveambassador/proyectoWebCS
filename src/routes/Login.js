@@ -24,6 +24,7 @@ const Login = () =>{
             navegate("/user")
         }catch(error){
             console.log(error.code);
+            alert("Esta cuenta no esta registrado")
             //alert("Esta email ya esta registrado")
         }
     }
@@ -41,9 +42,9 @@ const Login = () =>{
                     <Form.Control type="email" required onChange={e=>setEmail(e.target.value)}/>
                 </Form.Group>
                 <br/>
-                <Form.Group id="password">
+                <Form.Group id="password" >
                     <Form.Label>Contraseñas</Form.Label>
-                    <Form.Control type="password" required onChange={e=>setPassword(e.target.value)}/>
+                    <Form.Control type="password" required minLength={6} onChange={e=>setPassword(e.target.value)}/>
                 </Form.Group>
                 <br/>
                 <Button className="w-100" type="submit" variant='dark'>
