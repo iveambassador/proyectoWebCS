@@ -12,7 +12,7 @@ export default function Candidato({Partido, NombreAp, Cargo}) {
         <Card.Body>
           <Card.Title>Nombre: {NombreAp}</Card.Title>
           <Card.Text>
-            Cargo: {Cargo}
+            Sigla: {Cargo}
           </Card.Text>
           <Form.Group className='test'>
             <Form.Check className='Checkbox'/>

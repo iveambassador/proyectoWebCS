@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 import { Card, Form, Button } from "react-bootstrap";
-
+import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
+import { getAuth} from 'firebase/auth'
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
@@ -31,23 +32,42 @@ const Register = () => {
       await registerUser(email, password);
       console.log("usuario creado");
       navegate("/user");
-    } catch (error) {
-      console.log(error.code);
-      alert("Esta cuenta ya esta registrado")
-    }
-
-    try {
-      await addDoc(usuarioCollection, {
-        Nombre: nombre,
+      const user = getAuth(app).currentUser.uid;
+      await setDoc(doc(firestore, "UsuarioComun", user), {
         Apellido: apellido,
         CI: ci,
         Celular: celular,
         Correo: email,
         Direccion: direccion,
+        HashSemilla:"",
+        Nombre: nombre,
+        PostularEstado:false,
+        PostularNombrePartido:"",
+        PostularSigla:"",
+        VotoBlanco:0,
+        VotoEstado:false,
+        VotoFecha:"",
+        VotoHash:" ",
+        VotoNulo:0,
+        VotoPartidoSigla:""
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      alert("Esta cuenta ya esta registrado")
     }
+
+    // try {
+    //   await addDoc(usuarioCollection, {
+    //     Nombre: nombre,
+    //     Apellido: apellido,
+    //     CI: ci,
+    //     Celular: celular,
+    //     Correo: email,
+    //     Direccion: direccion,
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
