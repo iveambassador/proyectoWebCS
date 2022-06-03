@@ -22,6 +22,6 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
 
-const getUrna = () => getDocs(collection(firestore,'UrnaVoto'))
+const getUrna = () => getDocs(collection(firestore,'UrnaVoto'));
 const auth = getAuth(app);
 export {getUrna, auth};
