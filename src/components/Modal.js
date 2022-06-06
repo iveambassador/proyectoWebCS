@@ -14,6 +14,7 @@ export default function Modales(props) {
       props.onHide()
       props.test()
       props.setMensaje(`${generar()}`)
+      props.funcionClasificar()
     }
 
     return (

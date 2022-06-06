@@ -20,21 +20,63 @@ export default function EmitirVoto(props) {
 
   const [lista, setList] = useState([]);
   const [bandera, setBandera] = useState(0);
+  const [checkedState, setCheckedState] = useState([]);
+    
   // let condicion = true;
   // if(condicion){
+
+  const handlePadre = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+    setCheckedState(updatedCheckedState);
+    //console.log(checkedState);
+  }
+
+  const clasificarVoto = () =>{
+    var votoElegido;
+    var primeraOcurrencia = checkedState.indexOf(true);
+    if(primeraOcurrencia == -1){
+      //es voto en blanco
+      votoElegido = 'Blanco';
+    }else{
+    var ultimaOcurrencia = checkedState.lastIndexOf(true);
+    if(primeraOcurrencia != ultimaOcurrencia){
+      //Es voto nulo
+      votoElegido = 'Nulo';
+    }else{
+      votoElegido = 'Valido';
+      const found = lista.find(element => element.ix === primeraOcurrencia);
+      const foundName = found.nombre;
+      console.log(foundName);
+    }
+    }
+    console.log(votoElegido);
+  }
+
   useEffect(() => {
     const test = async ()=>{
       try {
       const querySnapshot = await getDocs(collection(firestore, "PartidosAceptados"));
       const listaTemp = [];
+      var i = 0;
       querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
         let nombre = doc.data().NombrePartido
         let sigla = doc.data().Sigla
         let nombreCandi = doc.data().NombreCandidato
-        let dato = {nombre,sigla,nombreCandi}
+        let ix = i
+        let dato = {nombre,sigla,nombreCandi,ix}
         listaTemp.push(dato);
+        i = i + 1;
+        //checkedState.push(false);
       })
+      //checkedState = new Array(i+1).fill(false);
+      for (var j = 0; j < i; j++) {
+        checkedState.push(false);
+      }
+
+      //console.log(i);
       setList(listaTemp);
       } catch (error) {
         console.log(error)
@@ -44,6 +86,10 @@ export default function EmitirVoto(props) {
     console.log("estos son los datos")
     console.log(lista)
    }, [bandera]);
+
+   useEffect(() => {
+    console.log(checkedState);
+    },[checkedState]);
   
   if (props.posi){
     return (
@@ -64,17 +110,21 @@ export default function EmitirVoto(props) {
           <Candidato 
           Partido={tupla.nombre}
           NombreAp={tupla.nombreCandi}
-          Cargo={tupla.sigla}/>  
+          Cargo={tupla.sigla}
+          index={tupla.ix}
+          handlePadree={handlePadre}
+          />  
           )) }      
         </div>
         <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>¡Guardar Voto!</Button>
-        
 
         <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}
         test = {() => setShow(true)}
-        setMensaje = {setMensaje}/>
+        setMensaje = {setMensaje}
+        funcionClasificar = {clasificarVoto}
+        />
 
         <ModalConfiramcion 
         show={show}
