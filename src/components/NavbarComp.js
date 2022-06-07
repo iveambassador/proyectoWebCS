@@ -37,7 +37,7 @@ const NavbarComp=()=> {
                       <Nav.Link as={Link} to={"/EmitirVoto"}>Emitir Voto</Nav.Link>
                       <Nav.Link as={Link} to={"/PagePostulante"}>Postulantes</Nav.Link>
                       <Nav.Link as={Link} to={"/Convocatoria"}>Nueva Convovatoria</Nav.Link>
-                      <Nav.Link as={Link} to={"/CrearPostulacion"}>Habilitar Postulantes</Nav.Link>
+                      {/* <Nav.Link as={Link} to={"/CrearPostulacion"}>Habilitar Postulantes</Nav.Link> */}
                       <Nav.Link as={Link} to={"/Postularme"}>Postularme</Nav.Link>
                   </Nav>
                   <Nav>
