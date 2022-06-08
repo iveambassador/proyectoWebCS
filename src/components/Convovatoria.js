@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 //import { Card, Form, Button } from "react-bootstrap";
 //import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
-import { collection, getDocs, addDoc, setDoc, doc, Timestamp } from "firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc, Timestamp, where, query, updateDoc } from "firebase/firestore";
 //import { getAuth} from 'firebase/auth'
 export default function Convovatoria() {
   const [nombreEleccion, setNombreEleccion] = useState('');
@@ -25,17 +25,36 @@ export default function Convovatoria() {
     try {
       navegate("/");
       //const user = getAuth(app).currentUser.uid;
+      async function eliminar(dato){
+        const washingtonRef = doc(firestore, "AdministrarFechas", dato);
+        await updateDoc(washingtonRef, {
+          Activo: false
+        });
+      }
+      let listita = []
+      const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
+      const usuariosComun = await getDocs(q);
+      usuariosComun.forEach((doc) => {
+        let id = doc.id
+        listita.push(id)
+        eliminar(id)
+      })
+      console.log('la listita es:')
+      console.log(listita);
+      
       await addDoc(collection(firestore, "AdministrarFechas"), {
         NombreEleccion : nombreEleccion,
         DescripcionEleccion: descripcion,
-        FechaIniEleccion : Timestamp.fromDate(new Date(fechaVotoHabil)),
-        FechaFinEleccion : Timestamp.fromDate(new Date(fechaVotoHabil)),
+        FechaIniEleccion : fechaVotoHabil,
+        FechaFinEleccion : fechaVotoHabil,
         HoraIniEleccion : horaIniVoto,
         HoraFinEleccion : horaFinVoto,
-        FechaIniPostulacion : Timestamp.fromDate(new Date(fechaIniPostulacion)),
-        FechaFinPostulacion : Timestamp.fromDate(new Date(fechaFinPostulacion)),
+        FechaIniPostulacion : fechaIniPostulacion,
+        FechaFinPostulacion : fechaFinPostulacion,
         Activo : true
       });
+
+      
     } catch (error) {
       console.log(error.code);
     }
