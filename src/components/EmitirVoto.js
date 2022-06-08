@@ -198,7 +198,9 @@ export default function EmitirVoto(props) {
     //console.log(año)
     //console.log(hora)
     //console.log(minutos)
-    if((año<=parseInt(fechaVoto[0]) && mes<=parseInt(fechaVoto[1]) && dia<=parseInt(fechaVoto[2])) && hora >= parseInt(inicio[0]) && minutos >= parseInt(inicio[1]) && hora <= parseInt(fin[0]) && minutos <= parseInt(fin[1])){
+    let idUsuario = getAuth(app).currentUser.uid;
+    const theUser = doc(firestore, "UsuarioComun", idUsuario);
+    if((año<=parseInt(fechaVoto[0]) && mes<=parseInt(fechaVoto[1]) && dia<=parseInt(fechaVoto[2])) && hora >= parseInt(inicio[0]) && minutos >= parseInt(inicio[1]) && hora <= parseInt(fin[0]) && minutos <= parseInt(fin[1]) && theUser.data().VotoEstado===false){
       setValido(true)
     }else{
       setValido(false)

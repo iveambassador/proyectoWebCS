@@ -9,11 +9,11 @@ const Blockchain = require('./blockchain/blockchain');
 const Block = require('./blockchain/block');
 
 export default function Modales(props) {
-  async function generar (){
+  function generar (){
     let hashGenerado = SHA256(JSON.stringify()).toString()
     console.log(hashGenerado)
-    hashGenerado = Math.random()
-    return hashGenerado;
+    // hashGenerado = Math.random()
+    return hashGenerado
   }
   const getCurrentDate = () => {
     var today = new Date();
