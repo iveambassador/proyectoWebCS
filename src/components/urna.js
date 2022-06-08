@@ -57,8 +57,8 @@ export default class urna extends Component {
 
     voters.forEach(doc => {
         var firedate = doc.data().VotoFecha;
-        var reactdate = firedate.toDate();
-        var thedate = reactdate.toLocaleString();
+        //var reactdate = firedate.toDate();
+        //var thedate = reactdate.toLocaleString();
 
         var voto;
 
@@ -77,7 +77,7 @@ export default class urna extends Component {
             <td>${doc.data().VotoHash}</td>
             <td>${doc.data().HashSemilla}</td>
             <td>${voto}</td>
-            <td>${thedate}</td>
+            <td>${firedate}</td>
             </tr>
         `
     })

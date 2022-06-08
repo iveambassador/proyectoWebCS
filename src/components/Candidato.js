@@ -20,7 +20,7 @@ export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree}
         <Card.Body>
           <Card.Title>Nombre: {NombreAp}</Card.Title>
           <Card.Text>
-            Sigla: {Cargo}
+            Cargo: {Cargo}
           </Card.Text>
           <Form.Group className='test'>
             <Form.Check 

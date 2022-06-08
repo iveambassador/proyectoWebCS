@@ -9,9 +9,10 @@ import ModalConfiramcion from './ModalConfirmacion'
 
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
-import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
+import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc, getDoc} from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { getAuth} from 'firebase/auth'
 
 export default function EmitirVoto(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -33,25 +34,79 @@ export default function EmitirVoto(props) {
     //console.log(checkedState);
   }
 
-  const clasificarVoto = () =>{
+  const guardarVoto = (hashGenerado,voteDate) =>{
     var votoElegido;
     var primeraOcurrencia = checkedState.indexOf(true);
     if(primeraOcurrencia == -1){
       //es voto en blanco
       votoElegido = 'Blanco';
     }else{
-    var ultimaOcurrencia = checkedState.lastIndexOf(true);
-    if(primeraOcurrencia != ultimaOcurrencia){
-      //Es voto nulo
-      votoElegido = 'Nulo';
-    }else{
-      votoElegido = 'Valido';
-      const found = lista.find(element => element.ix === primeraOcurrencia);
-      const foundName = found.nombre;
-      console.log(foundName);
-    }
+      var ultimaOcurrencia = checkedState.lastIndexOf(true);
+      if(primeraOcurrencia != ultimaOcurrencia){
+        //Es voto nulo
+        votoElegido = 'Nulo';
+      }else{
+        //votoElegido = 'Valido';
+        const foundCandidato = lista.find(element => element.ix === primeraOcurrencia);
+        const foundName = foundCandidato.sigla;
+        const foundId = foundCandidato.idCandidato;
+        votoElegido = foundName;
+        guardarEnPartidos(foundId);
+        //console.log(foundName);
+      }
     }
     console.log(votoElegido);
+    guardarEnUsuario(votoElegido,hashGenerado,voteDate);
+  }
+
+  const guardarEnUsuario = async (voteValue, voteHash,voteDate) =>{
+    let idUsuario = getAuth(app).currentUser.uid;
+    const theUser = doc(firestore, "UsuarioComun", idUsuario);
+
+    if(voteValue === "Nulo"){
+      await updateDoc(theUser, {
+        VotoEstado : true,
+        VotoNulo : 1,
+        VotoHash : voteHash,
+        VotoFecha: voteDate
+      });
+    }else{
+      if(voteValue === "Blanco"){
+        await updateDoc(theUser, {
+          VotoEstado : true,
+          VotoBlanco : 1,
+          VotoHash : voteHash,
+          VotoFecha: voteDate
+        });
+      }else{
+        await updateDoc(theUser, {
+          VotoEstado : true,
+          VotoPartidoSigla : voteValue,
+          VotoHash : voteHash,
+          VotoFecha: voteDate
+        });
+      }
+    }
+    console.log("Datos actualizados en la coleccion Usuario Comun");
+
+  }
+
+  const guardarEnPartidos = async (idPartido) =>{
+    console.log(idPartido);
+    const thePartido = doc(firestore, "PartidosAceptados", idPartido);
+    const docSnap = await getDoc(thePartido);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    let actualCuenta = docSnap.data().Cant;
+    let newCuenta = actualCuenta+1;
+    await updateDoc(thePartido, {
+      Cant : newCuenta
+    });
+    console.log("Cantidad de votos ",newCuenta);
   }
 
   useEffect(() => {
@@ -65,13 +120,15 @@ export default function EmitirVoto(props) {
       var i = 0;
       postulantesAceptados.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
+        let idCandidato = doc.id
         let nombre = doc.data().Nombre
         let apellido = doc.data().Apellido
         let nombreCandi = nombre + " " + apellido
         let nombrePartid = doc.data().PostularNombrePartido
         let sigla = doc.data().PostularSigla
+        let cargo = doc.data().PostularCargo
         let ix = i
-        let dato = {nombrePartid,sigla,nombreCandi,ix}
+        let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix}
         listaTemp.push(dato);
         i = i + 1;
         //checkedState.push(false);
@@ -80,7 +137,7 @@ export default function EmitirVoto(props) {
       for (var j = 0; j < i; j++) {
         checkedState.push(false);
       }
-
+      console.log("Lista Temporal",listaTemp);
       //console.log(i);
       setList(listaTemp);
       } catch (error) {
@@ -113,9 +170,10 @@ export default function EmitirVoto(props) {
         <div className='Cont-Candidatos'>
         { lista.map(tupla => (
           <Candidato 
-          Partido={tupla.nombre}
+          key = {tupla.idCandidato}
+          Partido={tupla.nombrePartid}
           NombreAp={tupla.nombreCandi}
-          Cargo={tupla.sigla}
+          Cargo={tupla.cargo}
           index={tupla.ix}
           handlePadree={handlePadre}
           />  
@@ -128,7 +186,7 @@ export default function EmitirVoto(props) {
         onHide={() => setModalShow(false)}
         test = {() => setShow(true)}
         setMensaje = {setMensaje}
-        funcionClasificar = {clasificarVoto}
+        funcionClasificar = {guardarVoto}
         />
 
         <ModalConfiramcion 
