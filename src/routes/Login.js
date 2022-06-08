@@ -25,7 +25,7 @@ const Login = () =>{
         try{
             await loginUser(email,password);
             console.log("usuario logeado");
-            navegate("/user")
+            navegate("/")
         }catch(error){
             console.log(error.code);
             alert("Esta cuenta no esta registrada")

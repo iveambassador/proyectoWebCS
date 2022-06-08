@@ -1,16 +1,9 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import {useContext} from 'react'
 import {UserContext } from '../context/UserProvider'
+import {getRolUser } from '../utils/getRolUser'
 
 
-
-const USER_ROLES = ['admin', 'user']
-
-const getRolUser = (user) =>{
-    const {email} = user
-    return email?.split('@').includes('admin') ? 'admin' : 'user'
-
-}
 export const PrivateRoutes = ({roles = []}) => {
 
     const {user}  = useContext(UserContext )
