@@ -10,7 +10,7 @@ class block{
         //datos que pasen 
         this.body = JSON.stringify(data).toString('hex');
         //es la fecha
-        this.time = 0:
+        this.time = 0;
         //es el hash anterior como lista enlazada
         this.previousBlockHash = "";
     }
@@ -55,4 +55,4 @@ class block{
 
 }
 
-module.exports = Block;
+module.exports = block;
