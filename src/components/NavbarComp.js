@@ -57,6 +57,7 @@ const NavbarComp=()=> {
                       navbarScroll
                   >   
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
+                      <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                       {
                         routes[userRol]?.map(({name, path}) => (
                           <Nav.Link as={Link} to={path}>{name}</Nav.Link>
