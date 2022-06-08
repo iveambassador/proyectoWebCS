@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../context/UserProvider"
 import { Card, Form, Button } from 'react-bootstrap'
@@ -8,23 +8,27 @@ const Login = () =>{
     const [password, setPassword] = useState('')
     
     //const {user, setUser}=useContext(UserContext)
-    const { loginUser }=useContext(UserContext)
+    const { loginUser,user }=useContext(UserContext)
     const navegate = useNavigate();
     /*const handleClickLogin=()=>{
         setUser(true)
         navegate("/")
     }*/
-
+    useEffect(() => {
+       if(user){
+        navegate("/")
+       }
+    }, [user]);
     const handleSubmit = async(e) =>{
         e.preventDefault();
         console.log("procesando form:" , email, password);
         try{
             await loginUser(email,password);
             console.log("usuario logeado");
-            navegate("/user")
+            navegate("/")
         }catch(error){
             console.log(error.code);
-            alert("Esta cuenta no esta registrado")
+            alert("Esta cuenta no esta registrada")
             //alert("Esta email ya esta registrado")
         }
     }

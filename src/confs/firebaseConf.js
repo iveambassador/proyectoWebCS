@@ -2,6 +2,9 @@ import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+//import "./firestore.indexes";
+
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
