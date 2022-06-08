@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, FormGroup } from "react-bootstrap";
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import { getAuth} from 'firebase/auth'
@@ -7,6 +7,8 @@ import {collection, getDocs, getFirestore, updateDoc, doc} from "firebase/firest
 import '../Styles/Login.css'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getStorage } from "@firebase/storage";
+
 
 export default function Postularme() {
   const [postularEstado, setPostularEstado] = useState(false);
@@ -65,17 +67,20 @@ export default function Postularme() {
             <Form.Label>Sigla del partido político:</Form.Label>
             <Form.Control type="input" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+
+          
+
+          <Form.Group className="mb-3" controlId="docPenales">
             <Form.Label>Certificado de antecedentes penales:</Form.Label>
-            <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+            <Form.Control type="file" onChange={(e) => setSigla(e.target.value)}/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="docJurada">
             <Form.Label>Declaración jurada: </Form.Label>
-            <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+            <Form.Control type="file" onChange={(e) => setSigla(e.target.value)}/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="docFotografia">
             <Form.Label>Fotografía:</Form.Label>
-            <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+            <Form.Control type="file" onChange={(e) => setSigla(e.target.value)}/>
           </Form.Group>
           {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}
           <Form.Group className="text-center mt-3">
