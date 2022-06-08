@@ -5,8 +5,6 @@ import { Button } from 'react-bootstrap'
 import NoDisponible from './NoDisponible'
 import Modal from './Modal'
 import ModalConfiramcion from './ModalConfirmacion'
-//import { useState } from 'react'
-
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
@@ -17,9 +15,11 @@ export default function EmitirVoto(props) {
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   const [mensaje, setMensaje] = useState("hola papu como estas !! ?")
+  
 
   const [lista, setList] = useState([]);
   const [bandera, setBandera] = useState(0);
+  const [valido, setValido] = useState(true);
   // let condicion = true;
   // if(condicion){
   useEffect(() => {
@@ -45,7 +45,52 @@ export default function EmitirVoto(props) {
     console.log(lista)
    }, [bandera]);
   
-  if (props.posi){
+   useEffect(() => {
+   const cumple = async ()=>{
+    const listaFechas = [];
+    try {
+    const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
+    const usuariosComun = await getDocs(q);
+    usuariosComun.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+      let id = doc.id
+      let NombreEleccion = doc.data().NombreEleccion
+      let DescripcionEleccion= doc.data().DescripcionEleccion
+      let FechaIniEleccion = doc.data().FechaIniEleccion
+      let FechaFinEleccion = doc.data().FechaFinEleccion
+      let HoraIniEleccion = doc.data().HoraIniEleccion
+      let HoraFinEleccion = doc.data().HoraFinEleccion
+      let FechaIniPostulacion = doc.data().FechaIniPostulacion
+      let FechaFinPostulacion = doc.data().FechaFinPostulacion
+      let Activo = doc.data().Activo
+      let dato = { id, NombreEleccion, DescripcionEleccion, FechaIniEleccion, FechaFinEleccion, HoraIniEleccion, HoraFinEleccion, FechaIniPostulacion, FechaFinPostulacion, Activo }
+      listaFechas.push(dato);
+    })
+    } catch (error) {
+      console.log(error)
+    }
+    console.log("estas soon las fechas")
+    console.log(listaFechas)
+    //console.log(listaFechas[0].FechaIniPostulacion.toString())
+    let hoy = new Date()
+    let dia = parseInt(hoy.getDate())
+    let mes = parseInt(( hoy.getMonth() + 1 ))
+    let año = parseInt(hoy.getFullYear())
+    let hora = parseInt(hoy.getHours())
+    let minutos = parseInt(hoy.getMinutes())
+    let fechaVoto = listaFechas[0].FechaIniEleccion.toString().split('-')
+    let inicio = listaFechas[0].HoraIniEleccion.toString().split(':')
+    let fin = listaFechas[0].HoraFinEleccion.toString().split(':')
+    if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && hora >= parseInt(inicio[0]) && minutos >= parseInt(inicio[1]) && hora <= parseInt(fin[0]) && minutos <= parseInt(fin[1])){
+      setValido(true)
+    }else{
+      setValido(false)
+    }
+  }
+  cumple();
+}, []);
+
+  if (valido){
     return (
       <div className='Container'>
         

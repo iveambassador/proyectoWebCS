@@ -9,11 +9,33 @@ export default function Modales(props) {
     // hashGenerado = Math.random()
     return hashGenerado
   }
+  const getCurrentDate = () => {
+    var today = new Date();
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    
+    
+    if(day < 10){
+      day = '0'+day;
+    }
+    if(month < 10){
+      month = '0'+month;
+    }
+    const voteDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+    console.log(voteDate);
+    return voteDate;
+  }
 
     function CambiarModal(){
+      const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      props.setMensaje(`${generar()}`)
+      const hashG = generar()
+      props.setMensaje(`${hashG}`)
+      props.funcionClasificar(hashG, voteDate)
     }
 
     return (
