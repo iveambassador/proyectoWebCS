@@ -21,24 +21,35 @@ import EmitirVoto from './components/EmitirVoto'
 import PagePostulante from './components/PagePostulante';
 import Convocatoria from './components/Convovatoria';
 import CrearPostulacion from './components/CrearPostulacion';
-
+import {PrivateRoutes}  from './routes/PrivateRoutes';
 function App() {
   return (
     <BrowserRouter>
       <UserProvider>
         <NavbarComp/>
         <Routes>
-          <Route path='/user' element={ <RequireAuth><User/></RequireAuth>} />
+
+          {/*rutas publicas */}
           <Route path="/" element={<Home/>}/>
           <Route path="/urna" element={<Urna/>}/>
-          <Route path="/EmitirVoto" element={<RequireAuth> <EmitirVoto posi={true}/></RequireAuth>}/>
           <Route path="/login" element={<Login/>}/>                    
           <Route path="/register" element={<Register/>}/>
-          <Route path="/PagePostulante" element={<RequireAuth><PagePostulante/></RequireAuth>}/>
-          <Route path="/Convocatoria" element={<RequireAuth><Convocatoria/></RequireAuth>}/>
-          <Route path="/CrearPostulacion" element={<RequireAuth><CrearPostulacion/></RequireAuth>}/>
-          <Route path="/Postularme" element={<RequireAuth><Postularme/></RequireAuth>}/>
-                </Routes>
+
+          {/*rutas admin */}
+          <Route element={<PrivateRoutes roles={['admin']}/>}>
+          <Route path="/PagePostulante" element={<PagePostulante/>}/>
+          <Route path="/Convocatoria" element={<Convocatoria/>}/>
+          </Route>
+
+          {/*rutas user authenticated */}
+          <Route element={<PrivateRoutes roles={['user']}/>}>
+
+          <Route path="/CrearPostulacion" element={<CrearPostulacion/>}/>
+          <Route path="/Postularme" element={<Postularme/>}/>
+          <Route path="/EmitirVoto" element={ <EmitirVoto posi={true}/>}/>
+
+          </Route>
+          </Routes>
         </UserProvider>
     </BrowserRouter>
   );
