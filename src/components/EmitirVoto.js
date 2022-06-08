@@ -112,21 +112,21 @@ export default function EmitirVoto(props) {
   useEffect(() => {
     const test = async ()=>{
       try {
-      //duda????? postulante aceptado estado
-      const thequery = query(collection(firestore, "UsuarioComun"), where("PostularEstado", "==", true));
-      const postulantesAceptados = await getDocs(thequery);
+      //const thequery = query(collection(firestore, "UsuarioComun"), where("PostularEstado", "==", true));
+      //const postulantesAceptados = await getDocs(thequery);
+      const postulantesAceptados = await getDocs(collection(firestore, "PartidosAceptados"));
       console.log(postulantesAceptados.size);
       const listaTemp = [];
       var i = 0;
       postulantesAceptados.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
         let idCandidato = doc.id
-        let nombre = doc.data().Nombre
-        let apellido = doc.data().Apellido
-        let nombreCandi = nombre + " " + apellido
-        let nombrePartid = doc.data().PostularNombrePartido
-        let sigla = doc.data().PostularSigla
-        let cargo = doc.data().PostularCargo
+        let nombreCandi = doc.data().NombreCandidato
+        //let apellido = doc.data().Apellido
+        //let nombreCandi = nombre + " " + apellido
+        let nombrePartid = doc.data().NombrePartido
+        let sigla = doc.data().Sigla
+        let cargo = doc.data().Cargo
         let ix = i
         let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix}
         listaTemp.push(dato);
