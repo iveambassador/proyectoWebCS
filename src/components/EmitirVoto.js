@@ -71,7 +71,7 @@ export default function EmitirVoto(props) {
     }
     console.log("estas soon las fechas")
     console.log(listaFechas)
-    console.log(listaFechas[0].FechaIniPostulacion.toString())
+    //console.log(listaFechas[0].FechaIniPostulacion.toString())
     let hoy = new Date()
     let dia = parseInt(hoy.getDate())
     let mes = parseInt(( hoy.getMonth() + 1 ))
@@ -81,27 +81,11 @@ export default function EmitirVoto(props) {
     let fechaVoto = listaFechas[0].FechaIniEleccion.toString().split('-')
     let inicio = listaFechas[0].HoraIniEleccion.toString().split(':')
     let fin = listaFechas[0].HoraFinEleccion.toString().split(':')
-    //console.log("este es el split: ")
-    //console.log(fechaVoto)
-    //console.log(inicio)
-    //console.log(fin)
-    //console.log(dia)
-    //console.log(mes)
-    //console.log(año)
-    //console.log(hora)
-    //console.log(minutos)
-    if((año<=parseInt(fechaVoto[0]) && mes<=parseInt(fechaVoto[1]) && dia<=parseInt(fechaVoto[2])) && hora >= parseInt(inicio[0]) && minutos >= parseInt(inicio[1]) && hora <= parseInt(fin[0]) && minutos <= parseInt(fin[1])){
+    if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && hora >= parseInt(inicio[0]) && minutos >= parseInt(inicio[1]) && hora <= parseInt(fin[0]) && minutos <= parseInt(fin[1])){
       setValido(true)
     }else{
       setValido(false)
     }
-    
-    //let fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-    //let hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
-    // console.log(fecha)
-    // console.log(hora)
-
-    
   }
   cumple();
 }, []);
