@@ -24,6 +24,7 @@ import CrearPostulacion from './components/CrearPostulacion';
 
 function App() {
   return (
+    
     <BrowserRouter>
       <UserProvider>
         <NavbarComp/>
