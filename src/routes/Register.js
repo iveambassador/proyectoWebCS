@@ -31,7 +31,7 @@ const Register = () => {
     try {
       await registerUser(email, password);
       console.log("usuario creado");
-      navegate("/user");
+      navegate("/");
       const user = getAuth(app).currentUser.uid;
       await setDoc(doc(firestore, "UsuarioComun", user), {
         Apellido: apellido,
@@ -42,6 +42,7 @@ const Register = () => {
         HashSemilla:"",
         Nombre: nombre,
         PostularEstado:false,
+        PuedePostular : true,
         PostularNombrePartido:"",
         PostularSigla:"",
         VotoBlanco:0,
@@ -80,7 +81,7 @@ const Register = () => {
       >
         <Card.Header style={{ backgroundColor: "#012345" }}>
           <h3 className="text-center mb-2" style={{ color: "white" }}>
-            Registarse
+            Registrarse
           </h3>
         </Card.Header>
         <Card.Body style={{ backgroundColor: "#5668d1" }}>

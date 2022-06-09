@@ -3,11 +3,12 @@ import { Form, Button, Card } from "react-bootstrap";
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import { getAuth} from 'firebase/auth'
-import {collection, getDocs, getFirestore, updateDoc, doc, query, where} from "firebase/firestore";
+import {collection, getDocs, getFirestore, updateDoc, doc, query, where, getDoc} from "firebase/firestore";
 import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
+
 
 export default function Postularme() {
   //const [postularEstado, setPostularEstado] = useState(false);
@@ -20,10 +21,12 @@ export default function Postularme() {
     e.preventDefault();
     let user = getAuth(app).currentUser.uid;
     const test = doc(firestore, "UsuarioComun", user);
+    console.log("este es el test osea el usuario")
     console.log(test);
     
     navegar("/");
     await updateDoc(test, {
+        PuedePostular : false,
         PostularEstado : true,
         PostularNombrePartido : nombrePartido,
         PostularSigla : siglaPartido,
@@ -58,9 +61,12 @@ export default function Postularme() {
      console.log(listaFechas[0].FechaIniPostulacion)
      console.log(listaFechas[0].FechaFinPostulacion)
 
+     let idUsuario = getAuth(app).currentUser.uid;
+     const usuarioActual = doc(firestore, "UsuarioComun", idUsuario);
+     const DatosUser = await getDoc(usuarioActual);
      let inicio = listaFechas[0].FechaIniPostulacion.toString().split('-')
      let fin = listaFechas[0].FechaFinPostulacion.toString().split('-')
-     if((año>=parseInt(inicio[0]) && año<=parseInt(fin[0]) && mes>=parseInt(inicio[1]) && mes<=parseInt(fin[1]) && dia>=parseInt(inicio[2])) && dia<=parseInt(fin[2])){
+     if((año>=parseInt(inicio[0]) && año<=parseInt(fin[0]) && mes>=parseInt(inicio[1]) && mes<=parseInt(fin[1]) && dia>=parseInt(inicio[2])) && dia<=parseInt(fin[2]) && DatosUser.data().PuedePostular===true){
        setValido(true)
      }else{
        setValido(false)
@@ -121,7 +127,7 @@ export default function Postularme() {
     }else{
       return (
         <div className='Container'>
-            <NoDisponible mensaje="Usted se encuentra fuera de rango de fechas disponibles para postular."/>
+            <NoDisponible mensaje="Usted ya postulo o se encuentra fuera de rango de fechas disponibles para postular."/>
         </div>
       ) 
     }

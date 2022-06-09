@@ -41,40 +41,40 @@ export default function PagePostulantes() {
       } catch (error) {
         console.log(error)
       }
-    }
-    test(); 
-    console.log("estos son los datos")
-    console.log(list)
-   }, [bandera]);
+      }
+      test(); 
+      console.log("estos son los datos")
+      console.log(list)
+  }, [bandera]);
 
-   console.log(list)
-   const navegar = useNavigate();
-   const deleteUser = async (id)=>{
-     console.log(id)
+    console.log(list)
+    const navegar = useNavigate();
+    const deleteUser = async (id)=>{
+      console.log(id)
       const user = doc(firestore, "UsuarioComun", id);
       await updateDoc(user, {
         PostularEstado : false,
-        PostularNombrePartido : '',
-        PostularSigla : '',
+        PostularNombrePartido : 'Delete',
+        PostularSigla : 'Delete',
       });
       //window.location.reload();
       setBandera(bandera+1)
       console.log(bandera)
-   }
+    }
 
    const acepteUser = async (id,nombre,sigla,nombreCandi)=>{
     console.log(id)
      const user = doc(firestore, "UsuarioComun", id);
      await updateDoc(user, {
        PostularEstado : false,
-       PostularNombrePartido : '',
-       PostularSigla : '',
+       PostularNombrePartido : 'Acept',
+       PostularSigla : 'Acept',
      });
      await setDoc(doc(firestore, "PartidosAceptados", id), {
       NombrePartido: nombre,
       Sigla : sigla,
       NombreCandidato : nombreCandi,
-      Cant : 10,
+      Cant : 0,
     });
      //window.location.reload();
      setBandera(bandera+1)

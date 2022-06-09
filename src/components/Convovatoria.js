@@ -39,8 +39,8 @@ export default function Convovatoria() {
         listita.push(id)
         eliminar(id)
       })
-      console.log('la listita es:')
-      console.log(listita);
+      //console.log('la listita es:')
+      //console.log(listita);
       
       await addDoc(collection(firestore, "AdministrarFechas"), {
         NombreEleccion : nombreEleccion,
