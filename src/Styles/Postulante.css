@@ -1,7 +1,7 @@
 .contenedor-informacion {
     width: 1000px;
     min-width: 17rem;
-    height: 300px;
+    min-height: 300px;
     margin: 10px 10px;
     display: flex;
     flex-direction: column;

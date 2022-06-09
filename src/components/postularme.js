@@ -81,34 +81,34 @@ export default function Postularme() {
           <div>
           <Card
           border="dark"
-          style={{ width: "100%", height: "auto", maxWidth: "400px" }}
+          style={{ width: "100%", height: "auto", maxWidth: "400px" ,borderRadius: '10px'}}
         >
-          <Card.Header style={{ backgroundColor: "#012345" }}>
-            <h3 className="text-center mb-2" style={{ color: "white" }}>
+          <Card.Header style={{ backgroundColor: "#012345" ,borderRadius: '10px 10px 0 0'}}>
+            <h3 className="text-center mb-2 mt-2" style={{ color: "white" }}>
               Formulario de postulación
             </h3>
           </Card.Header>
-          <Card.Body style={{ backgroundColor: "#5668d1" }}>
+          <Card.Body style={{ backgroundColor: "#5668d1" ,borderRadius: '0 0 10px 10px'}}>
             <Form onSubmit={Postular}>
             {/* <h1 className="contLoginTittle">Formulario de postulación</h1> */}
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Nombre del partido político:</Form.Label>
+              <Form.Label><h5>Nombre del partido político:</h5></Form.Label>
               <Form.Control type="input" placeholder="Nombre del partido político" onChange={(e) => setNombrePartido(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Sigla del partido político:</Form.Label>
+              <Form.Label><h5>Sigla del partido político:</h5></Form.Label>
               <Form.Control type="input" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Certificado de antecedentes penales:</Form.Label>
+              <Form.Label><h5>Certificado de antecedentes penales:</h5></Form.Label>
               <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Declaración jurada: </Form.Label>
+              <Form.Label><h5>Declaración jurada:</h5></Form.Label>
               <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Fotografía:</Form.Label>
+              <Form.Label><h5>Fotografía:</h5></Form.Label>
               <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}

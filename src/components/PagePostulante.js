@@ -1,13 +1,14 @@
 import React from 'react'
 import '../Styles/Postulante.css'
-import Postulante from './Postulante'
+//import Postulante from './Postulante'
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
-import { reload } from 'firebase/auth';
+import NoDisponible from './NoDisponible'
+//import { reload } from 'firebase/auth';
 //import { async } from '@firebase/util';
 export default function PagePostulantes() {
   const [list, setList] = useState([]);
@@ -82,26 +83,48 @@ export default function PagePostulantes() {
   }
   
     
-  return (
-    <div className="contMain">
-      <div className='contPostulante'>
-        <h4 className='contenedor-testimonio w-100'>Postulantes: </h4>
-        { list.map(tupla => (
-          <div>
-          <Postulante 
-            nombre = {tupla.nombreCompleto}
-            ci= {tupla.carnet}
-            telefono= {tupla.celular}
-            partido= {tupla.partido}
-            cargo= {tupla.sigla}/>
-            <div className='Postulante-Botones'>
-              <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto)}>Aceptado</Button>
-              <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
+  if(list.length > 0){
+    return (
+      <div className="contMain">
+        <div className='contPostulante'>
+          <h4 className='contenedor-testimonio w-100 ms-2'>Postulantes: </h4>
+          { list.map(tupla => (
+            <div className='contenedor-informacion px-4 py-3'>
+      
+              <p><strong>Nombre del postulante:</strong> {tupla.nombreCompleto}</p>
+              <p><strong>Nro. CI:</strong> {tupla.carnet}</p>
+              <p><strong>Nro. Teléfono:</strong> {tupla.celular}</p>
+              <p><strong>Partido político: </strong> {tupla.partido}</p>
+              <p><strong>Sigla:</strong> {tupla.sigla}</p>
+              <p>ver documentos</p>
+              <div className='Postulante-Botones'>
+                <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto)}>Aceptado</Button>
+                <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
+              </div>
+          
             </div>
-          </div>
-        )) }
-    
+            // <div>
+            // <Postulante 
+            //   nombre = {tupla.nombreCompleto}
+            //   ci= {tupla.carnet}
+            //   telefono= {tupla.celular}
+            //   partido= {tupla.partido}
+            //   cargo= {tupla.sigla}/>
+            //   <div className='Postulante-Botones'>
+            //     <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto)}>Aceptado</Button>
+            //     <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
+            //   </div>
+            // </div>
+          )) }
+      
+        </div>
       </div>
-    </div>
-  )
+    )
+  }else{
+    return (
+      <div className='Container'>
+          <NoDisponible mensaje="¡Vaya! Aún nadie ha postulado"/>
+      </div>
+    ) 
+  }
 }
