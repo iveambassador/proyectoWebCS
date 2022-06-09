@@ -114,6 +114,7 @@ export default function EmitirVoto(props) {
       try {
       //const thequery = query(collection(firestore, "UsuarioComun"), where("PostularEstado", "==", true));
       //const postulantesAceptados = await getDocs(thequery);
+      
       const postulantesAceptados = await getDocs(collection(firestore, "PartidosAceptados"));
       //console.log(postulantesAceptados.size);
       const listaTemp = [];

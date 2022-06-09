@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 //import { Card, Form, Button } from "react-bootstrap";
 //import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
-import { collection, getDocs, addDoc, setDoc, doc, Timestamp, where, query, updateDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc, Timestamp, where, query, updateDoc, deleteDoc } from "firebase/firestore";
 //import { getAuth} from 'firebase/auth'
 export default function Convovatoria() {
   const [nombreEleccion, setNombreEleccion] = useState('');
@@ -25,19 +25,44 @@ export default function Convovatoria() {
     try {
       navegate("/");
       //const user = getAuth(app).currentUser.uid;
-      async function eliminar(dato){
+      async function limpiarFechas(dato){
         const washingtonRef = doc(firestore, "AdministrarFechas", dato);
         await updateDoc(washingtonRef, {
           Activo: false
         });
       }
+
+      async function borrarPartidos(identificador){
+        await deleteDoc(doc(firestore, "PartidosAceptados",identificador));
+      }
+
+      async function limpiarVotos(idUser){
+        const unUsuario = doc(firestore, "UsuarioComun", idUser);
+        await updateDoc(unUsuario, {
+          VotoEstado: false,
+          VotoBlanco : 0,
+          VotoNulo : 0,
+          PostularEstado : false,
+          PuedePostular : true
+        });
+      }
+      const allUsers = await getDocs(collection(firestore, "UsuarioComun"));
+      allUsers.forEach((doc) => {
+        limpiarVotos(doc.id);
+      });
+
+      const querySnapshot = await getDocs(collection(firestore, "PartidosAceptados"));
+      querySnapshot.forEach((doc) => {
+        borrarPartidos(doc.id);
+      });
+
       let listita = []
       const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
       const usuariosComun = await getDocs(q);
       usuariosComun.forEach((doc) => {
         let id = doc.id
         listita.push(id)
-        eliminar(id)
+        limpiarFechas(id)
       })
       //console.log('la listita es:')
       //console.log(listita);
@@ -53,7 +78,7 @@ export default function Convovatoria() {
         FechaFinPostulacion : fechaFinPostulacion,
         Activo : true
       });
-
+      
       
     } catch (error) {
       console.log(error.code);
