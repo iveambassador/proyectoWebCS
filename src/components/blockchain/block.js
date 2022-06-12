@@ -49,7 +49,7 @@ class block{
     }
     toString(){
         const {hash, height, body, time, previousBlockHash} = this;
-        return "Block - hash: ${hash} , height: ${height}, body: ${body}, time: ${time}, previousBlockHash: ${previousBlockHash}";
+        return "Block - hash: ${hash} height: ${height} body: ${body} time: ${time} previousBlockHash: ${previousBlockHash}";
     }
 
 }
