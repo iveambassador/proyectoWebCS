@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -7,6 +7,7 @@ const pie = ({datos}) => {
   
   return (
     <div style={{width: '100%', height: 'auto', margin:'auto', maxWidth:'400px'}}>
+      <h3>Graficas de Resultados: </h3>
       <Pie data={datos} />
     </div>
   )

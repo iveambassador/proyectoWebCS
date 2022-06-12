@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Table } from 'react-bootstrap'
 
 const colNames=['Id','Candidato', 'Partido','Votos']
@@ -6,6 +6,7 @@ const colNames=['Id','Candidato', 'Partido','Votos']
 const tabla = ({listas}) => {
 return (
     <div style={{width: '100%', height: 'auto', margin:'auto', maxWidth:'400px'}}>
+        <h3>Tabla de Resultados: </h3>
         {listas.length>0 && (
             <Table striped bordered hover>
                 <thead >

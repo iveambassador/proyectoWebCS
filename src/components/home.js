@@ -1,41 +1,67 @@
-import React, { Component } from "react";
+import React from "react";
 import Pie from "./charts/pie";
 import Bar from "./charts/bar";
 import Tabla from "./charts/tabla";
-export const list = [
-  { id: 1, name:"John", partido:"PSG",votos: 102 },
-  { id: 2, name:"Jane", partido:"RM",votos: 23},
-  { id: 3, name:"Fabricio", partido:"WTF",votos: 50},
-]
 
-const data = {
-  labels: ['John', 'Jane', 'Fabricio','Blanco','Nulo'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [102, 23, 50, 5, 2],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        
-      ],
-      borderWidth: 1,
-    },
-  ],
-}
+import { useState,useEffect } from "react";
+import { collection, getDocs, orderBy } from 'firebase/firestore'
+import { firestore } from "../confs/firebaseConf";
 
-const home = () => {
+const Home = () => {
+  const [users, setUsers]=useState([])
+  const usersCollectionRef = collection(firestore,"resultados")
+  useEffect(()=> {
+  //Leer     
+  const getUsers = async () =>{
+      const data = await getDocs(usersCollectionRef)
+      //console.log(data)
+      setUsers(data.docs.map((doc)=>({...doc.data(),id: doc.id})))
+  }
+  getUsers()
+  },[])
+
+  
+  // obtener datos de firestore
+  const resultados =users.map((persona)=>{
+    const info =  {id:persona.id, name:persona.name, partido:persona.partido, votos:persona.votos} 
+    return info  
+  })
+  console.log(resultados)
+
+  //obtener partidos de resultados []
+  const partidos= resultados.map((p)=>{
+    return  p.partido
+  })
+
+  //obtener votos de resultados []
+  const conteo = resultados.map((p)=>{
+    return p.votos
+  })
+  //obtener color de firestore
+  const colores  = users.map((p)=>{
+    return p.color
+  })
+
+
+  //tabla de resultados 
+  const list = resultados 
+  
+  //generar un color aleatorio
+  var randomColor = Math.floor(Math.random()*16777215).toString(16);
+  
+
+  //graficas de resultsados 
+  const data = {
+    labels: partidos,
+    datasets: [
+      {
+        label: 'Votos',
+        data: conteo,
+        backgroundColor: colores,        
+        borderWidth: 1,
+      },
+    ]
+  }
     return (
       <div>
         <Tabla listas ={list} />
@@ -46,4 +72,4 @@ const home = () => {
     );
 }
 
-export default home
+export default Home
