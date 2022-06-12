@@ -13,12 +13,8 @@ export default function Modales(props) {
   async function run() {
     const blockchain = new Blockchain();
     const block1 = new block('Block 1');
-    const block2 = new block('Block 2');
-    const block3 = new block('Block 3');
 
     await blockchain.addBlock(block1);
-    await blockchain.addBlock(block2);
-    await blockchain.addBlock(block3);
 
     console.log(blockchain.toString());
     blockchain.print();
