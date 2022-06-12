@@ -145,8 +145,7 @@ export default function EmitirVoto(props) {
       }
     }
     test(); 
-    console.log("estos son los datos")
-    console.log(lista)
+    console.log("estos son los datos" + lista)
    }, [bandera]);
 
    useEffect(() => {
