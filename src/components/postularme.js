@@ -8,13 +8,48 @@ import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
+import { getStorage, ref, uploadBytes, UploadMetadata, getDownloadURL,uploadBytesResumable } from "firebase/storage";
+import { async } from "@firebase/util";
+import { storage } from "../confs/firebaseConf";
+//inicialiamos el storage
+//const storage = getStorage( app );
 
+let urlDescarga;
 export default function Postularme() {
   //const [postularEstado, setPostularEstado] = useState(false);
   const [valido, setValido] = useState(true);
   const [nombrePartido, setNombrePartido] = useState("");
   const [siglaPartido, setSigla] = useState("");
   const navegar = useNavigate();
+  const [progress, setProgress] = useState(0);
+  const formHandler = (e) =>{
+    e.preventDefault();
+    const file = e.target[0].files[0];
+    uploadFiles(file);
+  };
+
+  const uploadFiles = (file) => {
+    //
+    if (!file) return;
+    const sotrageRef = ref(storage, `docs/${file.name}`);
+    const uploadTask = uploadBytesResumable(sotrageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
+      },
+      (error) => console.log(error),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+        });
+      }
+    );
+  };
 
   const Postular = async (e) => {
     e.preventDefault();
@@ -27,9 +62,23 @@ export default function Postularme() {
         PostularEstado : true,
         PostularNombrePartido : nombrePartido,
         PostularSigla : siglaPartido,
+        PostularUrl : urlDescarga,
     });
     console.log("Datos actualizados")
   };
+
+  async function fileHandler(e){ 
+    //reconocer el archivo
+    const archivoLocal = e.target.files[0];
+    //cargarel archivo en el storage de firebase
+    const archivoRef = ref(storage, `/imagenes/${archivoLocal.name}`);
+    //subir el archivo
+    await uploadBytes(archivoRef, archivoLocal);
+    //obtener la url del archivo
+    urlDescarga = await getDownloadURL(archivoRef);
+  };
+
+
   useEffect(() => {
     const cumple = async ()=>{
      const listaFechas = [];
@@ -103,7 +152,7 @@ export default function Postularme() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Fotografía:</Form.Label>
-              <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+              <Form.Control type="file" onChange={formHandler}/>
             </Form.Group>
             {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}
             <Form.Group className="text-center mt-3">
