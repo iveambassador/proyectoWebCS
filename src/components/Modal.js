@@ -1,14 +1,33 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import block from './blockchain/block';
+
 const SHA256 = require('crypto-js/sha256')
 
 export default function Modales(props) {
   function generar (){
-    let hashGenerado = SHA256(JSON.stringify()).toString()
-    console.log(hashGenerado)
+    let block = new block({data: "Bloque Génesis"});
+    block.height = 0;
+    block.time = new Date().getTime().toString();
+    block.previousBlockHash = "";
+    block.hash = SHA256(JSON.stringify(block)).toString();
+    return block;
+  
+    //let hashGenerado = SHA256(JSON.stringify()).toString()
+    //console.log(hashGenerado)
     // hashGenerado = Math.random()
-    return hashGenerado
+    //return hashGenerado
   }
+
+  function generarHash(){
+    let block = new block({data: "Bloque Génesis"});
+    block.height = 0;
+    block.time = new Date().getTime().toString();
+    block.previousBlockHash = "";
+    block.hash = SHA256(JSON.stringify(block)).toString();
+    return block.hash;
+  }
+
   const getCurrentDate = () => {
     var today = new Date();
     let day = today.getDate();
