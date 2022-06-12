@@ -49,11 +49,13 @@ class block{
     }
     toString(){
         const {hash, height, body, time, previousBlockHash} = this;
-        return "Block - hash: ${hash} height: ${height} body: ${body} time: ${time} previousBlockHash: ${previousBlockHash}";
+        return `Block iVote - 
+        Hash: ${hash} 
+        Height: ${height} 
+        Body: ${body} 
+        Time: ${time} 
+        Previous Block Hash: ${previousBlockHash}`;
     }
-
 }
-
-
 
 module.exports = block;
