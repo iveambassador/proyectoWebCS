@@ -4,7 +4,7 @@ import Bar from "./charts/bar";
 import Tabla from "./charts/tabla";
 
 import { useState,useEffect } from "react";
-import { collection, getDocs, orderBy } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from "../confs/firebaseConf";
 
 const Home = () => {
@@ -26,7 +26,7 @@ const Home = () => {
     const info =  {id:persona.id, name:persona.name, partido:persona.partido, votos:persona.votos} 
     return info  
   })
-  console.log(resultados)
+  console.log(users)
 
   //obtener partidos de resultados []
   const partidos= resultados.map((p)=>{
