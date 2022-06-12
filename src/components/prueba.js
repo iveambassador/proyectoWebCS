@@ -1,6 +1,7 @@
 
 
 import React from 'react'
+
 const persona = [{
     nombre:"Rodrigo",
     apellido:"Ledezma"
