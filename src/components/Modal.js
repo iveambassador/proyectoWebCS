@@ -1,18 +1,40 @@
+import { async } from '@firebase/util';
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import block from './blockchain/block';
 
+const Blockchain = require('./blockchain/blockchain');
+const Block = require('./blockchain/block');
 const SHA256 = require('crypto-js/sha256')
 
 export default function Modales(props) {
-  function generar (){
-    let block = new block({data: "Bloque Génesis"});
-    block.height = 0;
-    block.time = new Date().getTime().toString();
-    block.previousBlockHash = "";
-    block.hash = SHA256(JSON.stringify(block)).toString();
-    return block;
+
+
+  async function run() {
+    const blockchain = new Blockchain();
+    const block1 = new block('Block 1');
+    const block2 = new block('Block 2');
+    const block3 = new block('Block 3');
+
+    await blockchain.addBlock(block1);
+    await blockchain.addBlock(block2);
+    await blockchain.addBlock(block3);
+
+    console.log(blockchain.toString());
+    blockchain.print();
+  }
   
+  function generar (){
+    var hash = SHA256(JSON.stringify(props.lista)).toString();
+
+    props.setHash(hash);
+    console.log(hash);
+    return hash;
+
+    //var hash = SHA256(props.hash).toString();
+    //console.log(hash);
+    //return hash;
+
     //let hashGenerado = SHA256(JSON.stringify()).toString()
     //console.log(hashGenerado)
     // hashGenerado = Math.random()
@@ -20,12 +42,9 @@ export default function Modales(props) {
   }
 
   function generarHash(){
-    let block = new block({data: "Bloque Génesis"});
-    block.height = 0;
-    block.time = new Date().getTime().toString();
-    block.previousBlockHash = "";
-    block.hash = SHA256(JSON.stringify(block)).toString();
-    return block.hash;
+    var hash = SHA256(JSON.stringify(props.lista)).toString();
+    props.setHash(hash);
+    console.log(hash);
   }
 
   const getCurrentDate = () => {
@@ -52,7 +71,7 @@ export default function Modales(props) {
       const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      const hashG = generar()
+      const hashG = run()
       props.setMensaje(`${hashG}`)
       props.funcionClasificar(hashG, voteDate)
     }
