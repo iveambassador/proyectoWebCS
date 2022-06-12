@@ -31,4 +31,5 @@ export const firestore = getFirestore(app);
 
 const getUrna = () => getDocs(collection(firestore, "UrnaVoto"));
 const auth = getAuth(app);
-export { getUrna, auth };
+const storage = getStorage(app);
+export { storage, getUrna, auth};
