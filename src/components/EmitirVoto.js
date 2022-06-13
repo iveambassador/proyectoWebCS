@@ -25,8 +25,7 @@ export default function EmitirVoto(props) {
   const [checkedState, setCheckedState] = useState([]);
     
   const [valido, setValido] = useState(true);
-  // let condicion = true;
-  // if(condicion){
+  const [isStart, setStart] =  useState(true)
 
   const handlePadre = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -192,6 +191,7 @@ export default function EmitirVoto(props) {
     let año = parseInt(hoy.getFullYear())
     let hora = hoy.getHours()
     let minutos = hoy.getMinutes()
+    if(minutos<10){minutos='0'+minutos}
     let horaCompleta = parseInt(hora +''+ minutos)
     let fechaVoto = listaFechas[0].FechaIniEleccion.toString().split('-')
     let inicio = listaFechas[0].HoraIniEleccion.toString().split(':')
@@ -201,9 +201,9 @@ export default function EmitirVoto(props) {
     //console.log(inicio)
     //console.log(fin)
     //console.log(dia)
-    //console.log(mes)
-    //console.log(año)
-    // console.log(horaCompleta)
+    //console.log(hora)
+    //console.log(minutos)
+    //console.log(horaCompleta)
     // console.log(parseInt(inicio[0]+''+inicio[1]))
     // console.log(parseInt(fin[0]+''+fin[1]))
     let idUsuario = getAuth(app).currentUser.uid;
@@ -214,10 +214,11 @@ export default function EmitirVoto(props) {
     }else{
       setValido(false)
     }
+    setStart(false)
   }
   cumple();
 }, []);
-
+if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
   if (valido){
     return (
       <div className='Container'>
@@ -269,4 +270,5 @@ export default function EmitirVoto(props) {
     
     ) 
   }
+}
 };

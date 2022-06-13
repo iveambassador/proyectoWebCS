@@ -8,6 +8,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from "../confs/firebaseConf";
 
 const Home = () => {
+  const [isStart, setStart] =  useState(true)
   const [users, setUsers]=useState([])
   const usersCollectionRef = collection(firestore,"resultados")
   useEffect(()=> {
@@ -16,6 +17,7 @@ const Home = () => {
       const data = await getDocs(usersCollectionRef)
       //console.log(data)
       setUsers(data.docs.map((doc)=>({...doc.data(),id: doc.id})))
+      setStart(false)
   }
   getUsers()
   },[])
@@ -67,8 +69,9 @@ const Home = () => {
     } else {
       return true
     }
+    
   }
-
+  if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
     return (
       <div>
         {esta() ? (
@@ -90,6 +93,7 @@ const Home = () => {
         
       </div>
     );
+  }
 }
 
 export default Home
