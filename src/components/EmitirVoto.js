@@ -212,7 +212,7 @@ export default function EmitirVoto(props) {
     if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && horaCompleta >= parseInt(inicio[0]+inicio[1]) && horaCompleta <= parseInt(fin[0]+fin[1]) && DatosUser.data().VotoEstado===false){
       setValido(true)
     }else{
-      setValido(true)
+      setValido(false)
     }
   }
   cumple();

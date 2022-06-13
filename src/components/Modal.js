@@ -23,6 +23,7 @@ export default function Modales(props) {
     //blockchain.chain[1].hash = blockchain.chain[1].calcularHash();
     //console.log(blockchain.toString());
     //console.log(blockchain.validateChain());
+    return "Aqui pones el codigo de la transaccion bro!!!"
   }
   //run();
   //function generar (){
@@ -65,11 +66,11 @@ export default function Modales(props) {
     return voteDate;
   }
 
-    function CambiarModal(){
+    async function CambiarModal(){
       const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      const hashG = run()
+      const hashG = await run()
       props.setMensaje(`${hashG}`)
       props.funcionClasificar(hashG, voteDate)
     }
