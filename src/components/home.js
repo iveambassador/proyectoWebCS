@@ -19,7 +19,6 @@ const Home = () => {
   }
   getUsers()
   },[])
-
   
   // obtener datos de firestore
   const resultados =users.map((persona)=>{

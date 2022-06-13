@@ -16,7 +16,9 @@ export default function EmitirVoto(props) {
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   const [mensaje, setMensaje] = useState("Hash Generado");
-  
+
+  //const [hash, setHash] = useState("");
+  //const [hashGenerado, setHashGenerado] = useState("");
 
   const [lista, setList] = useState([]);
   const [bandera, setBandera] = useState(0);

@@ -1,32 +1,49 @@
+import { async } from '@firebase/util';
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import block from './blockchain/block';
 
+const Blockchain = require('./blockchain/blockchain');
+const Block = require('./blockchain/block');
 const SHA256 = require('crypto-js/sha256')
 
 export default function Modales(props) {
-  function generar (){
-    let block = new block({data: "Bloque Génesis"});
-    block.height = 0;
-    block.time = new Date().getTime().toString();
-    block.previousBlockHash = "";
-    block.hash = SHA256(JSON.stringify(block)).toString();
-    return block;
-  
+
+
+  async function run() {
+    const blockchain = new Blockchain();
+    const block1 = new block('iVote Bloque Register');
+    const block2 = new block('iVote Bloque Vote');
+    await blockchain.addBlock(block1);
+    await blockchain.addBlock(block2);
+    console.log(JSON.stringify(blockchain, null, 0));
+    console.log(blockchain.toString());
+    blockchain.print();
+    //blockchain.chain[1].data = 'iVote Bloque Vote 2';
+    //blockchain.chain[1].hash = blockchain.chain[1].calcularHash();
+    //console.log(blockchain.toString());
+    //console.log(blockchain.validateChain());
+  }
+  //run();
+  //function generar (){
+    //var hash = SHA256(JSON.stringify(props.lista)).toString();
+    //props.setHash(hash);
+    //console.log(hash);
+    //return hash;
+
+    //var hash = SHA256(props.hash).toString();
+    //console.log(hash);
+    //return hash;
+
     //let hashGenerado = SHA256(JSON.stringify()).toString()
     //console.log(hashGenerado)
     // hashGenerado = Math.random()
-    //return hashGenerado
-  }
+    //return hashGenerado  }
 
-  function generarHash(){
-    let block = new block({data: "Bloque Génesis"});
-    block.height = 0;
-    block.time = new Date().getTime().toString();
-    block.previousBlockHash = "";
-    block.hash = SHA256(JSON.stringify(block)).toString();
-    return block.hash;
-  }
+  //function generarHash(){
+    //var hash = SHA256(JSON.stringify(props.lista)).toString();
+    //props.setHash(hash);
+    //console.log(hash);  }
 
   const getCurrentDate = () => {
     var today = new Date();
@@ -52,7 +69,7 @@ export default function Modales(props) {
       const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      const hashG = generar()
+      const hashG = run()
       props.setMensaje(`${hashG}`)
       props.funcionClasificar(hashG, voteDate)
     }
