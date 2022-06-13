@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
 import Spinner from 'react-bootstrap/Spinner';
 
+//let urlDescarga;
 export default function Postularme() {
   //const [postularEstado, setPostularEstado] = useState(false);
   const [valido, setValido] = useState(true);
@@ -72,6 +73,19 @@ export default function Postularme() {
     });
     console.log("Datos actualizados")
   };
+
+  async function fileHandler(e){ 
+    //reconocer el archivo
+    const archivoLocal = e.target.files[0];
+    //cargarel archivo en el storage de firebase
+    const archivoRef = ref(storage, `/imagenes/${archivoLocal.name}`);
+    //subir el archivo
+    await uploadBytes(archivoRef, archivoLocal);
+    //obtener la url del archivo
+    urlDescarga = await getDownloadURL(archivoRef);
+  };
+
+
   useEffect(() => {
     const cumple = async ()=>{
      const listaFechas = [];

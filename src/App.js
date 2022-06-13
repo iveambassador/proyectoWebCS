@@ -11,7 +11,7 @@ import RequireAuth from './components/RequireAuth';
 import Register from './routes/Register';
 
 
-import Home from './components/home'
+import Home from './components/Home'
 import Urna from './components/urna'
 import Postularme from './components/postularme'
 //import Register from './components/register'
@@ -22,8 +22,12 @@ import PagePostulante from './components/PagePostulante';
 import Convocatoria from './components/Convovatoria';
 import CrearPostulacion from './components/CrearPostulacion';
 import {PrivateRoutes}  from './routes/PrivateRoutes';
+
+
+
 function App() {
   return (
+    
     <BrowserRouter>
       <UserProvider>
         <NavbarComp/>

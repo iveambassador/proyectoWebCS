@@ -8,11 +8,11 @@ class block{
         //la posicion
         this.height = 0;
         //datos que pasen 
-        this.body = JSON.stringify(data).toString('hex');
+        this.body = JSON.stringify(data).toString(`hex`);
         //es la fecha
         this.time = 0;
         //es el hash anterior como lista enlazada
-        this.previousBlockHash = "";
+        this.previousBlockHash = '';
     }
 
     //validar
@@ -27,7 +27,7 @@ class block{
             if(currentHash != self.hash ){
                 return resolve(false);
             }else{
-                resolve(true);
+                return resolve(true);
             }
         });
     }
@@ -49,10 +49,13 @@ class block{
     }
     toString(){
         const {hash, height, body, time, previousBlockHash} = this;
-        return 'Block - hash: ${hash} height: ${height body: ${body} time: ${time} previousBlockHash: ${previousBlockHash}}';
-
+        return `iVote Block - 
+        Hash: ${hash} 
+        Height: ${height} 
+        Body: ${body} 
+        Time: ${time} 
+        Previous Block Hash: ${previousBlockHash}`;
     }
-
 }
 
 module.exports = block;
