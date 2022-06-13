@@ -35,8 +35,9 @@ export default function PagePostulantes() {
         let partido = doc.data().PostularNombrePartido
         let sigla = doc.data().PostularSigla
         let fotografia = doc.data().UrlFotografia
+        let linkDocumneto = doc.data().UrlDocumneto
         let nombreCompleto = nombre +' '+ apellido
-        let dato = { id, nombreCompleto, carnet, celular, partido, sigla, fotografia }
+        let dato = { id, nombreCompleto, carnet, celular, partido, sigla, fotografia, linkDocumneto }
         listaTemp.push(dato);
       })
       setList(listaTemp);
@@ -98,7 +99,7 @@ export default function PagePostulantes() {
               <p><strong>Nro. Teléfono:</strong> {tupla.celular}</p>
               <p><strong>Partido político: </strong> {tupla.partido}</p>
               <p><strong>Sigla:</strong> {tupla.sigla}</p>
-              <p>ver documentos</p>
+              <a href={tupla.linkDocumneto} target="_blank">Ver Documentos...</a>
               <div className='Postulante-Botones'>
                 <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia)}>Aceptado</Button>
                 <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>

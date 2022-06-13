@@ -9,7 +9,7 @@ import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
-
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function Postularme() {
   //const [postularEstado, setPostularEstado] = useState(false);
@@ -17,6 +17,9 @@ export default function Postularme() {
   const [nombrePartido, setNombrePartido] = useState("");
   const [siglaPartido, setSigla] = useState("");
   const [foto, setFoto] = useState("");
+  const [documento, setDoc] = useState("");
+  const [isLoading, setLoading] =  useState(false)
+
   const navegar = useNavigate();
   // let estesidara = "";
   const cargarFoto = async (event) => {
@@ -25,13 +28,30 @@ export default function Postularme() {
     const storage = getStorage();
     const storageRef = await ref(storage, `/imagenes/${file.name}`);
   
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log(snapshot)
+    setLoading(true)
+    await uploadBytes(storageRef, file).then((snapshot) => {
+      setLoading(false)
     });
 
     const laUrl = await getDownloadURL(storageRef);
     let test = laUrl.toString();
     setFoto(test);
+   };
+
+   const cargarDoc = async (event) => {
+    event.preventDefault();
+    const archivo = event.target.files[0];
+    const storage = getStorage();
+    const storageRef = await ref(storage, `/docs/${archivo.name}`);
+  
+    setLoading(true)
+    await uploadBytes(storageRef, archivo).then((snapshot) => {
+      setLoading(false)
+    });
+
+    const urlDelDoc = await getDownloadURL(storageRef);
+    let cambiado = urlDelDoc.toString();
+    setDoc(cambiado);
    };
   const Postular = async (e) => {
     e.preventDefault();
@@ -48,6 +68,7 @@ export default function Postularme() {
         PostularNombrePartido : nombrePartido,
         PostularSigla : siglaPartido,
         UrlFotografia : foto,
+        UrlDocumneto : documento,
     });
     console.log("Datos actualizados")
   };
@@ -89,11 +110,13 @@ export default function Postularme() {
      }else{
        setValido(false)
      }
+     setLoading(false)
    }
+   setLoading(false)
    cumple();
  }, []);
 
-
+ //if (isLoading) return <h5>Cargando...</h5>
   
     if(valido){
       return (
@@ -121,7 +144,7 @@ export default function Postularme() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Certificados Correspondientes:</h5></Form.Label>
-              <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+              <Form.Control type="file" onChange={cargarDoc}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Declaración jurada:</h5></Form.Label>
@@ -129,12 +152,23 @@ export default function Postularme() {
             </Form.Group> */}
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Fotografía:</h5></Form.Label>
-              <Form.Control type="file" placeholder="Sigla del partido político" onChange={cargarFoto}/>
+              <Form.Control type="file" onChange={cargarFoto}/>
             </Form.Group>
             {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}
             <Form.Group className="text-center mt-3">
-              <Button  className="w-50 is-loading" variant="dark" type="submit">
-                Enviar
+              <Button  className="w-50 is-loading" variant="dark" type="submit" disabled={isLoading}>
+               {
+                isLoading ? 
+                (
+                  <Spinner
+                    as="span"
+                    animation="grow"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                ) : 'Enviar'
+               }
               </Button>
             </Form.Group>
             
