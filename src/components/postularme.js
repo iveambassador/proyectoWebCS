@@ -4,6 +4,7 @@ import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import { getAuth} from 'firebase/auth'
 import {collection, getDocs, getFirestore, updateDoc, doc, query, where, getDoc} from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +16,23 @@ export default function Postularme() {
   const [valido, setValido] = useState(true);
   const [nombrePartido, setNombrePartido] = useState("");
   const [siglaPartido, setSigla] = useState("");
+  const [foto, setFoto] = useState("");
   const navegar = useNavigate();
+  // let estesidara = "";
+  const cargarFoto = async (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const storage = getStorage();
+    const storageRef = await ref(storage, `/imagenes/${file.name}`);
+  
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log(snapshot)
+    });
 
+    const laUrl = await getDownloadURL(storageRef);
+    let test = laUrl.toString();
+    setFoto(test);
+   };
   const Postular = async (e) => {
     e.preventDefault();
     let user = getAuth(app).currentUser.uid;
@@ -25,11 +41,13 @@ export default function Postularme() {
     console.log(test);
     
     navegar("/");
+    //console.log(estesidara)
     await updateDoc(test, {
         PuedePostular : false,
         PostularEstado : true,
         PostularNombrePartido : nombrePartido,
         PostularSigla : siglaPartido,
+        UrlFotografia : foto,
     });
     console.log("Datos actualizados")
   };
@@ -74,13 +92,15 @@ export default function Postularme() {
    }
    cumple();
  }, []);
+
+
   
     if(valido){
       return (
         <div className="Container">
-          <div>
+          <div className="">
           <Card
-          border="dark"
+          // border="dark"
           style={{ width: "100%", height: "auto", maxWidth: "400px" ,borderRadius: '10px'}}
         >
           <Card.Header style={{ backgroundColor: "#012345" ,borderRadius: '10px 10px 0 0'}}>
@@ -100,20 +120,20 @@ export default function Postularme() {
               <Form.Control type="input" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label><h5>Certificado de antecedentes penales:</h5></Form.Label>
+              <Form.Label><h5>Certificados Correspondientes:</h5></Form.Label>
               <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Declaración jurada:</h5></Form.Label>
               <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Fotografía:</h5></Form.Label>
-              <Form.Control type="file" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+              <Form.Control type="file" placeholder="Sigla del partido político" onChange={cargarFoto}/>
             </Form.Group>
             {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}
             <Form.Group className="text-center mt-3">
-              <Button  className="w-50" variant="dark" type="submit">
+              <Button  className="w-50 is-loading" variant="dark" type="submit">
                 Enviar
               </Button>
             </Form.Group>

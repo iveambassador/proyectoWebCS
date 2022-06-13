@@ -31,6 +31,12 @@
   color: #61dafb;
 }
 
+.is-loading{
+  background-color: red;
+  border: 2px solid red;
+
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

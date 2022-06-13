@@ -128,8 +128,9 @@ export default function EmitirVoto(props) {
         let nombrePartid = doc.data().NombrePartido
         let sigla = doc.data().Sigla
         let cargo = doc.data().Cargo
+        let Foto = doc.data().Foto
         let ix = i
-        let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix}
+        let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix,Foto}
         listaTemp.push(dato);
         i = i + 1;
         //checkedState.push(false);
@@ -209,7 +210,7 @@ export default function EmitirVoto(props) {
     if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && horaCompleta >= parseInt(inicio[0]+inicio[1]) && horaCompleta <= parseInt(fin[0]+fin[1]) && DatosUser.data().VotoEstado===false){
       setValido(true)
     }else{
-      setValido(false)
+      setValido(true)
     }
   }
   cumple();
@@ -235,8 +236,9 @@ export default function EmitirVoto(props) {
           key = {tupla.idCandidato}
           Partido={tupla.nombrePartid}
           NombreAp={tupla.nombreCandi}
-          Cargo={tupla.cargo}
+          Cargo={tupla.sigla}
           index={tupla.ix}
+          foto={tupla.Foto}
           handlePadree={handlePadre}
           />  
           )) }      

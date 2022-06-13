@@ -5,7 +5,7 @@ import logo from '../logo.svg'
 import { useState } from 'react';
 import '../Styles/Candidato.css'
 // import logo from '../../public/logo192.png'
-export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree}) {
+export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree,foto}) {
   const [isChecked, setIsChecked] = useState(false);
   const handleOnChange = () => {
     setIsChecked(!isChecked);
@@ -16,11 +16,11 @@ export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree}
   return (
     <Card className='Cont-Card'>
         <Card.Title>{Partido}</Card.Title>
-        <Card.Img variant="top" src={logo} alt='nada por aqui!'/>
+        <Card.Img variant="top" src={foto} alt='nada por aqui!'/>
         <Card.Body>
           <Card.Title>Nombre: {NombreAp}</Card.Title>
           <Card.Text>
-            Cargo: {Cargo}
+            Sigla: {Cargo}
           </Card.Text>
           <Form.Group className='test'>
             <Form.Check 
