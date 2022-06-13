@@ -99,7 +99,7 @@ export default function PagePostulantes() {
               <p><strong>Nro. Teléfono:</strong> {tupla.celular}</p>
               <p><strong>Partido político: </strong> {tupla.partido}</p>
               <p><strong>Sigla:</strong> {tupla.sigla}</p>
-              <a href={tupla.linkDocumneto} target="_blank">Ver Documentos...</a>
+              <a href={tupla.linkDocumneto} target="_blank" className='mb-4'>Ver Documentos...</a>
               <div className='Postulante-Botones'>
                 <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia)}>Aceptado</Button>
                 <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>

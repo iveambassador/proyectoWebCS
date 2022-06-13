@@ -20,6 +20,7 @@ export default function Postularme() {
   const [foto, setFoto] = useState("");
   const [documento, setDoc] = useState("");
   const [isLoading, setLoading] =  useState(false)
+  const [isStart, setStart] =  useState(true)
 
   const navegar = useNavigate();
   // let estesidara = "";
@@ -75,7 +76,9 @@ export default function Postularme() {
   };
 
   useEffect(() => {
+    
     const cumple = async ()=>{
+     
      const listaFechas = [];
      try {
      const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
@@ -112,13 +115,13 @@ export default function Postularme() {
      }else{
        setValido(false)
      }
-     setLoading(false)
+     setStart(false)
    }
-   setLoading(false)
    cumple();
+   
  }, []);
 
- //if (isLoading) return <h5>Cargando...</h5>
+ if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
   
     if(valido){
       return (
@@ -187,5 +190,5 @@ export default function Postularme() {
         </div>
       ) 
     }
-  
+ }
 };
