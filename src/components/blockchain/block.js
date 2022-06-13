@@ -12,7 +12,7 @@ class block{
         //es la fecha
         this.time = 0;
         //es el hash anterior como lista enlazada
-        this.previousBlockHash = "";
+        this.previousBlockHash = '';
     }
 
     //validar
@@ -27,7 +27,7 @@ class block{
             if(currentHash != self.hash ){
                 return resolve(false);
             }else{
-                resolve(true);
+                return resolve(true);
             }
         });
     }
@@ -49,7 +49,7 @@ class block{
     }
     toString(){
         const {hash, height, body, time, previousBlockHash} = this;
-        return `Block iVote - 
+        return `iVote Block - 
         Hash: ${hash} 
         Height: ${height} 
         Body: ${body} 
