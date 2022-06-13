@@ -9,7 +9,7 @@ import { firestore } from "../confs/firebaseConf";
 
 const Home = () => {
   const [users, setUsers]=useState([])
-  const usersCollectionRef = collection(firestore,"resultados")
+  const usersCollectionRef = collection(firestore,"PartidosAceptados")
   useEffect(()=> {
   //Leer     
   const getUsers = async () =>{
@@ -23,7 +23,7 @@ const Home = () => {
   
   // obtener datos de firestore
   const resultados =users.map((persona)=>{
-    const info =  {id:persona.id, name:persona.name, partido:persona.partido, votos:persona.votos} 
+    const info =  {id:persona.id, name:persona.NombreCandidato, partido:persona.Sigla, votos:persona.Cant} 
     return info  
   })
   console.log(users)
@@ -39,7 +39,7 @@ const Home = () => {
   })
   //obtener color de firestore
   const colores  = users.map((p)=>{
-    return p.color
+    return p.Color
   })
 
   //tabla de resultados 

@@ -73,12 +73,14 @@ export default function PagePostulantes() {
        PostularNombrePartido : 'Acept',
        PostularSigla : 'Acept',
      });
+     var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
      await setDoc(doc(firestore, "PartidosAceptados", id), {
       NombrePartido: nombre,
       Sigla : sigla,
       NombreCandidato : nombreCandi,
       Foto : fotografia,
       Cant : 0,
+      Color: randomColor
     });
      //window.location.reload();
      setBandera(bandera+1)
