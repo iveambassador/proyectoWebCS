@@ -42,13 +42,12 @@ const Home = () => {
     return p.color
   })
 
-
   //tabla de resultados 
   const list = resultados 
   
   //generar un color aleatorio
-  var randomColor = Math.floor(Math.random()*16777215).toString(16);
-  
+  var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+  //console.log(randomColor)
 
   //graficas de resultsados 
   const data = {
@@ -62,12 +61,33 @@ const Home = () => {
       },
     ]
   }
+  const esta=()=>{
+    if (users.length===0) {
+      return false
+    } else {
+      return true
+    }
+  }
+
     return (
       <div>
-        <Tabla listas ={list} />
-        <Pie datos={data}/>
-        <Bar datos={data}/>
-        {console.log(list)}
+        {esta() ? (
+          <>
+            <Tabla listas ={list} />
+            <Pie datos={data}/>
+            <Bar datos={data}/>
+            
+          </>
+        ):(
+          <>
+            <div className="Container">
+              <h1>Bienvenido a iVote</h1>
+              <h1>No esta disponible en resultados</h1>
+              <h1>¿Porque no intentas más tarde?</h1>
+            </div>
+          </>
+        )}
+        
       </div>
     );
 }
