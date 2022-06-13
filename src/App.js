@@ -11,7 +11,7 @@ import RequireAuth from './components/RequireAuth';
 import Register from './routes/Register';
 
 
-import Home from './components/Home'
+import Home from './routes/Home'
 import Urna from './components/urna'
 import Postularme from './components/postularme'
 //import Register from './components/register'
