@@ -6,6 +6,7 @@ import Tabla from "../components/charts/tabla";
 import { useState,useEffect } from "react";
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { firestore } from "../confs/firebaseConf";
+import { Spinner } from "react-bootstrap";
 
 const Home = () => {
   const [isStart, setStart] =  useState(true)
@@ -37,7 +38,7 @@ const Home = () => {
   
   // obtener datos de firestore
   const resultados =users.map((persona)=>{
-    const info =  {id:persona.id, name:persona.NombreCandidato, partido:persona.Sigla, votos:persona.Cant, color:persona.Color}
+    const info =  {id:persona.id, name:persona.NombreCandidato, partido:persona.Sigla, votos:persona.Cant}
     return info  
   })
   console.log(users)
@@ -60,7 +61,7 @@ const Home = () => {
   const list = resultados 
   
   //generar un color aleatorio
-  var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+  //var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
   //console.log(randomColor)
 
   //graficas de resultsados 
@@ -83,7 +84,15 @@ const Home = () => {
     }
     
   }
-  if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
+  if (isStart) {
+    return (
+      <div className="Container">
+        <Spinner animation="border" roles="status"  >
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+        <h4 className="p-1">Cargando...</h4>
+      </div>
+    )}else{
     return (
       <div>
         {esta() ? (
