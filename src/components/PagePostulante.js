@@ -73,14 +73,12 @@ export default function PagePostulantes() {
        PostularNombrePartido : 'Acept',
        PostularSigla : 'Acept',
      });
-     var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
      await setDoc(doc(firestore, "PartidosAceptados", id), {
       NombrePartido: nombre,
       Sigla : sigla,
       NombreCandidato : nombreCandi,
       Foto : fotografia,
       Cant : 0,
-      Color: randomColor
     });
      //window.location.reload();
      setBandera(bandera+1)
@@ -92,16 +90,16 @@ export default function PagePostulantes() {
     return (
       <div className="contMain">
         <div className='contPostulante'>
-          <h1 className='contenedor-testimonio w-100 ms-2'>Postulantes</h1>
+          <h4 className='contenedor-testimonio w-100 ms-2'>Postulantes: </h4>
           { list.map(tupla => (
             <div className='contenedor-informacion px-4 py-3'>
       
               <p><strong>Nombre del postulante:</strong> {tupla.nombreCompleto}</p>
-              <p><strong>Nro. de C.I.:</strong> {tupla.carnet}</p>
-              <p><strong>Nro. de teléfono:</strong> {tupla.celular}</p>
+              <p><strong>Nro. CI:</strong> {tupla.carnet}</p>
+              <p><strong>Nro. Teléfono:</strong> {tupla.celular}</p>
               <p><strong>Partido político: </strong> {tupla.partido}</p>
               <p><strong>Sigla:</strong> {tupla.sigla}</p>
-              <a href={tupla.linkDocumneto} target="_blank">Ver documentos...</a>
+              <a href={tupla.linkDocumneto} target="_blank" className='mb-4'>Ver Documentos...</a>
               <div className='Postulante-Botones'>
                 <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia)}>Aceptado</Button>
                 <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
@@ -128,7 +126,7 @@ export default function PagePostulantes() {
   }else{
     return (
       <div className='Container'>
-          <NoDisponible mensaje="¡Vaya! Aún nadie se ha postulado."/>
+          <NoDisponible mensaje="¡Vaya! Aún nadie ha postulado"/>
       </div>
     ) 
   }

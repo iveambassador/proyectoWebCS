@@ -25,8 +25,9 @@ export default function EmitirVoto(props) {
   const [checkedState, setCheckedState] = useState([]);
     
   const [valido, setValido] = useState(true);
-  // let condicion = true;
-  // if(condicion){
+  const [isStart, setStart] =  useState(true);
+  const [nombre, setNombreEleccion] =  useState('');
+  const [descripcion, setDescripcion] =  useState('');
 
   const handlePadre = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -192,6 +193,7 @@ export default function EmitirVoto(props) {
     let año = parseInt(hoy.getFullYear())
     let hora = hoy.getHours()
     let minutos = hoy.getMinutes()
+    if(minutos<10){minutos='0'+minutos}
     let horaCompleta = parseInt(hora +''+ minutos)
     let fechaVoto = listaFechas[0].FechaIniEleccion.toString().split('-')
     let inicio = listaFechas[0].HoraIniEleccion.toString().split(':')
@@ -201,9 +203,9 @@ export default function EmitirVoto(props) {
     //console.log(inicio)
     //console.log(fin)
     //console.log(dia)
-    //console.log(mes)
-    //console.log(año)
-    // console.log(horaCompleta)
+    //console.log(hora)
+    //console.log(minutos)
+    //console.log(horaCompleta)
     // console.log(parseInt(inicio[0]+''+inicio[1]))
     // console.log(parseInt(fin[0]+''+fin[1]))
     let idUsuario = getAuth(app).currentUser.uid;
@@ -214,15 +216,26 @@ export default function EmitirVoto(props) {
     }else{
       setValido(false)
     }
+    const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
+      const lafecha = await getDocs(q);
+      lafecha.forEach((doc) => {
+        let id = doc.id
+        let tituloEleccion = doc.data().DescripcionEleccion
+        let nombreEleccion = doc.data().NombreEleccion
+        setNombreEleccion(nombreEleccion);
+        setDescripcion(tituloEleccion);
+      })
+    setStart(false)
   }
   cumple();
 }, []);
-
+if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
   if (valido){
     return (
       <div className='Container'>
         
-        <h1>Emitir Voto</h1>
+        <h1>¡Comienza con  I Vote!</h1>
+        <h5 className='mt-2'>{descripcion}</h5>
         <div className='Cont-Titulo'>
           <div className='tester'>
           <h5>Marca al candidato de tu preferencia.</h5>
@@ -245,7 +258,7 @@ export default function EmitirVoto(props) {
           />  
           )) }      
         </div>
-        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>Guardar voto</Button>
+        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>¡Guardar Voto!</Button>
 
         <Modal
         show={modalShow}
@@ -264,9 +277,10 @@ export default function EmitirVoto(props) {
   }else{
     return (
       <div className='Container'>
-          <NoDisponible mensaje="La jornada electoral no se encuentra habilitada. Verifica el horario de votación y recuerda que no puedes votar por segunda vez."/>
+          <NoDisponible mensaje="Hola! por el momento no se encuentra disponible una votacion ¿porque no intentas mas tarde?"/>
       </div>
     
     ) 
   }
+}
 };
