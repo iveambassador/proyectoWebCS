@@ -6,7 +6,6 @@ import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { getAuth} from 'firebase/auth';
-import { SHA256 } from "crypto-js";
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
@@ -24,20 +23,6 @@ const Register = () => {
   const navegate = useNavigate();
   const { registerUser } = useContext(UserContext);
 
-  function hashGenerado() {
-    var hash = SHA256(Math.random().toString()).toString();
-    setHash(hash);
-    console.log(hash);
-    return hash;
-  }
-  //let hashGenerado = SHA256(JSON.stringify()).toString()
-  //hashGenerado = Math.random()
-  //console.log(hashGenerado);
-  //console.log(SHA256(JSON.stringify()).toString())
-  //console.log(SHA256(Math.random().toString()).toString())
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("procesando form:", email, password);
@@ -46,6 +31,8 @@ const Register = () => {
       console.log("usuario creado");
       navegate("/");
       const user = getAuth(app).currentUser.uid;
+
+      await setDoc(doc(firestore, "BlockChain", user), {})
       await setDoc(doc(firestore, "UsuarioComun", user), {
         Apellido: apellido,
         CI: ci,
@@ -61,7 +48,9 @@ const Register = () => {
         VotoBlanco:0,
         VotoEstado:false,
         VotoFecha:"",
-        VotoHash:" ",
+        VotoHash:"",
+        PostularHash : "",
+        RegistroHash : "",
         VotoNulo:0,
         VotoPartidoSigla:"",
         //HashSemilla:hash
