@@ -23,7 +23,7 @@ const Home = () => {
   
   // obtener datos de firestore
   const resultados =users.map((persona)=>{
-    const info =  {id:persona.id, name:persona.NombreCandidato, partido:persona.Sigla, votos:persona.Cant} 
+    const info =  {id:persona.id, name:persona.NombreCandidato, partido:persona.Sigla, votos:persona.Cant, color:persona.Color}
     return info  
   })
   console.log(users)
