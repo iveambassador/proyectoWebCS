@@ -6,7 +6,6 @@ import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { getAuth} from 'firebase/auth';
-import { SHA256 } from "crypto-js";
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
@@ -24,20 +23,6 @@ const Register = () => {
   const navegate = useNavigate();
   const { registerUser } = useContext(UserContext);
 
-  function hashGenerado() {
-    var hash = SHA256(Math.random().toString()).toString();
-    setHash(hash);
-    console.log(hash);
-    return hash;
-  }
-  //let hashGenerado = SHA256(JSON.stringify()).toString()
-  //hashGenerado = Math.random()
-  //console.log(hashGenerado);
-  //console.log(SHA256(JSON.stringify()).toString())
-  //console.log(SHA256(Math.random().toString()).toString())
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("procesando form:", email, password);
@@ -46,6 +31,8 @@ const Register = () => {
       console.log("usuario creado");
       navegate("/");
       const user = getAuth(app).currentUser.uid;
+
+      await setDoc(doc(firestore, "BlockChain", user), {})
       await setDoc(doc(firestore, "UsuarioComun", user), {
         Apellido: apellido,
         CI: ci,
@@ -61,7 +48,9 @@ const Register = () => {
         VotoBlanco:0,
         VotoEstado:false,
         VotoFecha:"",
-        VotoHash:" ",
+        VotoHash:"",
+        PostularHash : "",
+        RegistroHash : "",
         VotoNulo:0,
         VotoPartidoSigla:"",
         //HashSemilla:hash
@@ -87,22 +76,17 @@ const Register = () => {
 
 
   return (
-    <div
-      style={{ justifyContent: "center", display: "flex", marginTop: "150px" }}
-    >
-      <Card
-        border="dark"
-        style={{ width: "100%", height: "auto", maxWidth: "400px" }}
-      >
-        <Card.Header style={{ backgroundColor: "#012345" }}>
-          <h3 className="text-center mb-2" style={{ color: "white" }}>
+    <div style={{ justifyContent: "center", display: "flex", marginTop: "70px" }}>
+      <Card style={{ width: "100%", height: "auto", maxWidth: "420px",borderRadius: '10px' }} className='mb-5'>
+        <Card.Header style={{ backgroundColor: "#012345" ,borderRadius: '10px 10px 0 0'}}>
+          <h3 className="text-center mb-2 py-1" style={{ color: "white" }}>
             Registrarse
           </h3>
         </Card.Header>
-        <Card.Body style={{ backgroundColor: "#5668d1" }}>
+        <Card.Body style={{ backgroundColor: '#5668d1',borderRadius: '0 0 10px 10px'}}>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="nombre">
-              <Form.Label>Nombre(s)</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-2">Nombre(s)</h5></Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -111,8 +95,9 @@ const Register = () => {
                 onChange={(e) => setNombre(e.target.value)}
               />
             </Form.Group>
+            <br/>
             <Form.Group id="apellido">
-              <Form.Label>Apellidos</Form.Label>
+            <Form.Label><h5 className="mb-0 mt-0">Apellido(s)</h5></Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -122,7 +107,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="ci">
-              <Form.Label>Nro. C.I.</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-3">Nro. C.I.</h5></Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -133,7 +118,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="email">
-              <Form.Label>Correo electrónico</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-3">Correo electrónico</h5></Form.Label>
               <Form.Control
                 type="email"
                 required
@@ -141,7 +126,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="direccion">
-              <Form.Label>Dirección</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-3">Dirección</h5></Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -149,7 +134,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="celular">
-              <Form.Label>Número de teléfono</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-3">Número de teléfono</h5></Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -160,7 +145,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Contraseña</Form.Label>
+              <Form.Label><h5 className="mb-0 mt-3">Contraseña</h5></Form.Label>
               <Form.Control
                 type="password"                
                 required
@@ -170,11 +155,13 @@ const Register = () => {
             </Form.Group>
 
             <br />
-            <Button className="w-100" type="submit" variant="dark">
-              Registrarse
-            </Button>
+            <Form.Group className="text-center">
+              <Button className="w-50" type="submit" variant="dark">
+                Registrarse
+              </Button>
+            </Form.Group>
           </Form>
-          <div className="w-100 text-center mt-3"></div>
+          {/* <div className="w-100 text-center mt-3"></div> */}
         </Card.Body>
       </Card>
     </div>

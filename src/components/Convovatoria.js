@@ -105,7 +105,7 @@ export default function Convovatoria() {
               
               <div className="form-group mx-sm-4 text-center">
                 {/* <input type="submit" className="btn btn-dark w-50 mt-5 mb-3" style={{backgroundColor: '#EEF2F6', color:'black',border:'none'}} value="Crear" />  */}
-                <input type="submit" className="btn btn-dark w-50 mt-5 mb-3" value="Crear" /> 
+                <input type="submit" className="btn btn-dark w-50 mt-4 mb-3" value="Crear" /> 
               </div>
             </div>
           </form>

@@ -35,27 +35,29 @@ const Login = () =>{
 
     return(
         <div style={{ justifyContent:'center', display:'flex', marginTop:'150px'}}>
-        <Card border="dark" style={{width: '100%', height: 'auto', maxWidth:'400px', }}>
-            <Card.Header style={{ backgroundColor: '#012345'}}>
-                <h3 className="text-center mb-2" style={{color:'white'}}>Iniciar sesión</h3>
+        <Card style={{ width: "100%", height: "auto", maxWidth: "400px", borderRadius: '10px'}}>
+            <Card.Header style={{ backgroundColor: "#012345" ,borderRadius: '10px 10px 0 0'}}>
+                <h3 className="text-center mb-2 py-1" style={{color:'white'}}>Iniciar sesión</h3>
             </Card.Header>
-            <Card.Body style={{ backgroundColor: '#5668d1'}}>
+            <Card.Body style={{ backgroundColor: '#5668d1',borderRadius: '0 0 10px 10px'}}>
                 <Form  onSubmit={handleSubmit} >
                 <Form.Group id="email">
-                    <Form.Label>Correo electrónico</Form.Label>
+                    <Form.Label><h5>Correo electrónico</h5></Form.Label>
                     <Form.Control type="email" required onChange={e=>setEmail(e.target.value)}/>
                 </Form.Group>
                 <br/>
                 <Form.Group id="password" >
-                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Label><h5>Contraseña</h5></Form.Label>
                     <Form.Control type="password" required minLength={6} onChange={e=>setPassword(e.target.value)}/>
                 </Form.Group>
                 <br/>
-                <Button className="w-100" type="submit" variant='dark'>
-                    Entrar
-                </Button>
+                <Form.Group className="text-center">
+                    <Button className="w-50" type="submit" variant='dark'>
+                        Entrar
+                    </Button>
+                </Form.Group>
                 </Form>
-                <div className="w-100 text-center mt-3"></div>
+                
             </Card.Body>
         </Card>
         </div>
