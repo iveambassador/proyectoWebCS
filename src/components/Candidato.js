@@ -16,8 +16,8 @@ export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree,
   return (
     <Card className='Cont-Card'>
         <Card.Title>{Partido}</Card.Title>
-        <div style={{height : '14rem',display : 'flex',alignItems : 'center'}}>
-        <Card.Img variant="top" src={foto} alt='Foto Candidato'/>
+        <div style={{height : '14rem',display : 'flex',alignItems : 'center',justifyContent : 'center'}}>
+          <Card.Img variant="top" src={foto} alt='Foto Candidato' style={{maxHeight : '100%',width : '14rem'}}/>
         </div>
         <Card.Body>
           <Card.Title>Nombre: {NombreAp}</Card.Title>

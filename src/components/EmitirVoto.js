@@ -25,7 +25,9 @@ export default function EmitirVoto(props) {
   const [checkedState, setCheckedState] = useState([]);
     
   const [valido, setValido] = useState(true);
-  const [isStart, setStart] =  useState(true)
+  const [isStart, setStart] =  useState(true);
+  const [nombre, setNombreEleccion] =  useState('');
+  const [descripcion, setDescripcion] =  useState('');
 
   const handlePadre = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -214,6 +216,15 @@ export default function EmitirVoto(props) {
     }else{
       setValido(false)
     }
+    const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
+      const lafecha = await getDocs(q);
+      lafecha.forEach((doc) => {
+        let id = doc.id
+        let tituloEleccion = doc.data().DescripcionEleccion
+        let nombreEleccion = doc.data().NombreEleccion
+        setNombreEleccion(nombreEleccion);
+        setDescripcion(tituloEleccion);
+      })
     setStart(false)
   }
   cumple();
@@ -224,6 +235,7 @@ if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
       <div className='Container'>
         
         <h1>¡Comienza con  I Vote!</h1>
+        <h5 className='mt-2'>{descripcion}</h5>
         <div className='Cont-Titulo'>
           <div className='tester'>
           <h5>Marca al candidato de tu preferencia.</h5>
