@@ -5,10 +5,10 @@ const colNames=['Id','Candidato', 'Partido','Votos']
 
 const tabla = ({listas}) => {
 return (
-    <div style={{width: '100%', height: 'auto', margin:'auto', maxWidth:'400px'}}>
-        <h3>Tabla de resultados: </h3>
+    <div>
+        <h3 className="text-center">Tabla de resultados: </h3>
         {listas.length>0 && (
-            <Table striped bordered hover>
+            <Table striped bordered hover responsive style={{ maxWidth:'400px' ,marginLeft:'auto', marginRight:'auto'}}>
                 <thead >
                     <tr>
                         {colNames.map((headerItem,index)=>(
