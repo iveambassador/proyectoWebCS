@@ -4,12 +4,14 @@ import Bar from "../components/charts/bar";
 import Tabla from "../components/charts/tabla";
 
 import { useState,useEffect } from "react";
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { firestore } from "../confs/firebaseConf";
 
 const Home = () => {
   const [isStart, setStart] =  useState(true)
   const [users, setUsers]=useState([])
+  const [nombre, setNombreEleccion] =  useState('');
+  const [descripcion, setDescripcion] =  useState('');
   const usersCollectionRef = collection(firestore,"PartidosAceptados")
   useEffect(()=> {
   //Leer     
@@ -17,6 +19,16 @@ const Home = () => {
       const data = await getDocs(usersCollectionRef)
       //console.log(data)
       setUsers(data.docs.map((doc)=>({...doc.data(),id: doc.id})))
+
+      const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
+      const lafecha = await getDocs(q);
+      lafecha.forEach((doc) => {
+        let id = doc.id
+        let tituloEleccion = doc.data().DescripcionEleccion
+        let nombreEleccion = doc.data().NombreEleccion
+        setNombreEleccion(nombreEleccion);
+        setDescripcion(tituloEleccion);
+      })
       setStart(false)
   }
   getUsers()
@@ -76,6 +88,7 @@ const Home = () => {
       <div>
         {esta() ? (
           <>
+            <h2 className="text-center mb-4 mt-2">{nombre}</h2>
             <Tabla listas ={list} />
             <Pie datos={data}/>
             <Bar datos={data}/>
