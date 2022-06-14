@@ -32,7 +32,7 @@ export default class urna extends Component {
                       <th>Hash del voto</th>
                       <th>Elector</th>
                       <th>Voto</th>
-                      <th>Fecha</th>
+                      <th>Fecha y hora</th>
                       </tr>
                   </thead>
                   <tbody id="dataTablee">

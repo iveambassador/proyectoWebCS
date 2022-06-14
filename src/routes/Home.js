@@ -81,9 +81,9 @@ const Home = () => {
         ):(
           <>
             <div className="Container">
-              <h1>Bienvenido a iVote</h1>
-              <h1>No esta disponible en resultados</h1>
-              <h1>¿Porque no intentas más tarde?</h1>
+              <h2>Bienvenido a iVote</h2>
+              <h2>Los resultados de la votación aún no se encuentran disponibles.</h2>
+              <h2>¿Por qué no intentas más tarde?</h2>
             </div>
           </>
         )}

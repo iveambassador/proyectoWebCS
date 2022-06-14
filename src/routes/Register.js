@@ -102,7 +102,7 @@ const Register = () => {
         <Card.Body style={{ backgroundColor: "#5668d1" }}>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="nombre">
-              <Form.Label>Nombre</Form.Label>
+              <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -112,7 +112,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="apellido">
-              <Form.Label>Apellido</Form.Label>
+              <Form.Label>Apellidos</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -133,7 +133,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Correo electrónico</Form.Label>
               <Form.Control
                 type="email"
                 required
@@ -149,7 +149,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group id="celular">
-              <Form.Label>Nro. Celular</Form.Label>
+              <Form.Label>Número de teléfono</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -171,7 +171,7 @@ const Register = () => {
 
             <br />
             <Button className="w-100" type="submit" variant="dark">
-              Registarse
+              Registrarse
             </Button>
           </Form>
           <div className="w-100 text-center mt-3"></div>

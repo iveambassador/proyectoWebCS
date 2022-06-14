@@ -138,15 +138,15 @@ export default function Postularme() {
             {/* <h1 className="contLoginTittle">Formulario de postulación</h1> */}
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label><h5>Nombre del partido político:</h5></Form.Label>
-              <Form.Control type="input" placeholder="Nombre del partido político" onChange={(e) => setNombrePartido(e.target.value)}/>
+              <Form.Control required minLength={10} type="input" placeholder="Nombre del partido político" onChange={(e) => setNombrePartido(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Sigla del partido político:</h5></Form.Label>
-              <Form.Control type="input" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
+              <Form.Control required minLength={2} type="input" placeholder="Sigla del partido político" onChange={(e) => setSigla(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label><h5>Certificados Correspondientes:</h5></Form.Label>
-              <Form.Control type="file" onChange={cargarDoc}/>
+              <Form.Label><h5>Documentos requeridos:</h5></Form.Label>
+              <Form.Control required type="file" onChange={cargarDoc}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Declaración jurada:</h5></Form.Label>
@@ -154,7 +154,7 @@ export default function Postularme() {
             </Form.Group> */}
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label><h5>Fotografía:</h5></Form.Label>
-              <Form.Control type="file" onChange={cargarFoto}/>
+              <Form.Control required type="file" onChange={cargarFoto}/>
             </Form.Group>
             {/* <Button  variant="primary" type="submit" onClick={this.getBooks.bind()}></Button> */}
             <Form.Group className="text-center mt-3">
