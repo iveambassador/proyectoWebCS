@@ -4,7 +4,7 @@ import Bar from "../components/charts/bar";
 import Tabla from "../components/charts/tabla";
 
 import { useState,useEffect } from "react";
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, setDoc } from 'firebase/firestore'
 import { firestore } from "../confs/firebaseConf";
 
 const Home = () => {
