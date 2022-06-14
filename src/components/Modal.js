@@ -4,13 +4,21 @@ import { Modal, Button } from 'react-bootstrap'
 import block from './blockchain/block';
 
 const Blockchain = require('./blockchain/blockchain');
-const Block = require('./blockchain/block');
-const SHA256 = require('crypto-js/sha256')
+const SHA256 = require('crypto-js/sha256');
+
 
 export default function Modales(props) {
+  async function HMACSHA256() {
+    
+    let hashGenerado = SHA256(JSON.stringify()).toString();
+    for (let i = 0; i < 10; i++) {
+      hashGenerado = SHA256(hashGenerado).toString();
+      console.log(hashGenerado);
+    }
+    return hashGenerado;
+  }
 
-
-  async function run() {
+  async function runing() {
     const blockchain = new Blockchain();
     const block1 = new block('iVote Bloque Register');
     const block2 = new block('iVote Bloque Vote');
@@ -23,7 +31,7 @@ export default function Modales(props) {
     //blockchain.chain[1].hash = blockchain.chain[1].calcularHash();
     //console.log(blockchain.toString());
     //console.log(blockchain.validateChain());
-    return "Aqui pones el codigo de la transaccion bro!!!"
+    return  blockchain;
   }
   //run();
   //function generar (){
@@ -76,7 +84,7 @@ export default function Modales(props) {
       const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      const hashG = await run()
+      const hashG = await HMACSHA256()
       props.setMensaje(`${hashG}`)
       props.funcionClasificar(hashG, voteDate)
     }
