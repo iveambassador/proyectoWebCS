@@ -14,7 +14,6 @@ class block{
         //es el hash anterior como lista enlazada
         this.previousBlockHash = '';
     }
-
     //validar
     validate(){
         const self = this;
@@ -24,7 +23,7 @@ class block{
             //calcular si el hash es el mismo del guardado "estructura"
             self.hash = SHA256 (JSON.stringify({...self, hash:null})).toString();
             //si el hash actual es distinto al anterior
-            if(currentHash != self.hash ){
+            if(currentHash !== self.hash ){
                 return resolve(false);
             }else{
                 return resolve(true);
@@ -41,7 +40,7 @@ class block{
             let dataObject = JSON.parse(decodedData);
 
             //comprobar por ultimo bloque
-            if(dataObject == 'Genesis Block' ){
+            if(dataObject === 'Genesis Block' ){
                 reject(new Error('Este es el bloque génesis'))
             }
             resolve(dataObject);
@@ -57,5 +56,4 @@ class block{
         Previous Block Hash: ${previousBlockHash}`;
     }
 }
-
 module.exports = block;
