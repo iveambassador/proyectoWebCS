@@ -19,7 +19,7 @@ export default function Convovatoria() {
   const [fechaIniPostulacion, setIniPos] = useState('');
   const [fechaFinPostulacion, setFinPos] = useState('');
 
-  /*const navegate = useNavigate();
+  const navegate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -82,13 +82,13 @@ export default function Convovatoria() {
       
     } catch (error) {
       console.log(error.code);
-      <form className='contLoginTittle'onSubmit={handleSubmit}>
+      
     }
-  }*/
+  }
   return (
     <div className="contLogin" style={{fontFamily: 'Arial, Helvetica, sans-serif'}}>
         <div className="col-lg-4 col-md-6 col-sm-8 col-11 formulario my-5">
-          <form className='contLoginTittle'>
+          <form className='contLoginTittle'onSubmit={handleSubmit}>
             
             <div className="form-group text-center py-3">
               <h2>Convocar a elecciones</h2>
