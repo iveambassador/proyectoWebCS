@@ -82,6 +82,7 @@ export default function Convovatoria() {
       
     } catch (error) {
       console.log(error.code);
+      
     }
   }
   return (
@@ -90,16 +91,16 @@ export default function Convovatoria() {
           <form className='contLoginTittle'onSubmit={handleSubmit}>
             
             <div className="form-group text-center py-3">
-              <h2>Convocatoria a elecciones</h2>
+              <h2>Convocar a elecciones</h2>
             </div>
             <div className='contLoginBody pt-1'>
               <Campos NombreCampo="Nombre de la elección: " Holder='ingrese su nombre' setValue={setNombreEleccion}/>
-              <Campos NombreCampo="Descripción" Holder='ingrese una descripción'setValue={setDescripcion}/>
+              <Campos NombreCampo="Descripción:" Holder='ingrese una descripción'setValue={setDescripcion}/>
               {/* <Campos NombreCampo="Nombre de la organización" Holder='ingrese su CI'/> */}
-              <Fecha NombreCampo="Fecha: " setValue={setFechaVoto}/>
-              <Hora NombreCampo="Hora inicio: " setValue={setInivoto}/>
-              <Hora NombreCampo="Hora fin: " setValue={setFinVoto}/>
-              <Fecha NombreCampo="Fecha inicio de postulación: " setValue={setIniPos}/>
+              <Fecha NombreCampo="Fecha de votación: " setValue={setFechaVoto}/>
+              <Hora NombreCampo="Hora inicio de votación: " setValue={setInivoto}/>
+              <Hora NombreCampo="Hora fin de votación: " setValue={setFinVoto}/>
+              <Fecha NombreCampo="Fecha inicial de postulación: " setValue={setIniPos}/>
               <Fecha NombreCampo="Fecha final de postulación: " setValue={setFinPos}/>
               
               <div className="form-group mx-sm-4 text-center">

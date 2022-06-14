@@ -7,7 +7,7 @@ const pie = ({datos}) => {
   
   return (
     <div style={{width: '100%', height: 'auto', margin:'auto', maxWidth:'400px'}}>
-      <h3>Graficas de Resultados: </h3>
+      <h3>Gráficas de resultados: </h3>
       <Pie data={datos} />
     </div>
   )

@@ -37,17 +37,17 @@ const Login = () =>{
         <div style={{ justifyContent:'center', display:'flex', marginTop:'150px'}}>
         <Card border="dark" style={{width: '100%', height: 'auto', maxWidth:'400px', }}>
             <Card.Header style={{ backgroundColor: '#012345'}}>
-                <h3 className="text-center mb-2" style={{color:'white'}}>Iniciar Sesión</h3>
+                <h3 className="text-center mb-2" style={{color:'white'}}>Iniciar sesión</h3>
             </Card.Header>
             <Card.Body style={{ backgroundColor: '#5668d1'}}>
                 <Form  onSubmit={handleSubmit} >
                 <Form.Group id="email">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>Correo electrónico</Form.Label>
                     <Form.Control type="email" required onChange={e=>setEmail(e.target.value)}/>
                 </Form.Group>
                 <br/>
                 <Form.Group id="password" >
-                    <Form.Label>Contraseñas</Form.Label>
+                    <Form.Label>Contraseña</Form.Label>
                     <Form.Control type="password" required minLength={6} onChange={e=>setPassword(e.target.value)}/>
                 </Form.Group>
                 <br/>

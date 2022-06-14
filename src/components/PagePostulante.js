@@ -92,16 +92,16 @@ export default function PagePostulantes() {
     return (
       <div className="contMain">
         <div className='contPostulante'>
-          <h4 className='contenedor-testimonio w-100 ms-2'>Postulantes: </h4>
+          <h1 className='contenedor-testimonio w-100 ms-2'>Postulantes</h1>
           { list.map(tupla => (
             <div className='contenedor-informacion px-4 py-3'>
       
               <p><strong>Nombre del postulante:</strong> {tupla.nombreCompleto}</p>
-              <p><strong>Nro. CI:</strong> {tupla.carnet}</p>
-              <p><strong>Nro. Teléfono:</strong> {tupla.celular}</p>
+              <p><strong>Nro. de C.I.:</strong> {tupla.carnet}</p>
+              <p><strong>Nro. de teléfono:</strong> {tupla.celular}</p>
               <p><strong>Partido político: </strong> {tupla.partido}</p>
               <p><strong>Sigla:</strong> {tupla.sigla}</p>
-              <a href={tupla.linkDocumneto} target="_blank">Ver Documentos...</a>
+              <a href={tupla.linkDocumneto} target="_blank">Ver documentos...</a>
               <div className='Postulante-Botones'>
                 <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia)}>Aceptado</Button>
                 <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
@@ -128,7 +128,7 @@ export default function PagePostulantes() {
   }else{
     return (
       <div className='Container'>
-          <NoDisponible mensaje="¡Vaya! Aún nadie ha postulado"/>
+          <NoDisponible mensaje="¡Vaya! Aún nadie se ha postulado."/>
       </div>
     ) 
   }

@@ -222,7 +222,7 @@ export default function EmitirVoto(props) {
     return (
       <div className='Container'>
         
-        <h1>¡Comienza con  I Vote!</h1>
+        <h1>Emitir Voto</h1>
         <div className='Cont-Titulo'>
           <div className='tester'>
           <h5>Marca al candidato de tu preferencia.</h5>
@@ -245,7 +245,7 @@ export default function EmitirVoto(props) {
           />  
           )) }      
         </div>
-        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>¡Guardar Voto!</Button>
+        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>Guardar voto</Button>
 
         <Modal
         show={modalShow}
@@ -264,7 +264,7 @@ export default function EmitirVoto(props) {
   }else{
     return (
       <div className='Container'>
-          <NoDisponible mensaje="Hola! por el momento no se encuentra disponible una votacion ¿porque no intentas mas tarde?"/>
+          <NoDisponible mensaje="La jornada electoral no se encuentra habilitada. Verifica el horario de votación y recuerda que no puedes votar por segunda vez."/>
       </div>
     
     ) 
