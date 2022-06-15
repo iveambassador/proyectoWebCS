@@ -34,7 +34,6 @@ useEffect(() => {
         let Fecha = (DatosSem.data().Fecha).toString()
         let dato = {Hash,HashPrevio,Transaccion,Fecha}
         listaTemp.push(dato);
-        console.log(listaTemp)
 
         if(hPostular){
             const thashP = doc(firestore, "BlockChain", hPostular);

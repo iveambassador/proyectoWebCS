@@ -16,10 +16,8 @@ const Home = () => {
   const [descripcion, setDescripcion] = useState("");
   const usersCollectionRef = collection(firestore, "PartidosAceptados");
   useEffect(() => {
-    //Leer
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
-      //console.log(data)
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 
       const q = query(
@@ -49,7 +47,6 @@ const Home = () => {
     };
     return info;
   });
-  console.log(users);
 
   //obtener partidos de resultados []
   const partidos = resultados.map((p) => {
@@ -67,10 +64,6 @@ const Home = () => {
 
   //tabla de resultados
   const list = resultados;
-
-  //generar un color aleatorio
-  //var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
-  //console.log(randomColor)
 
   //graficas de resultsados
   const data = {

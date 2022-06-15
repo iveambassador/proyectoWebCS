@@ -34,14 +34,13 @@ export default function EmitirVoto(props) {
       index === position ? !item : item
     );
     setCheckedState(updatedCheckedState);
-    //console.log(checkedState);
   }
 
   const guardarVoto = (hashGenerado,voteDate) =>{
     var votoElegido;
     var primeraOcurrencia = checkedState.indexOf(true);
     if(primeraOcurrencia == -1){
-      //es voto en blanco
+      //Es voto en blanco
       votoElegido = 'Blanco';
     }else{
       var ultimaOcurrencia = checkedState.lastIndexOf(true);
@@ -49,16 +48,15 @@ export default function EmitirVoto(props) {
         //Es voto nulo
         votoElegido = 'Nulo';
       }else{
-        //votoElegido = 'Valido';
+
         const foundCandidato = lista.find(element => element.ix === primeraOcurrencia);
         const foundName = foundCandidato.sigla;
         const foundId = foundCandidato.idCandidato;
         votoElegido = foundName;
         guardarEnPartidos(foundId);
-        //console.log(foundName);
+
       }
     }
-    //console.log(votoElegido);
     guardarEnUsuario(votoElegido,hashGenerado,voteDate);
   }
 
@@ -91,44 +89,30 @@ export default function EmitirVoto(props) {
         });
       }
     }
-    //console.log("Datos actualizados en la coleccion Usuario Comun");
 
   }
 
   const guardarEnPartidos = async (idPartido) =>{
-    //console.log(idPartido);
     const thePartido = doc(firestore, "PartidosAceptados", idPartido);
     const docSnap = await getDoc(thePartido);
-    if (docSnap.exists()) {
-      //console.log("Document data:", docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      //console.log("No such document!");
-    }
     let actualCuenta = docSnap.data().Cant;
     let newCuenta = actualCuenta+1;
     await updateDoc(thePartido, {
       Cant : newCuenta
     });
-    //console.log("Cantidad de votos ",newCuenta);
   }
 
   useEffect(() => {
     const test = async ()=>{
       try {
-      //const thequery = query(collection(firestore, "UsuarioComun"), where("PostularEstado", "==", true));
-      //const postulantesAceptados = await getDocs(thequery);
       
       const postulantesAceptados = await getDocs(collection(firestore, "PartidosAceptados"));
-      //console.log(postulantesAceptados.size);
       const listaTemp = [];
       var i = 0;
       postulantesAceptados.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
+
         let idCandidato = doc.id
         let nombreCandi = doc.data().NombreCandidato
-        //let apellido = doc.data().Apellido
-        //let nombreCandi = nombre + " " + apellido
         let nombrePartid = doc.data().NombrePartido
         let sigla = doc.data().Sigla
         let cargo = doc.data().Cargo
@@ -137,26 +121,24 @@ export default function EmitirVoto(props) {
         let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix,Foto}
         listaTemp.push(dato);
         i = i + 1;
-        //checkedState.push(false);
+
       })
-      //checkedState = new Array(i+1).fill(false);
+
       for (var j = 0; j < i; j++) {
         checkedState.push(false);
       }
-      //console.log("Lista Temporal",listaTemp);
-      //console.log(i);
+
       setList(listaTemp);
       } catch (error) {
-        //console.log(error)
+        console.log(error)
       }
     }
     test(); 
-    //console.log("estos son los datos")
-    //console.log(lista)
+
    }, [bandera]);
 
    useEffect(() => {
-    //console.log(checkedState);
+
     },[checkedState]);
   
    useEffect(() => {
@@ -166,7 +148,7 @@ export default function EmitirVoto(props) {
     const q = query(collection(firestore, "AdministrarFechas"), where("Activo", "==", true));
     const usuariosComun = await getDocs(q);
     usuariosComun.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
+
       let id = doc.id
       let NombreEleccion = doc.data().NombreEleccion
       let DescripcionEleccion= doc.data().DescripcionEleccion
@@ -183,12 +165,9 @@ export default function EmitirVoto(props) {
     } catch (error) {
       console.log(error)
     }
-    //console.log("estas soon las fechas")
-    //console.log(listaFechas)
-    //console.log(listaFechas[0].FechaIniPostulacion.toString())
+ 
     let hoy = new Date()
-    //console.log("este es el dato")
-    //console.log(hoy)
+
     let dia = parseInt(hoy.getDate())
     let mes = parseInt(( hoy.getMonth() + 1 ))
     let año = parseInt(hoy.getFullYear())
@@ -199,16 +178,7 @@ export default function EmitirVoto(props) {
     let fechaVoto = listaFechas[0].FechaIniEleccion.toString().split('-')
     let inicio = listaFechas[0].HoraIniEleccion.toString().split(':')
     let fin = listaFechas[0].HoraFinEleccion.toString().split(':')
-    //console.log("este es el split: ")
-    //console.log(fechaVoto)
-    //console.log(inicio)
-    //console.log(fin)
-    //console.log(dia)
-    //console.log(hora)
-    //console.log(minutos)
-    //console.log(horaCompleta)
-    // console.log(parseInt(inicio[0]+''+inicio[1]))
-    // console.log(parseInt(fin[0]+''+fin[1]))
+
     let contador = 0
     const coleccionPA = await getDocs(collection(firestore, "PartidosAceptados"));
     coleccionPA.forEach((doc) => {

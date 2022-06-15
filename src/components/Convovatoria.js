@@ -75,9 +75,7 @@ export default function Convovatoria() {
         listita.push(id)
         limpiarFechas(id)
       })
-      //console.log('la listita es:')
-      //console.log(listita);
-      
+
       await addDoc(collection(firestore, "AdministrarFechas"), {
         NombreEleccion : nombreEleccion,
         DescripcionEleccion: descripcion,

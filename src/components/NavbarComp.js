@@ -49,13 +49,12 @@ const NavbarComp=()=> {
 
     async function getHash(){
       if(user){
-        let user = getAuth(app).currentUser.uid;
-        let test = doc(firestore, "UsuarioComun", user);
-        let DatosUser = await getDoc(test);
-        let HashUser = await DatosUser.data().HashSemilla;
-        //let HashRecort = HashUser.slice(0,-32)+'...'
+        let usuario = getAuth(app).currentUser.uid;
+        let consulta = doc(firestore, "UsuarioComun", usuario);
+        let datosUser = await getDoc(consulta);
+        let HashUser = datosUser.data().HashSemilla;
         let HashGUser = HashUser.toString();
-        setHashNavbar(HashUser);
+        setHashNavbar(HashGUser);
       }
     }
     getHash();
@@ -124,14 +123,3 @@ const NavbarComp=()=> {
     )
   }
 export default NavbarComp
-
-/**
- * 
- * 
- * 
-                      <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
-                      <Nav.Link as={Link} to={"/EmitirVoto"}>Emitir Voto</Nav.Link>
-                      <Nav.Link as={Link} to={"/PagePostulante"}>Postulantes</Nav.Link>
-                      <Nav.Link as={Link} to={"/Convocatoria"}>Nueva Convovatoria</Nav.Link>
-                      -- <Nav.Link as={Link} to={"/CrearPostulacion"}>Habilitar Postulantes</Nav.Link> --
-                      <Nav.Link as={Link} to={"/Postularme"}>Postularme</Nav.Link> */

@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
 import Spinner from 'react-bootstrap/Spinner';
 const SHA256 = require('crypto-js/sha256');
-//let urlDescarga;
+
 export default function Postularme() {
-  //const [postularEstado, setPostularEstado] = useState(false);
+
   const [valido, setValido] = useState(true);
   const [nombrePartido, setNombrePartido] = useState("");
   const [siglaPartido, setSigla] = useState("");
@@ -74,7 +74,7 @@ export default function Postularme() {
     e.preventDefault();
     let user = getAuth(app).currentUser.uid;
     const test = doc(firestore, "UsuarioComun", user);
-    console.log("este es el test osea el usuario")
+
     console.log(test);
     let elHash = await HMACSHA256();
     let fecha = new Date()
@@ -83,16 +83,20 @@ export default function Postularme() {
     const usuarioActual = doc(firestore, "UsuarioComun", idUsuario);
     const DatosUser = await getDoc(usuarioActual);
     let elHashPrevio = DatosUser.data().HashSemilla;
-
+    let bady = parseInt(Math.random() * (10000000))
     await setDoc(doc(firestore, "BlockChain", elHash), {
       Hash : elHash,
       HashPrevio : elHashPrevio,
       Data : 1,
       Fecha : fecha,
-      Body : parseInt(Math.random() * (10000000)),
+      Body : bady,
       Transaccion : 'Postular como candidato',
     });
-    //console.log(estesidara)
+    console.log(`Hash : ${elHash}`)
+    console.log(`HashPrevio : ${elHashPrevio}`)
+    console.log(` Fecha : ${fecha}`)
+    console.log(`Body : ${bady}`)
+    console.log(`Transaccion : Postular`)
     await updateDoc(test, {
         PuedePostular : false,
         PostularEstado : true,
@@ -130,10 +134,6 @@ export default function Postularme() {
      let dia = parseInt(hoy.getDate())
      let mes = parseInt(( hoy.getMonth() + 1 ))
      let año = parseInt(hoy.getFullYear())
-     //let hora = parseInt(hoy.getHours())
-     //let minutos = parseInt(hoy.getMinutes())
-     console.log(listaFechas[0].FechaIniPostulacion)
-     console.log(listaFechas[0].FechaFinPostulacion)
 
      let idUsuario = getAuth(app).currentUser.uid;
      const usuarioActual = doc(firestore, "UsuarioComun", idUsuario);
