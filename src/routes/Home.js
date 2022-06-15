@@ -40,7 +40,7 @@ const Home = () => {
   // obtener datos de firestore
   const resultados = users.map((persona) => {
     const info = {
-      id: persona.id,
+      id: persona.HashSemilla,
       name: persona.NombreCandidato,
       partido: persona.Sigla,
       votos: persona.Cant,

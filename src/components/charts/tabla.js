@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-const colNames=['Id','Candidato', 'Partido','Votos']
+const colNames=['Hash','Candidato', 'Partido','Votos']
 
 const tabla = ({listas}) => {
 return (
