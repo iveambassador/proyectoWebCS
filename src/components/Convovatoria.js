@@ -36,6 +36,10 @@ export default function Convovatoria() {
         await deleteDoc(doc(firestore, "PartidosAceptados",identificador));
       }
 
+      async function borrarBlock(identificador){
+        await deleteDoc(doc(firestore, "BlockChain",identificador));
+      }
+
       async function limpiarVotos(idUser){
         const unUsuario = doc(firestore, "UsuarioComun", idUser);
         await updateDoc(unUsuario, {
@@ -43,7 +47,9 @@ export default function Convovatoria() {
           VotoBlanco : 0,
           VotoNulo : 0,
           PostularEstado : false,
-          PuedePostular : true
+          PuedePostular : true,
+          HashPostular : '',
+          HashVoto : '',
         });
       }
       const allUsers = await getDocs(collection(firestore, "UsuarioComun"));
@@ -54,6 +60,11 @@ export default function Convovatoria() {
       const querySnapshot = await getDocs(collection(firestore, "PartidosAceptados"));
       querySnapshot.forEach((doc) => {
         borrarPartidos(doc.id);
+      });
+
+      const block = await getDocs(collection(firestore, "BlockChain"));
+      block.forEach((doc) => {
+        borrarBlock(doc.id);
       });
 
       let listita = []

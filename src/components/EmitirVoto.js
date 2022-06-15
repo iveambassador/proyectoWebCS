@@ -71,7 +71,8 @@ export default function EmitirVoto(props) {
         VotoEstado : true,
         VotoNulo : 1,
         VotoHash : voteHash,
-        VotoFecha: voteDate
+        VotoFecha: voteDate,
+        Transaccion : 'Emitir Voto',
       });
     }else{
       if(voteValue === "Blanco"){

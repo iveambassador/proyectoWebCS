@@ -4,8 +4,10 @@ import { UserContext } from "../context/UserProvider";
 import { Card, Form, Button } from "react-bootstrap";
 import { app } from "../confs/firebaseConf";
 import { firestore } from "../confs/firebaseConf";
-import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc, Timestamp } from "firebase/firestore";
 import { getAuth} from 'firebase/auth';
+import { HmacSHA256 } from "crypto-js";
+const SHA256 = require('crypto-js/sha256');
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
@@ -23,16 +25,51 @@ const Register = () => {
   const navegate = useNavigate();
   const { registerUser } = useContext(UserContext);
 
+  async function HMACSHA256() {
+    let listita = [];
+    const allUsers = await getDocs(collection(firestore, "BlockChain"));
+      allUsers.forEach((doc) => {
+        listita.push(doc.id)
+      });
+
+    let hashGenerado = (SHA256(JSON.stringify()).toString()).slice(0,-32);
+    
+    while(listita.includes(hashGenerado)){
+      hashGenerado = (SHA256(hashGenerado).toString()).slice(0,-32);
+    }
+    return hashGenerado;
+  }
+function pruebita (){
+  let fecha = new Date()
+  console.log(fecha);
+  console.log(parseInt(Math.random() * (10000000)));
+}
+pruebita();
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("procesando form:", email, password);
     try {
       await registerUser(email, password);
       console.log("usuario creado");
+      let HashSemillaGenerado = await HMACSHA256();
       navegate("/");
-      const user = getAuth(app).currentUser.uid;
+      
+      console.log('HashSemillaGenerado');
+      console.log(HashSemillaGenerado);
+      //console.log(Date().toDateString());
+      //console.log(Math.floor((Math.random() * (10000000))));
+      let fecha = new Date()
+     
+      await setDoc(doc(firestore, "BlockChain", HashSemillaGenerado), {
+        HashSemilla : HashSemillaGenerado,
+        HashPrevio : '',
+        Data : 0,
+        Fecha : fecha,
+        Body : parseInt(Math.random() * (10000000)),
+        Transaccion : 'Registro',
+      });
 
-      await setDoc(doc(firestore, "BlockChain", user), {})
+      const user = getAuth(app).currentUser.uid;
       await setDoc(doc(firestore, "UsuarioComun", user), {
         Apellido: apellido,
         CI: ci,
@@ -53,11 +90,13 @@ const Register = () => {
         RegistroHash : "",
         VotoNulo:0,
         VotoPartidoSigla:"",
-        //HashSemilla:hash
+        HashSemilla: HashSemillaGenerado,
+        HashVoto : '',
+        HashPostular : '',
       });
     } catch (error) {
       console.log(error.code);
-      alert("Esta cuenta ya esta registrado")
+      alert("Esta cuenta ya esta registrada")
     }
 
     // try {

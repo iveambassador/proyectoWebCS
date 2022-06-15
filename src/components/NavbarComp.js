@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 import logo from '../blockchain-logo-svg-vector.svg'
 import {getRolUser } from '../utils/getRolUser'
-
+import { doc, getDoc } from "firebase/firestore";
+import { app } from "../confs/firebaseConf";
+import { firestore } from "../confs/firebaseConf";
+import { getAuth} from 'firebase/auth'
+//import { useContext, useEffect, useState } from "react";
 
 const routes = {
   user: [
@@ -29,6 +33,7 @@ const routes = {
   ]
 }
 const NavbarComp=()=> {
+  const [hashNavbar,setHashNavbar] = useState('');
   const {user,signOutUser} = useContext(UserContext)
   const handleClickLogout = async()=>{
       try {
@@ -37,6 +42,17 @@ const NavbarComp=()=> {
           console.log(error.code);
       }
   }
+  async function getHash(){
+    if(user){
+      let user = getAuth(app).currentUser.uid;
+      const test = doc(firestore, "UsuarioComun", user);
+      const DatosUser = await getDoc(test);
+      let HashUser = DatosUser.data().HashSemilla;
+      //let HashRecort = HashUser.slice(0,-32)+'...'
+      setHashNavbar(HashUser);
+    }
+  }
+  getHash();
 
   const userRol = getRolUser(user) 
 
@@ -66,7 +82,7 @@ const NavbarComp=()=> {
                       }
                   </Nav>
                   <Nav>
-                    <NavDropdown title="b474d48cdfc4974d86ef4d24904cdd91..." id='basic-nav-dropdown'>
+                    <NavDropdown title={hashNavbar} id='basic-nav-dropdown'>
                       <NavDropdown.Item onClick={handleClickLogout}>Cerrar Sesión</NavDropdown.Item>
                     </NavDropdown>
                   </Nav>

@@ -3,14 +3,14 @@ import { Form, Button, Card } from "react-bootstrap";
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
 import { getAuth} from 'firebase/auth'
-import {collection, getDocs, getFirestore, updateDoc, doc, query, where, getDoc} from "firebase/firestore";
+import {collection, getDocs, getFirestore, updateDoc, doc, query, where, getDoc, setDoc} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
 import Spinner from 'react-bootstrap/Spinner';
-
+const SHA256 = require('crypto-js/sha256');
 //let urlDescarga;
 export default function Postularme() {
   //const [postularEstado, setPostularEstado] = useState(false);
@@ -18,12 +18,26 @@ export default function Postularme() {
   const [nombrePartido, setNombrePartido] = useState("");
   const [siglaPartido, setSigla] = useState("");
   const [foto, setFoto] = useState("");
-  const [documento, setDoc] = useState("");
+  const [documento, setDocs] = useState("");
   const [isLoading, setLoading] =  useState(false)
   const [isStart, setStart] =  useState(true)
-
   const navegar = useNavigate();
-  // let estesidara = "";
+
+  async function HMACSHA256() {
+    let listita = [];
+    const allUsers = await getDocs(collection(firestore, "BlockChain"));
+      allUsers.forEach((doc) => {
+        listita.push(doc.id)
+      });
+
+    let hashGenerado = SHA256(JSON.stringify()).toString();
+    
+    while(listita.includes(hashGenerado)){
+      hashGenerado = SHA256(hashGenerado).toString();
+    }
+    return hashGenerado;
+  }
+
   const cargarFoto = async (event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -53,16 +67,31 @@ export default function Postularme() {
 
     const urlDelDoc = await getDownloadURL(storageRef);
     let cambiado = urlDelDoc.toString();
-    setDoc(cambiado);
+    setDocs(cambiado);
    };
+
   const Postular = async (e) => {
     e.preventDefault();
     let user = getAuth(app).currentUser.uid;
     const test = doc(firestore, "UsuarioComun", user);
     console.log("este es el test osea el usuario")
     console.log(test);
-    
+    let elHash = await HMACSHA256();
+    let fecha = new Date()
     navegar("/");
+    let idUsuario = getAuth(app).currentUser.uid;
+    const usuarioActual = doc(firestore, "UsuarioComun", idUsuario);
+    const DatosUser = await getDoc(usuarioActual);
+    let elHashPrevio = DatosUser.data().HashSemilla;
+
+    await setDoc(doc(firestore, "BlockChain", elHash), {
+      Hash : elHash,
+      HashPrevio : elHashPrevio,
+      Data : 1,
+      Fecha : fecha,
+      Body : parseInt(Math.random() * (10000000)),
+      Transaccion : 'Postular como candidato',
+    });
     //console.log(estesidara)
     await updateDoc(test, {
         PuedePostular : false,
@@ -71,6 +100,7 @@ export default function Postularme() {
         PostularSigla : siglaPartido,
         UrlFotografia : foto,
         UrlDocumneto : documento,
+        HashPostular : elHash,
     });
     console.log("Datos actualizados")
   };

@@ -2,57 +2,29 @@ import { async } from '@firebase/util';
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import block from './blockchain/block';
-
+import { firestore } from "../confs/firebaseConf";
+import { collection, getDocs, addDoc, setDoc, doc, Timestamp, updateDoc, getDoc } from "firebase/firestore";
+import { getAuth} from 'firebase/auth'
+import { app } from "../confs/firebaseConf";
 const Blockchain = require('./blockchain/blockchain');
 const SHA256 = require('crypto-js/sha256');
 
 
 export default function Modales(props) {
   async function HMACSHA256() {
-    
+    let listita = [];
+    const allUsers = await getDocs(collection(firestore, "BlockChain"));
+      allUsers.forEach((doc) => {
+        listita.push(doc.id)
+      });
+
     let hashGenerado = SHA256(JSON.stringify()).toString();
-    for (let i = 0; i < 10; i++) {
+    
+    while(listita.includes(hashGenerado)){
       hashGenerado = SHA256(hashGenerado).toString();
-      console.log(hashGenerado);
     }
     return hashGenerado;
   }
-
-  async function runing() {
-    const blockchain = new Blockchain();
-    const block1 = new block('iVote Bloque Register');
-    const block2 = new block('iVote Bloque Vote');
-    await blockchain.addBlock(block1);
-    await blockchain.addBlock(block2);
-    console.log(JSON.stringify(blockchain, null, 0));
-    console.log(blockchain.toString());
-    blockchain.print();
-    //blockchain.chain[1].data = 'iVote Bloque Vote 2';
-    //blockchain.chain[1].hash = blockchain.chain[1].calcularHash();
-    //console.log(blockchain.toString());
-    //console.log(blockchain.validateChain());
-    return  blockchain;
-  }
-  //run();
-  //function generar (){
-    //var hash = SHA256(JSON.stringify(props.lista)).toString();
-    //props.setHash(hash);
-    //console.log(hash);
-    //return hash;
-
-    //var hash = SHA256(props.hash).toString();
-    //console.log(hash);
-    //return hash;
-
-    //let hashGenerado = SHA256(JSON.stringify()).toString()
-    //console.log(hashGenerado)
-    // hashGenerado = Math.random()
-    //return hashGenerado  }
-
-  //function generarHash(){
-    //var hash = SHA256(JSON.stringify(props.lista)).toString();
-    //props.setHash(hash);
-    //console.log(hash);  }
 
   const getCurrentDate = () => {
     var today = new Date();
@@ -81,10 +53,34 @@ export default function Modales(props) {
   }
 
     async function CambiarModal(){
+      let user = getAuth(app).currentUser.uid;
+      const test = doc(firestore, "UsuarioComun", user);
+      const DatosUser = await getDoc(test);
+      const hashG = await HMACSHA256()
+      let data = 2;
+      let fecha = new Date()
+
+      let elHashPrevio = DatosUser.data().HashPostular;
+      if(elHashPrevio == ''){
+        elHashPrevio = DatosUser.data().HashSemilla;
+        data = 1;
+      }
+
+      await setDoc(doc(firestore, "BlockChain", hashG), {
+        Hash : hashG,
+        HashPrevio : elHashPrevio,
+        Data : data,
+        Fecha : fecha,
+        Body : parseInt(Math.random() * (10000000)),
+      });
+
+      await updateDoc(test, {
+        HashVoto : hashG,
+      });
+
       const voteDate = getCurrentDate();
       props.onHide()
       props.test()
-      const hashG = await HMACSHA256()
       props.setMensaje(`${hashG}`)
       props.funcionClasificar(hashG, voteDate)
     }
