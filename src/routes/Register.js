@@ -127,6 +127,7 @@ pruebita();
             <Form.Group id="nombre">
               <Form.Label><h5 className="mb-0 mt-2">Nombre(s)</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su nombre"
                 type="text"
                 required
                 pattern="^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$"
@@ -138,6 +139,7 @@ pruebita();
             <Form.Group id="apellido">
             <Form.Label><h5 className="mb-0 mt-0">Apellido(s)</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su apellido"
                 type="text"
                 required
                 pattern="^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$"
@@ -148,6 +150,7 @@ pruebita();
             <Form.Group id="ci">
               <Form.Label><h5 className="mb-0 mt-3">Nro. C.I.</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su número de CI"
                 type="text"
                 required
                 pattern="[0-9]+$"
@@ -159,6 +162,7 @@ pruebita();
             <Form.Group id="email">
               <Form.Label><h5 className="mb-0 mt-3">Correo electrónico</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su correo"
                 type="email"
                 required
                 onChange={(e) => setEmail(e.target.value)}
@@ -167,6 +171,7 @@ pruebita();
             <Form.Group id="direccion">
               <Form.Label><h5 className="mb-0 mt-3">Dirección</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su dirección"
                 type="text"
                 required
                 onChange={(e) => setDireccion(e.target.value)}
@@ -175,6 +180,7 @@ pruebita();
             <Form.Group id="celular">
               <Form.Label><h5 className="mb-0 mt-3">Número de teléfono</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su número de teléfono"
                 type="text"
                 required
                 pattern="[0-9]+$"
@@ -186,6 +192,7 @@ pruebita();
             <Form.Group id="password">
               <Form.Label><h5 className="mb-0 mt-3">Contraseña</h5></Form.Label>
               <Form.Control
+                placeholder="Ingrese su contraseña"
                 type="password"                
                 required
                 minLength={6}

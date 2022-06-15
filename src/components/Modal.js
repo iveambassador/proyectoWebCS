@@ -95,13 +95,13 @@ export default function Modales(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Espera!!!
+            ¡Espera!
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>¿Estas seguro de que deseas continuar?</h4>
+          <h4>¿Estás seguro de que deseas continuar?</h4>
           <p>
-            una vez realizado el voto no puedes volver a emitir tu voto..! estas seguro de esta accion?
+            Una vez realizado el voto no puedes cambiarlo. ¿Estás seguro de esta acción?
           </p>
         </Modal.Body>
         <Modal.Footer>

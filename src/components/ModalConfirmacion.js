@@ -7,12 +7,12 @@ export default function ModalConfiramcion({ show, onHide, mensaje }) {
 
         <Modal show={show} onHide={onHide} size="lg">
           <Modal.Header closeButton>
-            <Modal.Title>Voto! realizado correctamente</Modal.Title>
+            <Modal.Title>Voto guardado correctamente</Modal.Title>
           </Modal.Header>
           <Modal.Body>Este es tu hash generado: {mensaje}</Modal.Body>
           <Modal.Footer>
             <Link to="/" className='btn btn-primary' onClick={onHide}>
-              Finalizar!
+              Finalizar
             </Link>
           </Modal.Footer>
         </Modal>

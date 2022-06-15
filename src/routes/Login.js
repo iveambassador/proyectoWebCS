@@ -43,12 +43,12 @@ const Login = () =>{
                 <Form  onSubmit={handleSubmit} >
                 <Form.Group id="email">
                     <Form.Label><h5>Correo electrónico</h5></Form.Label>
-                    <Form.Control type="email" required onChange={e=>setEmail(e.target.value)}/>
+                    <Form.Control placeholder="Ingrese su correo" type="email" required onChange={e=>setEmail(e.target.value)}/>
                 </Form.Group>
                 <br/>
                 <Form.Group id="password" >
                     <Form.Label><h5>Contraseña</h5></Form.Label>
-                    <Form.Control type="password" required minLength={6} onChange={e=>setPassword(e.target.value)}/>
+                    <Form.Control placeholder="Ingrese su contraseña" type="password" required minLength={6} onChange={e=>setPassword(e.target.value)}/>
                 </Form.Group>
                 <br/>
                 <Form.Group className="text-center">

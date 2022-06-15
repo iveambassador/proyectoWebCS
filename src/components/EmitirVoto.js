@@ -240,13 +240,13 @@ if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
     return (
       <div className='Container'>
         
-        <h1>¡Comienza con  I Vote!</h1>
+        <h1>Emitir Voto</h1>
         <h5 className='mt-2'>{descripcion}</h5>
         <div className='Cont-Titulo'>
           <div className='tester'>
-          <h5>Marca al candidato de tu preferencia.</h5>
-          <h5>Puedes votar en blanco si esa es tu elección.</h5>
-          <h5>Si marcas más de una casilla se contara como voto "nulo".</h5>
+          <h6>Marca al candidato de tu preferencia.</h6>
+          <h6>Puedes votar en blanco si esa es tu elección.</h6>
+          <h6>Si marcas más de una casilla se contara como voto "nulo".</h6>
           </div>
           <div className='testers'></div>
           <div className='testers'></div>
@@ -264,7 +264,7 @@ if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
           />  
           )) }      
         </div>
-        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>¡Guardar Voto!</Button>
+        <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>Guardar Voto</Button>
 
         <Modal
         show={modalShow}
@@ -283,7 +283,7 @@ if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
   }else{
     return (
       <div className='Container'>
-          <NoDisponible mensaje="Hola! por el momento no se encuentra disponible una votacion ¿porque no intentas mas tarde?"/>
+          <NoDisponible mensaje="La jornada electoral no se encuentra disponible. Verifica el horario de votación y recuerda que no puedes votar por segunda vez."/>
       </div>
     
     ) 

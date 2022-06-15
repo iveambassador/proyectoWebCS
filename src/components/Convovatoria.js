@@ -105,8 +105,8 @@ export default function Convovatoria() {
               <h2>Convocar a elecciones</h2>
             </div>
             <div className='contLoginBody pt-1'>
-              <Campos NombreCampo="Nombre de la elección: " Holder='ingrese su nombre' setValue={setNombreEleccion}/>
-              <Campos NombreCampo="Descripción:" Holder='ingrese una descripción'setValue={setDescripcion}/>
+              <Campos NombreCampo="Nombre de la elección: " Holder='Ingrese el nombre' setValue={setNombreEleccion}/>
+              <Campos NombreCampo="Descripción:" Holder='Ingrese una descripción'setValue={setDescripcion}/>
               {/* <Campos NombreCampo="Nombre de la organización" Holder='ingrese su CI'/> */}
               <Fecha NombreCampo="Fecha de votación: " setValue={setFechaVoto}/>
               <Hora NombreCampo="Hora inicio de votación: " setValue={setInivoto}/>
