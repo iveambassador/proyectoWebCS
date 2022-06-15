@@ -41,7 +41,7 @@ useEffect(() => {
             let Hash = DatosPos.data().Hash
             let HashPrevio = DatosPos.data().HashPrevio
             let Transaccion = DatosPos.data().Transaccion
-            let Fecha = (DatosPos.data().Fecha).toString()
+            let Fecha = (DatosPos.data().Fecha.toDate()).toString().substring(4,21)
             let dato = {Hash,HashPrevio,Transaccion,Fecha}
             listaTemp.push(dato);
         }
@@ -51,7 +51,7 @@ useEffect(() => {
             let Hash = DatosVot.data().Hash
             let HashPrevio = DatosVot.data().HashPrevio
             let Transaccion = DatosVot.data().Transaccion
-            let Fecha = (DatosVot.data().Fecha).toString()
+            let Fecha = (DatosVot.data().Fecha.toDate()).toString().substring(4,21)
             let dato = {Hash,HashPrevio,Transaccion,Fecha}
             listaTemp.push(dato);
         }
