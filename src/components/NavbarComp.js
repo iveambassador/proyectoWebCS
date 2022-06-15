@@ -20,6 +20,10 @@ const routes = {
       name: 'Emitir Voto',
       path: '/EmitirVoto'
     },
+    {
+      name: 'Actividades',
+      path: '/Actividades'
+    },
   ],
   admin: [
     {
@@ -46,10 +50,11 @@ const NavbarComp=()=> {
     async function getHash(){
       if(user){
         let user = getAuth(app).currentUser.uid;
-        const test = doc(firestore, "UsuarioComun", user);
-        const DatosUser = await getDoc(test);
-        let HashUser = DatosUser.data().HashSemilla;
+        let test = doc(firestore, "UsuarioComun", user);
+        let DatosUser = await getDoc(test);
+        let HashUser = await DatosUser.data().HashSemilla;
         //let HashRecort = HashUser.slice(0,-32)+'...'
+        let HashGUser = HashUser.toString();
         setHashNavbar(HashUser);
       }
     }

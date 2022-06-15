@@ -21,6 +21,7 @@ import EmitirVoto from './components/EmitirVoto'
 import PagePostulante from './components/PagePostulante';
 import Convocatoria from './components/Convovatoria';
 import CrearPostulacion from './components/CrearPostulacion';
+import Actividades  from './components/Actividades';
 import {PrivateRoutes}  from './routes/PrivateRoutes';
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/CrearPostulacion" element={<CrearPostulacion/>}/>
           <Route path="/Postularme" element={<Postularme/>}/>
           <Route path="/EmitirVoto" element={ <EmitirVoto posi={true}/>}/>
+          <Route path="/Actividades" element={ <Actividades/>}/>
 
           </Route>
           </Routes>

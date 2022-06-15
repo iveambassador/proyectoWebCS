@@ -72,6 +72,7 @@ export default function Modales(props) {
         Data : data,
         Fecha : fecha,
         Body : parseInt(Math.random() * (10000000)),
+        Transaccion : 'Voto',
       });
 
       await updateDoc(test, {

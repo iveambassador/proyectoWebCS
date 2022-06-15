@@ -209,10 +209,15 @@ export default function EmitirVoto(props) {
     //console.log(horaCompleta)
     // console.log(parseInt(inicio[0]+''+inicio[1]))
     // console.log(parseInt(fin[0]+''+fin[1]))
+    let contador = 0
+    const coleccionPA = await getDocs(collection(firestore, "PartidosAceptados"));
+    coleccionPA.forEach((doc) => {
+      contador = contador +1;
+    });
     let idUsuario = getAuth(app).currentUser.uid;
     const usuarioActual = doc(firestore, "UsuarioComun", idUsuario);
     const DatosUser = await getDoc(usuarioActual);
-    if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && horaCompleta >= parseInt(inicio[0]+inicio[1]) && horaCompleta <= parseInt(fin[0]+fin[1]) && DatosUser.data().VotoEstado===false){
+    if((año===parseInt(fechaVoto[0]) && mes===parseInt(fechaVoto[1]) && dia===parseInt(fechaVoto[2])) && horaCompleta >= parseInt(inicio[0]+inicio[1]) && horaCompleta <= parseInt(fin[0]+fin[1]) && DatosUser.data().VotoEstado===false && contador > 0){
       setValido(true)
     }else{
       setValido(false)
