@@ -30,7 +30,7 @@ class MasterChain{
         this.chain.push(nuevoBloque)
     }
 }
-module.exports = MasterChain;
+export default MasterChain;
 //let fabriCoin = new MasterChain()
 //fabriCoin.agregarBloque(new Block('fecha',{cantidad: 10}))
 //console.log(JSON.stringify(fabriCoin, null, 0))

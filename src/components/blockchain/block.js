@@ -56,4 +56,4 @@ class block{
         Previous Block Hash: ${previousBlockHash}`;
     }
 }
-module.exports = block;
+export default block;

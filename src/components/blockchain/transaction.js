@@ -31,5 +31,5 @@ let base64Result = CryptoJS.enc.Base32.stringify(CryptoJS.DES.decrypt(result, ke
 console.log(base64Result);
 let hexResult = CryptoJS.enc.Hex.stringify(CryptoJS.DES.decrypt(result, key));
 console.log(hexResult);
-module.exports = Transaction;
+export default Transaction;
 
