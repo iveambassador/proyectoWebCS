@@ -30,8 +30,9 @@ export default function PagePostulantes() {
         let sigla = doc.data().PostularSigla
         let fotografia = doc.data().UrlFotografia
         let linkDocumneto = doc.data().UrlDocumneto
+        let Hash = doc.data().HashSemilla
         let nombreCompleto = nombre +' '+ apellido
-        let dato = { id, nombreCompleto, carnet, celular, partido, sigla, fotografia, linkDocumneto }
+        let dato = { id, nombreCompleto, carnet, celular, partido, sigla, fotografia, linkDocumneto, Hash }
         listaTemp.push(dato);
       })
       setList(listaTemp);
@@ -57,7 +58,7 @@ export default function PagePostulantes() {
 
     }
 
-   const acepteUser = async (id,nombre,sigla,nombreCandi,fotografia)=>{
+   const acepteUser = async (id,nombre,sigla,nombreCandi,fotografia,hash)=>{
 
      let randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
      const user = doc(firestore, "UsuarioComun", id);
@@ -73,6 +74,7 @@ export default function PagePostulantes() {
       Foto : fotografia,
       Cant : 0,
       Color : randomColor,
+      HashSemilla : hash,
     });
      //window.location.reload();
      setBandera(bandera+1)
@@ -95,7 +97,7 @@ export default function PagePostulantes() {
               <p><strong>Sigla:</strong> {tupla.sigla}</p>
               <a href={tupla.linkDocumneto} target="_blank" className='mb-4'>Ver documentos</a>
               <div className='Postulante-Botones'>
-                <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia)}>Aceptado</Button>
+                <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto,tupla.fotografia,tupla.Hash)}>Aceptado</Button>
                 <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
               </div>
           
