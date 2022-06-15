@@ -8,17 +8,11 @@ import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
-//import { reload } from 'firebase/auth';
-//import { async } from '@firebase/util';
+
 export default function PagePostulantes() {
   const [list, setList] = useState([]);
   const [bandera, setBandera] = useState(0);
-  //componentDidMount() { this.getBooks() }
-  //let list = []; 
-  //let nada = {nombre : "ninguno",apellido : "nada por aqui"} 
-  // list.push(nada)
-  // list.push(nada)
-  // const test = async (e) => {
+
    useEffect(() => {
     const test = async ()=>{
       try {
@@ -46,14 +40,12 @@ export default function PagePostulantes() {
       }
       }
       test(); 
-      console.log("estos son los datos")
-      console.log(list)
+  
   }, [bandera]);
 
-    console.log(list)
     const navegar = useNavigate();
     const deleteUser = async (id)=>{
-      console.log(id)
+
       const user = doc(firestore, "UsuarioComun", id);
       await updateDoc(user, {
         PostularEstado : false,
@@ -62,11 +54,11 @@ export default function PagePostulantes() {
       });
       //window.location.reload();
       setBandera(bandera+1)
-      console.log(bandera)
+
     }
 
    const acepteUser = async (id,nombre,sigla,nombreCandi,fotografia)=>{
-     console.log(id)
+
      let randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
      const user = doc(firestore, "UsuarioComun", id);
      await updateDoc(user, {
@@ -84,7 +76,7 @@ export default function PagePostulantes() {
     });
      //window.location.reload();
      setBandera(bandera+1)
-     console.log(bandera)
+
   }
   
     

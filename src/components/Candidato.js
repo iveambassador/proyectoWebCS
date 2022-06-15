@@ -4,7 +4,7 @@ import logo192 from '../Images/logo512.png'
 import logo from '../logo.svg'
 import { useState } from 'react';
 import '../Styles/Candidato.css'
-// import logo from '../../public/logo192.png'
+
 export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree,foto}) {
   const [isChecked, setIsChecked] = useState(false);
   const handleOnChange = () => {
@@ -31,7 +31,6 @@ export default function Candidato({Partido, NombreAp, Cargo, index,handlePadree,
             onChange={handleOnChange}
             />
           </Form.Group>
-          {/* <Button variant="primary">Go somewhere</Button> */}
         </Card.Body>
         
     </Card>

@@ -48,7 +48,7 @@ export default function Modales(props) {
       minutes = '0'+minutes;
     }
     const voteDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
-    console.log(voteDate);
+
     return voteDate;
   }
 
@@ -65,15 +65,20 @@ export default function Modales(props) {
         elHashPrevio = DatosUser.data().HashSemilla;
         data = 1;
       }
-
+      let bady = parseInt(Math.random() * (10000000));
       await setDoc(doc(firestore, "BlockChain", hashG), {
         Hash : hashG,
         HashPrevio : elHashPrevio,
         Data : data,
         Fecha : fecha,
-        Body : parseInt(Math.random() * (10000000)),
+        Body : bady,
         Transaccion : 'Voto',
       });
+      console.log(`Hash : ${hashG}`)
+      console.log(`HashPrevio : ${elHashPrevio}`)
+      console.log(` Fecha : ${fecha}`)
+      console.log(`Body : ${bady}`)
+      console.log(`Transaccion : Voto`)
 
       await updateDoc(test, {
         HashVoto : hashG,

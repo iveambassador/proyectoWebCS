@@ -39,35 +39,28 @@ const Register = () => {
     }
     return hashGenerado;
   }
-function pruebita (){
-  let fecha = new Date()
-  console.log(fecha);
-  console.log(parseInt(Math.random() * (10000000)));
-}
-pruebita();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("procesando form:", email, password);
     try {
       await registerUser(email, password);
-      console.log("usuario creado");
       let HashSemillaGenerado = await HMACSHA256();
       navegate("/");
-      
-      console.log('HashSemillaGenerado');
-      console.log(HashSemillaGenerado);
-      //console.log(Date().toDateString());
-      //console.log(Math.floor((Math.random() * (10000000))));
       let fecha = new Date()
-     
+      let bady = parseInt(Math.random() * (10000000))
       await setDoc(doc(firestore, "BlockChain", HashSemillaGenerado), {
         HashSemilla : HashSemillaGenerado,
         HashPrevio : '',
         Data : 0,
         Fecha : fecha,
-        Body : parseInt(Math.random() * (10000000)),
+        Body : bady,
         Transaccion : 'Registro',
       });
+      console.log(`HashSemilla : ${HashSemillaGenerado}`)
+      console.log(`HashPrevio : init`)
+      console.log(` Fecha : ${fecha}`)
+      console.log(`Body : ${bady}`)
+      console.log(`Transaccion : Registro`)
 
       const user = getAuth(app).currentUser.uid;
       await setDoc(doc(firestore, "UsuarioComun", user), {
@@ -98,19 +91,6 @@ pruebita();
       console.log(error.code);
       alert("Esta cuenta ya esta registrada")
     }
-
-    // try {
-    //   await addDoc(usuarioCollection, {
-    //     Nombre: nombre,
-    //     Apellido: apellido,
-    //     CI: ci,
-    //     Celular: celular,
-    //     Correo: email,
-    //     Direccion: direccion,
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
 

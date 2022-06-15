@@ -62,8 +62,7 @@ export default class urna extends Component {
 }
 
 async function insertData(thevoters) {
-  console.log("Se ejecuta insertData()");
-  //const querySnapshot = await getUrna()
+ 
   const thequery = query(
     collection(firestore, "UsuarioComun"),
     where("VotoEstado", "==", true)
