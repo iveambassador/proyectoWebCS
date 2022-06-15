@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
@@ -42,17 +42,20 @@ const NavbarComp=()=> {
           console.log(error.code);
       }
   }
-  async function getHash(){
-    if(user){
-      let user = getAuth(app).currentUser.uid;
-      const test = doc(firestore, "UsuarioComun", user);
-      const DatosUser = await getDoc(test);
-      let HashUser = DatosUser.data().HashSemilla;
-      //let HashRecort = HashUser.slice(0,-32)+'...'
-      setHashNavbar(HashUser);
+
+    async function getHash(){
+      if(user){
+        let user = getAuth(app).currentUser.uid;
+        const test = doc(firestore, "UsuarioComun", user);
+        const DatosUser = await getDoc(test);
+        let HashUser = DatosUser.data().HashSemilla;
+        //let HashRecort = HashUser.slice(0,-32)+'...'
+        setHashNavbar(HashUser);
+      }
     }
-  }
-  getHash();
+    getHash();
+
+  
 
   const userRol = getRolUser(user) 
 

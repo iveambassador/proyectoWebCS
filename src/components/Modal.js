@@ -18,10 +18,10 @@ export default function Modales(props) {
         listita.push(doc.id)
       });
 
-    let hashGenerado = SHA256(JSON.stringify()).toString();
-    
+    let hashGenerado = (SHA256(JSON.stringify()).toString()).slice(0,-32);
+  
     while(listita.includes(hashGenerado)){
-      hashGenerado = SHA256(hashGenerado).toString();
+      hashGenerado = (SHA256(hashGenerado).toString()).slice(0,-32);
     }
     return hashGenerado;
   }
