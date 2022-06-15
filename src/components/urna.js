@@ -9,7 +9,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 //import NoDisponible from './NoDisponible'
 import "../Styles/urna.css";
 import { async } from "@firebase/util";
-import { Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import ReactToPrint from "react-to-print";
 
 export default class urna extends Component {
@@ -26,11 +26,12 @@ export default class urna extends Component {
     }else{*/
     return (
       <div id="urna">
+        <Container>
         <ReactToPrint
           trigger={() => {
             return (
               <a href="#">
-                <h5>🖨️Imprimir</h5>
+                <h5 class="text-center mb-4 mt-2">🖨️Imprimir</h5>
               </a>
             );
           }}
@@ -38,16 +39,17 @@ export default class urna extends Component {
           documentTitle="TALLER DE SIMULACION DE SISTEMAS"
           pageStyle="print"
         />
+        </Container>
         <div ref={(el) => (this.componentRef = el)}>
           <div className="title-urna">Urna Electoral</div>
           <div>
             <div >
-              <Table striped bordered hover className="table-urna">
+              <Table striped bordered hover responsive className="table-urna" style={{ marginLeft:'auto', marginRight:'auto'}}>
                 <thead>
-                  <th>Hash del voto</th>
-                  <th>Elector</th>
-                  <th>Voto</th>
-                  <th>Fecha y Hora</th>
+                  <th class="text-center mb-4 mt-2" >Hash del voto</th>
+                  <th class="text-center mb-4 mt-2" >Elector</th>
+                  <th class="text-center mb-4 mt-2" >Voto</th>
+                  <th class="text-center mb-4 mt-2">Fecha y Hora</th>
                 </thead>
                 <tbody id="dataTablee"></tbody>
               </Table>
@@ -90,10 +92,10 @@ async function insertData(thevoters) {
 
     shtml += `
             <tr>
-            <td>${doc.data().VotoHash}</td>
-            <td>${doc.data().HashSemilla}</td>
-            <td>${voto}</td>
-            <td>${firedate}</td>
+            <td class="text-center mb-4 mt-2" >${doc.data().VotoHash}</td>
+            <td class="text-center mb-4 mt-2" >${doc.data().HashSemilla}</td>
+            <td class="text-center mb-4 mt-2" >${voto}</td>
+            <td class="text-center mb-4 mt-2" >${firedate}</td>
             </tr>
         `;
   });

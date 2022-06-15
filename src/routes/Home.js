@@ -104,22 +104,24 @@ const Home = () => {
   } else {
     return (
       <div>
-        <ReactToPrint
-          trigger={() => {
-            return (
-              <a href="#">
-                <h5>🖨️Imprimir</h5>
-              </a>
-            );
-          }}
-          content={() => componentRef.current}
-          documentTitle="TALLER DE SIMULACION DE SISTEMAS"
-          pageStyle="print"
-        />
+        <Container>
+          <ReactToPrint
+            trigger={() => {
+              return (
+                <a href="#">
+                  <h5 class="text-center mb-4 mt-2" >🖨️Imprimir</h5>
+                </a>
+              );
+            }}
+            content={() => componentRef.current}
+            documentTitle="TALLER DE SIMULACION DE SISTEMAS"
+            pageStyle="print"
+          />
+        </Container>
         <Container ref={componentRef}>
           {esta() ? (
             <>
-              <h2 className="text-center mb-4 mt-2">{nombre}</h2>
+              <h2 className="text-center mb-4 mt-2" style={{ fontWeight:'bold'}}>{nombre}</h2>
               <Tabla listas={list} />
               <Pie datos={data} />
               <Bar datos={data} />
@@ -137,6 +139,7 @@ const Home = () => {
             </>
           )}
         </Container>
+        
       </div>
     );
   }
