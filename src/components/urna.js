@@ -40,8 +40,8 @@ export default class urna extends Component {
         />
         <div ref={(el) => (this.componentRef = el)}>
           <div className="title-urna">Urna Electoral</div>
-          <div className="table-container">
-            <div className="table-responsive">
+          <div >
+            <div >
               <Table striped bordered hover className="table-urna">
                 <thead>
                   <th>Hash del voto</th>
