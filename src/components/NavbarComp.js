@@ -97,8 +97,6 @@ const NavbarComp=()=> {
   <>
                   <Nav
                       className="me-auto"
-                      style={{ maxHeight: '100px' }}
-                      navbarScroll
                   >   
                       <Nav.Link as={Link} to={"/"}></Nav.Link>
                       <Nav.Link as={Link} to={"/"}></Nav.Link>
