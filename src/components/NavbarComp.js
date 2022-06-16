@@ -103,8 +103,6 @@ const NavbarComp=()=> {
                   >   
                       <Nav.Link as={Link} to={"/"}></Nav.Link>
                       <Nav.Link as={Link} to={"/"}></Nav.Link>
-                      <Nav.Link as={Link} to={"/"}></Nav.Link>
-                      
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                                             
