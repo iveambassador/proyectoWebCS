@@ -24,8 +24,13 @@ const Login = () =>{
 
             navegate("/")
         }catch(error){
-            console.log(error.code);
-            alert("Esta cuenta no esta registrada")
+            if(error.code === "auth/wrong-password"){
+                alert("Contraseña incorrecta")
+            }else{
+                alert("Esta cuenta no esta registrada")
+            }
+            //console.log(error.code);
+            
 
         }
     }

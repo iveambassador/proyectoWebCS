@@ -67,17 +67,15 @@ const NavbarComp=()=> {
       <div>
             <Navbar bg="dark" variant={"dark"} expand="lg">
               <Container fluid>
-                  <Navbar.Brand> </Navbar.Brand>
+                  
                   <Navbar.Brand as={Link} to={"/"}> <img src={logo}></img> iVote</Navbar.Brand>
-                  <Navbar.Toggle aria-controls="navbarScroll" />
-                  <Navbar.Collapse id="navbarScroll">
+                  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                  <Navbar.Collapse id="responsive-navbar-nav">
 
 {user ? (
   <>
                   <Nav
-                      className="me-auto my-2 my-lg-0"
-                      style={{ maxHeight: '100px', paddingLeft:'5rem' }}
-                      navbarScroll
+                      className="me-auto"
                   >   
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
