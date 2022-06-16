@@ -75,7 +75,7 @@ const NavbarComp=()=> {
 {user ? (
   <>
                   <Nav
-                      className="me-auto"
+                      className="me-auto "
                   >   
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
@@ -96,7 +96,7 @@ const NavbarComp=()=> {
 
   <>
                   <Nav
-                      className="me-auto my-2 my-lg-0"
+                      className="me-auto"
                       style={{ maxHeight: '100px' }}
                       navbarScroll
                   >   
