@@ -3,11 +3,12 @@ import '../Styles/Postulante.css'
 //import Postulante from './Postulante'
 import { firestore } from "../confs/firebaseConf";
 import { app } from "../confs/firebaseConf";
-import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc} from "firebase/firestore";
+import {collection,query, where, getDocs, getFirestore, updateDoc, doc, deleteDoc, setDoc, getDoc} from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 import NoDisponible from './NoDisponible'
+const SHA256 = require('crypto-js/sha256');
 
 export default function PagePostulantes() {
   const [list, setList] = useState([]);
@@ -43,15 +44,46 @@ export default function PagePostulantes() {
       test(); 
   
   }, [bandera]);
+    async function HMACSHA256() {
+      let listita = [];
+      const allUsers = await getDocs(collection(firestore, "BlockChain"));
+        allUsers.forEach((doc) => {
+          listita.push(doc.id)
+        });
 
+      let hashGenerado = (SHA256(JSON.stringify()).toString()).slice(0,-32);
+      
+      while(listita.includes(hashGenerado)){
+        hashGenerado = (SHA256(hashGenerado).toString()).slice(0,-32);
+      }
+      return hashGenerado;
+    }
     const navegar = useNavigate();
     const deleteUser = async (id)=>{
 
+      const userDelete = doc(firestore, "UsuarioComun", id);
+      const DatosUser = await getDoc(userDelete);
+      const hashDelete = await HMACSHA256()
+      let data = 2;
+      let fecha = new Date()
+
+      let elHashPrevio = DatosUser.data().HashPostular;
+     
+      let bady = parseInt(Math.random() * (10000000));
+      await setDoc(doc(firestore, "BlockChain", hashDelete), {
+        Hash : hashDelete,
+        HashPrevio : elHashPrevio,
+        Data : data,
+        Fecha : fecha,
+        Body : bady,
+        Transaccion : 'Rechazado',
+      });
       const user = doc(firestore, "UsuarioComun", id);
       await updateDoc(user, {
         PostularEstado : false,
         PostularNombrePartido : 'Delete',
         PostularSigla : 'Delete',
+        HashResponse : hashDelete,
       });
       //window.location.reload();
       setBandera(bandera+1)
@@ -59,6 +91,30 @@ export default function PagePostulantes() {
     }
 
    const acepteUser = async (id,nombre,sigla,nombreCandi,fotografia,hash)=>{
+     
+      const userAcepted = doc(firestore, "UsuarioComun", id);
+      const DatosUser = await getDoc(userAcepted);
+      const hashGenerado = await HMACSHA256();
+      let data = 2;
+      let fecha = new Date();
+      
+      let elHashPrevio = DatosUser.data().HashPostular;
+
+      
+      let bady = parseInt(Math.random() * (10000000));
+      await setDoc(doc(firestore, "BlockChain", hashGenerado), {
+        Hash : hashGenerado,
+        HashPrevio : elHashPrevio,
+        Data : data,
+        Fecha : fecha,
+        Body : bady,
+        Transaccion : 'Aceptado',
+      });
+      // console.log(`Hash : ${hashGenerado}`)
+      // console.log(`HashPrevio : ${elHashPrevio}`)
+      // console.log(` Fecha : ${fecha}`)
+      // console.log(`Body : ${bady}`)
+      // console.log(`Transaccion : Voto`)
 
      let randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
      const user = doc(firestore, "UsuarioComun", id);
@@ -66,6 +122,7 @@ export default function PagePostulantes() {
        PostularEstado : false,
        PostularNombrePartido : 'Acept',
        PostularSigla : 'Acept',
+       HashResponse : hashGenerado,
      });
      await setDoc(doc(firestore, "PartidosAceptados", id), {
       NombrePartido: nombre,
@@ -102,18 +159,6 @@ export default function PagePostulantes() {
               </div>
           
             </div>
-            // <div>
-            // <Postulante 
-            //   nombre = {tupla.nombreCompleto}
-            //   ci= {tupla.carnet}
-            //   telefono= {tupla.celular}
-            //   partido= {tupla.partido}
-            //   cargo= {tupla.sigla}/>
-            //   <div className='Postulante-Botones'>
-            //     <Button variant="primary" onClick={()=>acepteUser(tupla.id,tupla.partido,tupla.sigla,tupla.nombreCompleto)}>Aceptado</Button>
-            //     <Button variant="danger" onClick={()=>deleteUser(tupla.id)}>Rechazado</Button>
-            //   </div>
-            // </div>
           )) }
       
         </div>

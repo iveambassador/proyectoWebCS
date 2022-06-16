@@ -86,6 +86,7 @@ const Register = () => {
         HashSemilla: HashSemillaGenerado,
         HashVoto : '',
         HashPostular : '',
+        HashResponse : '',
       });
     } catch (error) {
       console.log(error.code);
@@ -191,24 +192,7 @@ const Register = () => {
         </Card.Body>
       </Card>
     </div>
-    /**<>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="email" 
-                    placeholder="Ingrese email"
-                    value={email}
-                    onChange={e=>setEmail(e.target.value)}
-                />
-                <input 
-                    type="password" 
-                    placeholder="Ingrese password"
-                    value={password}
-                    onChange={e=>setPassword(e.target.value)}
-                />
-                <button type="submit">Register</button>
-            </form>
-        </>*/
+    
   );
 };
 

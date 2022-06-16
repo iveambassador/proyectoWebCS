@@ -57,10 +57,10 @@ export default function Modales(props) {
       const test = doc(firestore, "UsuarioComun", user);
       const DatosUser = await getDoc(test);
       const hashG = await HMACSHA256()
-      let data = 2;
+      let data = 3;
       let fecha = new Date()
 
-      let elHashPrevio = DatosUser.data().HashPostular;
+      let elHashPrevio = DatosUser.data().HashResponse;
       if(elHashPrevio == ''){
         elHashPrevio = DatosUser.data().HashSemilla;
         data = 1;

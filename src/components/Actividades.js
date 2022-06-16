@@ -23,6 +23,7 @@ useEffect(() => {
         const DatosUser = await getDoc(usuarioActual);
         let hSemilla = (DatosUser.data().HashSemilla).toString();
         let hPostular = DatosUser.data().HashPostular;
+        let hResponse = DatosUser.data().HashResponse;
         let hVoto = DatosUser.data().HashVoto;
       
         const listaTemp = [];
@@ -45,6 +46,16 @@ useEffect(() => {
             let dato = {Hash,HashPrevio,Transaccion,Fecha}
             listaTemp.push(dato);
         }
+        if(hResponse){
+          const thashP = doc(firestore, "BlockChain", hResponse);
+          const DatosVot = await getDoc(thashP);
+          let Hash = DatosVot.data().Hash
+          let HashPrevio = DatosVot.data().HashPrevio
+          let Transaccion = DatosVot.data().Transaccion
+          let Fecha = (DatosVot.data().Fecha.toDate()).toString().substring(4,21)
+          let dato = {Hash,HashPrevio,Transaccion,Fecha}
+          listaTemp.push(dato);
+      }
         if(hVoto){
             const thashV = doc(firestore, "BlockChain", hVoto);
             const DatosVot = await getDoc(thashV);
