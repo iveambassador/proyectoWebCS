@@ -71,12 +71,15 @@ const NavbarComp=()=> {
                   <Navbar.Brand as={Link} to={"/"}> <img src={logo}></img> iVote</Navbar.Brand>
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                   <Navbar.Collapse id="responsive-navbar-nav">
+                  <Nav.Link as={Link} to={"/"}></Nav.Link>
 
 {user ? (
   <>
                   <Nav
                       className="me-auto "
                   >   
+                      <Nav.Link as={Link} to={"/"}></Nav.Link>
+                      <Nav.Link as={Link} to={"/"}></Nav.Link>
                       <Nav.Link as={Link} to={"/"}>Inicio</Nav.Link>
                       <Nav.Link as={Link} to={"/urna"}>Urna Electoral</Nav.Link>
                       
