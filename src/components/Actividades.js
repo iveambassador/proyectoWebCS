@@ -7,7 +7,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import '../Styles/Login.css'
 import { useState, useEffect } from "react";
 import NoDisponible from './NoDisponible'
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Spinner } from "react-bootstrap";
 
 
 export default function Actividades() {
@@ -77,7 +77,14 @@ useEffect(() => {
    }, []);
     
 
- if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
+ if (isStart) {return (
+  <div className="Container">
+    <Spinner animation="border" roles="status">
+      <span className="visually-hidden">Cargando...</span>
+    </Spinner>
+    <h4 className="p-1">Cargando...</h4>
+  </div>
+);}else{
   
    
       return (

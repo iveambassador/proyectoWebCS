@@ -151,7 +151,14 @@ export default function Postularme() {
    
  }, []);
 
- if (isStart) {return <h4 className="p-1">Cargando...</h4>}else{
+ if (isStart) {return (
+  <div className="Container">
+    <Spinner animation="border" roles="status">
+      <span className="visually-hidden">Cargando...</span>
+    </Spinner>
+    <h4 className="p-1">Cargando...</h4>
+  </div>
+);}else{
   
     if(valido){
       return (
