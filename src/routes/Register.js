@@ -17,6 +17,7 @@ const Register = () => {
   const [celular, setCelular] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repetPassword, setRepetPassword] = useState("");
   const [hash, setHash] = useState("");
 
   const [UsuarioComun, setUsuarioComun] = useState([]);
@@ -42,6 +43,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(repetPassword === password){
     try {
       await registerUser(email, password);
       let HashSemillaGenerado = await HMACSHA256();
@@ -91,6 +93,8 @@ const Register = () => {
     } catch (error) {
       console.log(error.code);
       alert("Esta cuenta ya esta registrada")
+    }}else{
+      alert("Error: La contraseña es incorrecta")
     }
   };
 
@@ -180,6 +184,17 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+            <Form.Group id="password">
+              <Form.Label><h5 className="mb-0 mt-3">Confirmar contraseña</h5></Form.Label>
+              <Form.Control
+                placeholder="Repita su contraseña"
+                type="password"                
+                required
+                minLength={6}
+                onChange={(e) => setRepetPassword(e.target.value)}
+              />
+            </Form.Group>
+            
 
             <br />
             <Form.Group className="text-center">

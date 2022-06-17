@@ -88,6 +88,21 @@ export default function Convovatoria() {
         Activo : true
       });
       
+      await setDoc(doc(firestore, "PartidosAceptados", "zzzVotoNulo"), {
+        Cant : 0,
+        Color : '#F7F4F3',
+        HashSemilla : '91c1b0f15e40c9d49afbf4c8996fb924',
+        NombreCandidato : 'Voto Nulo',
+        Sigla : 'Nulo'
+      });
+      await setDoc(doc(firestore, "PartidosAceptados", "zzzVotoBlanco"), {
+        Cant : 0,
+        Color : '#FF8A71',
+        HashSemilla : '16f0cd50b749a8fa718b061f50bf2072',
+        NombreCandidato : 'Voto Blanco',
+        Sigla : 'Blanco'
+      });
+
       
     } catch (error) {
       console.log(error.code);

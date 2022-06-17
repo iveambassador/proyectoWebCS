@@ -41,11 +41,13 @@ export default function EmitirVoto(props) {
     var primeraOcurrencia = checkedState.indexOf(true);
     if(primeraOcurrencia == -1){
       //Es voto en blanco
+      guardarBlanco();
       votoElegido = 'Blanco';
     }else{
       var ultimaOcurrencia = checkedState.lastIndexOf(true);
       if(primeraOcurrencia != ultimaOcurrencia){
         //Es voto nulo
+        guardarNulo();
         votoElegido = 'Nulo';
       }else{
 
@@ -100,7 +102,25 @@ export default function EmitirVoto(props) {
     await updateDoc(thePartido, {
       Cant : newCuenta
     });
-  }
+  };
+  const guardarBlanco = async () =>{
+    const thePartido = doc(firestore, "PartidosAceptados", "zzzVotoBlanco");
+    const docSnap = await getDoc(thePartido);
+    let actualCuenta = docSnap.data().Cant;
+    let newCuenta = actualCuenta+1;
+    await updateDoc(thePartido, {
+      Cant : newCuenta
+    });
+  };
+  const guardarNulo = async () =>{
+    const thePartido = doc(firestore, "PartidosAceptados", "zzzVotoNulo");
+    const docSnap = await getDoc(thePartido);
+    let actualCuenta = docSnap.data().Cant;
+    let newCuenta = actualCuenta+1;
+    await updateDoc(thePartido, {
+      Cant : newCuenta
+    });
+  };
 
   useEffect(() => {
     const test = async ()=>{
