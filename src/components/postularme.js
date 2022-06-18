@@ -42,7 +42,7 @@ export default function Postularme() {
     event.preventDefault();
     const file = event.target.files[0];
     const storage = getStorage();
-    const storageRef = await ref(storage, `/imagenes/${file.name}`);
+    const storageRef = await ref(storage, `/${file.name}`);
   
     setLoading(true)
     await uploadBytes(storageRef, file).then((snapshot) => {
@@ -58,7 +58,7 @@ export default function Postularme() {
     event.preventDefault();
     const archivo = event.target.files[0];
     const storage = getStorage();
-    const storageRef = await ref(storage, `/docs/${archivo.name}`);
+    const storageRef = await ref(storage, `/${archivo.name}`);
   
     setLoading(true)
     await uploadBytes(storageRef, archivo).then((snapshot) => {
