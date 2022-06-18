@@ -235,7 +235,7 @@ if (isStart) {return (
     <h4 className="p-1">Cargando...</h4>
   </div>
 );}else{
-  if (valido){
+  if (valido && lista.length > 0){
     return (
       <div className='Container'>
         
