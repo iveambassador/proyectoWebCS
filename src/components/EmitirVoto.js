@@ -131,16 +131,18 @@ export default function EmitirVoto(props) {
       var i = 0;
       postulantesAceptados.forEach((doc) => {
 
-        let idCandidato = doc.id
-        let nombreCandi = doc.data().NombreCandidato
-        let nombrePartid = doc.data().NombrePartido
-        let sigla = doc.data().Sigla
-        let cargo = doc.data().Cargo
-        let Foto = doc.data().Foto
-        let ix = i
-        let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix,Foto}
-        listaTemp.push(dato);
-        i = i + 1;
+        if(doc.data().Sigla != 'Blanco' && doc.data().Sigla != 'Nulo'){
+          let idCandidato = doc.id
+          let nombreCandi = doc.data().NombreCandidato
+          let nombrePartid = doc.data().NombrePartido
+          let sigla = doc.data().Sigla
+          let cargo = doc.data().Cargo
+          let Foto = doc.data().Foto
+          let ix = i
+          let dato = {idCandidato,nombrePartid,sigla,cargo,nombreCandi,ix,Foto}
+          listaTemp.push(dato);
+          i = i + 1;
+        }
 
       })
 
@@ -259,7 +261,7 @@ if (isStart) {return (
           foto={tupla.Foto}
           handlePadree={handlePadre}
           />  
-          )) }      
+          )) }
         </div>
         <Button variant="primary" size='lg' className='mb-4' onClick={() => setModalShow(true)}>Guardar Voto</Button>
 
