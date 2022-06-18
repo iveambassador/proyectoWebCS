@@ -54,7 +54,7 @@ const NavbarComp=()=> {
             setHashNavbar("Administrador");
           }else{
             setHashNavbar('Cargando ...');
-            let usuario = getAuth(app).currentUser.uid;
+            let usuario = await getAuth(app).currentUser.uid;
             let consulta = doc(firestore, "UsuarioComun", usuario);
             let datosUser = await getDoc(consulta);
             let HashUser = datosUser.data().HashSemilla;
