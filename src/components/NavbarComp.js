@@ -35,7 +35,7 @@ const routes = {
       path: '/Convocatoria'
     },
   ]
-}
+};
 const NavbarComp=()=> {
   const [hashNavbar,setHashNavbar] = useState('');
   const {user,signOutUser} = useContext(UserContext)
@@ -45,24 +45,28 @@ const NavbarComp=()=> {
       } catch (error) {
           console.log(error.code);
       }
-  }
+  };
 
-    async function getHash(){
-      if(user){
-        let usuario = getAuth(app).currentUser.uid;
-        let consulta = doc(firestore, "UsuarioComun", usuario);
-        let datosUser = await getDoc(consulta);
-        let HashUser = datosUser.data().HashSemilla;
-        let HashGUser = HashUser.toString();
-        setHashNavbar(HashGUser);
-      }
-    }
-    getHash();
+    useEffect(() => {
+      async function getHash(){
+        if(user){
+          if(getRolUser(user) == 'admin'){
+            setHashNavbar("Administrador");
+          }else{
+            setHashNavbar('Cargando ...');
+            let usuario = getAuth(app).currentUser.uid;
+            let consulta = doc(firestore, "UsuarioComun", usuario);
+            let datosUser = await getDoc(consulta);
+            let HashUser = datosUser.data().HashSemilla;
+            let HashGUser = HashUser.toString();
+            setHashNavbar(HashGUser);
+          }
+        }
+      };
+      getHash();
+    }, [user]);
 
-  
-
-  const userRol = getRolUser(user) 
-
+    const userRol = getRolUser(user) 
     return (
       <div>
             <Navbar bg="dark" variant={"dark"} expand="lg">
